@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Page Rank" href="Pagerank2.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="ClusterEmail.html" />
+    <link rel="prev" title="Clusttering Email" href="ClusterEmail.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,6 +185,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_berita.html">Klasifikasi LDA Berita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_abstrak.html">Klasifikasi LDA Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ClusterEmail.html">Clustering Data Email</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Word Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pagerank2.html">Algoritma PageRank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphlnk.html">Graph Link Analysis</a></li>
@@ -373,7 +374,7 @@ document.write(`
   <section id="Word-Graph">
 <h1>Word Graph<a class="headerlink" href="#Word-Graph" title="Link to this heading">#</a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>PyPDF2<span class="w"> </span>nltk<span class="w"> </span>networkx<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>tqdm
@@ -393,48 +394,147 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Collecting PyPDF2
-  Downloading pypdf2-3.0.1-py3-none-any.whl.metadata (6.8 kB)
-Requirement already satisfied: nltk in d:\kuliah\anaconda3\lib\site-packages (3.8.1)
-Requirement already satisfied: networkx in d:\kuliah\anaconda3\lib\site-packages (3.1)
-Requirement already satisfied: pandas in d:\kuliah\anaconda3\lib\site-packages (2.1.4)
-Requirement already satisfied: matplotlib in d:\kuliah\anaconda3\lib\site-packages (3.8.0)
-Requirement already satisfied: tqdm in d:\kuliah\anaconda3\lib\site-packages (4.65.0)
-Requirement already satisfied: click in d:\kuliah\anaconda3\lib\site-packages (from nltk) (8.1.7)
-Requirement already satisfied: joblib in d:\kuliah\anaconda3\lib\site-packages (from nltk) (1.2.0)
-Requirement already satisfied: regex&gt;=2021.8.3 in d:\kuliah\anaconda3\lib\site-packages (from nltk) (2023.10.3)
-Requirement already satisfied: numpy&lt;2,&gt;=1.23.2 in d:\kuliah\anaconda3\lib\site-packages (from pandas) (1.26.4)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in d:\kuliah\anaconda3\lib\site-packages (from pandas) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in d:\kuliah\anaconda3\lib\site-packages (from pandas) (2023.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.1 in d:\kuliah\anaconda3\lib\site-packages (from pandas) (2023.3)
-Requirement already satisfied: contourpy&gt;=1.0.1 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (1.2.0)
-Requirement already satisfied: cycler&gt;=0.10 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (0.11.0)
-Requirement already satisfied: fonttools&gt;=4.22.0 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (4.25.0)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (1.4.4)
-Requirement already satisfied: packaging&gt;=20.0 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (23.1)
-Requirement already satisfied: pillow&gt;=6.2.0 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (10.2.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in d:\kuliah\anaconda3\lib\site-packages (from matplotlib) (3.0.9)
-Requirement already satisfied: colorama in d:\kuliah\anaconda3\lib\site-packages (from tqdm) (0.4.6)
-Requirement already satisfied: six&gt;=1.5 in d:\kuliah\anaconda3\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
-Downloading pypdf2-3.0.1-py3-none-any.whl (232 kB)
-   ---------------------------------------- 0.0/232.6 kB ? eta -:--:--
-   ---------------------------------------- 0.0/232.6 kB ? eta -:--:--
-   - -------------------------------------- 10.2/232.6 kB ? eta -:--:--
-   ----- --------------------------------- 30.7/232.6 kB 435.7 kB/s eta 0:00:01
-   ------------ -------------------------- 71.7/232.6 kB 563.7 kB/s eta 0:00:01
-   -------------------------------------- - 225.3/232.6 kB 1.4 MB/s eta 0:00:01
-   ---------------------------------------- 232.6/232.6 kB 1.3 MB/s eta 0:00:00
-Installing collected packages: PyPDF2
-Successfully installed PyPDF2-3.0.1
+  Using cached pypdf2-3.0.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting nltk
+  Using cached nltk-3.9.2-py3-none-any.whl.metadata (3.2 kB)
+Requirement already satisfied: networkx in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (3.5)
+Requirement already satisfied: pandas in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (2.3.3)
+Requirement already satisfied: matplotlib in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (3.10.6)
+Requirement already satisfied: tqdm in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (4.67.1)
+Requirement already satisfied: click in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from nltk) (8.3.1)
+Requirement already satisfied: joblib in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from nltk) (1.5.2)
+Collecting regex&gt;=2021.8.3 (from nltk)
+  Downloading regex-2025.11.3-cp311-cp311-win_amd64.whl.metadata (41 kB)
+Requirement already satisfied: numpy&gt;=1.23.2 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from pandas) (2.3.5)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from pandas) (2025.2)
+Requirement already satisfied: contourpy&gt;=1.0.1 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (1.3.3)
+Requirement already satisfied: cycler&gt;=0.10 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (4.60.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (1.4.9)
+Requirement already satisfied: packaging&gt;=20.0 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow&gt;=8 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (12.0.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from matplotlib) (3.2.5)
+Requirement already satisfied: colorama in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from tqdm) (0.4.6)
+Requirement already satisfied: six&gt;=1.5 in d:\kuliah\anaconda3\envs\rupiah\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Using cached pypdf2-3.0.1-py3-none-any.whl (232 kB)
+Using cached nltk-3.9.2-py3-none-any.whl (1.5 MB)
+Downloading regex-2025.11.3-cp311-cp311-win_amd64.whl (277 kB)
+Installing collected packages: regex, PyPDF2, nltk
+
+   ---------------------------------------- 0/3 [regex]
+   ---------------------------------------- 0/3 [regex]
+   ---------------------------------------- 0/3 [regex]
+   ---------------------------------------- 0/3 [regex]
+   ---------------------------------------- 0/3 [regex]
+   ---------------------------------------- 0/3 [regex]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   ------------- -------------------------- 1/3 [PyPDF2]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   -------------------------- ------------- 2/3 [nltk]
+   ---------------------------------------- 3/3 [nltk]
+
+Successfully installed PyPDF2-3.0.1 nltk-3.9.2 regex-2025.11.3
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\abror\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\abror\AppData\Roaming\nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     C:\Users\abror\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PyPDF2</span>
@@ -466,20 +566,38 @@ Successfully installed PyPDF2-3.0.1
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\abror\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-intense-fg ansi-bold">Failed to start the Kernel.
+Panjang teks mentah: 38847
+197     Jurnal Geografi Gea, Volume 20, Nomor 2, Oktober 2020 .
 
-</span><span class="ansi-red-intense-fg ansi-bold">Unable to start Kernel &#39;Python (rupiah) (Python 3.11.7)&#39; due to a timeout waiting for the ports to get used.
 
-</span><span class="ansi-red-intense-fg ansi-bold">View Jupyter &lt;a href=&#39;command:jupyter.viewOutput&#39;&gt;log&lt;/a&gt; for further details.</span>
+
+ANALISIS PASCA BENCANA TANAH LONGSOR 1 JANUARI
+2020 DAN EVALUASI PENATAAN KAWASAN DI
+KECAMATAN SUKAJAYA, KABUPATEN BOGOR
+
+Heru Sri Naryanto1, Firman Prawiradisastra2, Ruki Ardiyanto3, Wahyu Hidayat4
+1,2Pusat Teknologi Reduksi Risiko Bencana, 3Pusat Teknologi Pengembangan Sumberdaya
+Wilayah, 4Pusat Teknologi Pengembangan Sumberdaya Mineral,
+Badan Pengkajian dan Penerapan (BPPT), Gedung Geostech, Kompleks Puspiptek Ser
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
@@ -516,14 +634,14 @@ Successfully installed PyPDF2-3.0.1
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Panjang teks cleaned: 13944
-39 Jurnal Geografi Gea, Volume 20, Nomor 1, April 2020 ANALISIS PENYEBAB BANJIR DI KOTA SAMARINDA Haris Setiawan1, Muhammad Jalil2, Muhammad Enggi S3, Fathan Purwadi4, Christopel Adios S5, Asri Wahyu Brata6, Andi Syaful Jufda7 1,2,3,4,5,6 ,7Program Studi Pendidikan Geografi, Fakulta s Keguruan dan Ilmu Pendidikan, Universitas Mulawarman 121enggi@gmail.com ABSTRACT The purpose of this study was to determine the distribution of floods in Samarinda City, identify the causes of flooding in Samarinda
-Total kata: 1880
-20 kata pertama: [&#39;jurnal&#39;, &#39;geografi&#39;, &#39;gea&#39;, &#39;volume&#39;, &#39;nomor&#39;, &#39;april&#39;, &#39;analisis&#39;, &#39;penyebab&#39;, &#39;banjir&#39;, &#39;di&#39;, &#39;kota&#39;, &#39;samarinda&#39;, &#39;haris&#39;, &#39;setiawan&#39;, &#39;muhammad&#39;, &#39;jalil&#39;, &#39;muhammad&#39;, &#39;enggi&#39;, &#39;s&#39;, &#39;fathan&#39;]
+Panjang teks cleaned: 32900
+197 Jurnal Geografi Gea, Volume 20, Nomor 2, Oktober 2020 . ANALISIS PASCA BENCANA TANAH LONGSOR 1 JANUARI 2020 DAN EVALUASI PENATAAN KAWASAN DI KECAMATAN SUKAJAYA, KABUPATEN BOGOR Heru Sri Naryanto1, Firman Prawiradisastra2, Ruki Ardiyanto3, Wahyu Hidayat4 1,2Pusat Teknologi Reduksi Risiko Bencana, 3Pusat Teknologi Pengembangan Sumberdaya Wilayah, 4Pusat Teknologi Pengembangan Sumberdaya Mineral, Badan Pengkajian dan Penerapan (BPPT), Gedung Geostech, Kompleks Puspiptek Serpong, Kota Tanger ang
+Total kata: 4298
+20 kata pertama: [&#39;jurnal&#39;, &#39;geografi&#39;, &#39;gea&#39;, &#39;volume&#39;, &#39;nomor&#39;, &#39;oktober&#39;, &#39;analisis&#39;, &#39;pasca&#39;, &#39;bencana&#39;, &#39;tanah&#39;, &#39;longsor&#39;, &#39;januari&#39;, &#39;dan&#39;, &#39;evaluasi&#39;, &#39;penataan&#39;, &#39;kawasan&#39;, &#39;di&#39;, &#39;kecamatan&#39;, &#39;sukajaya&#39;, &#39;kabupaten&#39;]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">zip_longest</span>
@@ -555,12 +673,12 @@ Total kata: 1880
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Jumlah node (kata unik): 663
-Jumlah edge (pasangan tetangga): 1326
+Jumlah node (kata unik): 1117
+Jumlah edge (pasangan tetangga): 2868
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
@@ -596,16 +714,15 @@ Jumlah edge (pasangan tetangga): 1326
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &#39;samarinda&#39;, &#39;dan&#39;, &#39;kota&#39;, &#39;air&#39;, &#39;the&#39;, &#39;daerah&#39;, &#39;sungai&#39;, &#39;adalah&#39;, &#39;bencana&#39;, &#39;hujan&#39;, &#39;manusia&#39;, &#39;pada&#39;, &#39;akan&#39;, &#39;of&#39;, &#39;dengan&#39;, &#39;dalam&#39;, &#39;pasang&#39;]
+Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;longsor&#39;, &#39;dan&#39;, &#39;di&#39;, &#39;tanah&#39;, &#39;pada&#39;, &#39;kecamatan&#39;, &#39;sukajaya&#39;, &#39;dengan&#39;, &#39;bencana&#39;, &#39;desa&#39;, &#39;analisis&#39;, &#39;lereng&#39;, &#39;hujan&#39;, &#39;terjadi&#39;, &#39;kawasan&#39;, &#39;sangat&#39;, &#39;untuk&#39;, &#39;curam&#39;, &#39;data&#39;]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-  <div id="df-8cedb57e-af35-400d-aea7-9baa8dde3804" class="colab-df-container">
-    <div>
+<div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -624,25 +741,25 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
     <tr style="text-align: right;">
       <th></th>
       <th>yang</th>
-      <th>banjir</th>
-      <th>di</th>
-      <th>samarinda</th>
+      <th>longsor</th>
       <th>dan</th>
-      <th>kota</th>
-      <th>air</th>
-      <th>the</th>
-      <th>daerah</th>
-      <th>sungai</th>
-      <th>adalah</th>
-      <th>bencana</th>
-      <th>hujan</th>
-      <th>manusia</th>
+      <th>di</th>
+      <th>tanah</th>
       <th>pada</th>
-      <th>akan</th>
-      <th>of</th>
+      <th>kecamatan</th>
+      <th>sukajaya</th>
       <th>dengan</th>
-      <th>dalam</th>
-      <th>pasang</th>
+      <th>bencana</th>
+      <th>desa</th>
+      <th>analisis</th>
+      <th>lereng</th>
+      <th>hujan</th>
+      <th>terjadi</th>
+      <th>kawasan</th>
+      <th>sangat</th>
+      <th>untuk</th>
+      <th>curam</th>
+      <th>data</th>
     </tr>
   </thead>
   <tbody>
@@ -651,44 +768,67 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>longsor</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>banjir</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <th>dan</th>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -697,33 +837,76 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>tanah</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>pada</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>samarinda</th>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
+      <th>kecamatan</th>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -732,158 +915,24 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>dan</th>
       <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>kota</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>air</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>the</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>daerah</th>
-      <td>1</td>
+      <th>sukajaya</th>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
-      <td>0</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>sungai</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>adalah</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -892,145 +941,6 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>bencana</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>hujan</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>manusia</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>pada</th>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>akan</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>of</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1042,10 +952,6 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -1053,6 +959,10 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1061,10 +971,33 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>1</td>
     </tr>
     <tr>
-      <th>dalam</th>
+      <th>bencana</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>desa</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1075,7 +1008,7 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1084,7 +1017,198 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
     </tr>
     <tr>
-      <th>pasang</th>
+      <th>analisis</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>lereng</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>hujan</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>terjadi</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>kawasan</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>sangat</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>untuk</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>curam</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -1093,289 +1217,18 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-8cedb57e-af35-400d-aea7-9baa8dde3804')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-8cedb57e-af35-400d-aea7-9baa8dde3804 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-8cedb57e-af35-400d-aea7-9baa8dde3804');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-7a185c8f-c0c4-4e49-bc11-6ae21969c923">
-      <button class="colab-df-quickchart" onclick="quickchart('df-7a185c8f-c0c4-4e49-bc11-6ae21969c923')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-7a185c8f-c0c4-4e49-bc11-6ae21969c923 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_d8b9775b-7505-4233-af42-0b9321a47ebc">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('adj_df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_d8b9775b-7505-4233-af42-0b9321a47ebc button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('adj_df');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div></div>
+</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>  <span class="c1"># pakai bobot berapa sering jadi tetangga</span>
@@ -1391,12 +1244,11 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-  <div id="df-59faedb7-7ae9-4633-9e07-f2b07e6d457f" class="colab-df-container">
-    <div>
+<div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1422,373 +1274,109 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
     <tr>
       <th>0</th>
       <td>yang</td>
-      <td>0.028294</td>
+      <td>0.026894</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>banjir</td>
-      <td>0.022202</td>
+      <td>dan</td>
+      <td>0.024091</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>di</td>
-      <td>0.017338</td>
+      <td>longsor</td>
+      <td>0.022928</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>dan</td>
-      <td>0.015888</td>
+      <td>di</td>
+      <td>0.015172</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>samarinda</td>
-      <td>0.014372</td>
+      <td>tanah</td>
+      <td>0.012943</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>air</td>
-      <td>0.011106</td>
+      <td>dengan</td>
+      <td>0.011348</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>the</td>
-      <td>0.010749</td>
+      <td>pada</td>
+      <td>0.010103</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>kota</td>
-      <td>0.010468</td>
+      <td>sukajaya</td>
+      <td>0.009018</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>daerah</td>
-      <td>0.008320</td>
+      <td>kecamatan</td>
+      <td>0.008442</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>of</td>
-      <td>0.007846</td>
+      <td>bencana</td>
+      <td>0.007853</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>manusia</td>
-      <td>0.007534</td>
+      <td>desa</td>
+      <td>0.006979</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>dengan</td>
-      <td>0.007329</td>
+      <td>untuk</td>
+      <td>0.006431</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>adalah</td>
-      <td>0.007242</td>
+      <td>analisis</td>
+      <td>0.006359</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>dari</td>
-      <td>0.006931</td>
+      <td>lereng</td>
+      <td>0.006249</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>sungai</td>
-      <td>0.006880</td>
+      <td>and</td>
+      <td>0.005928</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>bencana</td>
-      <td>0.006730</td>
+      <td>hujan</td>
+      <td>0.005841</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>pada</td>
-      <td>0.006696</td>
+      <td>dari</td>
+      <td>0.005477</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>akan</td>
-      <td>0.006339</td>
+      <td>terjadi</td>
+      <td>0.005392</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>dalam</td>
-      <td>0.006235</td>
+      <td>sangat</td>
+      <td>0.005351</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>hujan</td>
-      <td>0.006228</td>
+      <td>data</td>
+      <td>0.005198</td>
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-59faedb7-7ae9-4633-9e07-f2b07e6d457f')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-59faedb7-7ae9-4633-9e07-f2b07e6d457f button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-59faedb7-7ae9-4633-9e07-f2b07e6d457f');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-87b379dd-9567-48fb-8281-7d4ae73a6a07">
-      <button class="colab-df-quickchart" onclick="quickchart('df-87b379dd-9567-48fb-8281-7d4ae73a6a07')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-87b379dd-9567-48fb-8281-7d4ae73a6a07 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_19a9ecc5-c3ab-4549-8b29-6fec34efd4ab">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('pr_df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_19a9ecc5-c3ab-4549-8b29-6fec34efd4ab button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('pr_df');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div></div>
+</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -1831,7 +1419,7 @@ Kata yang dipakai di matriks: [&#39;yang&#39;, &#39;banjir&#39;, &#39;di&#39;, &
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Clusttering Email</p>
       </div>
     </a>
     <a class="right-next"
