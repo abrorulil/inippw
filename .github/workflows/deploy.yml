@@ -2,24 +2,38 @@ name: Deploy Sphinx
 on:
   push:
     branches: [main]
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          
+      # LANGKAH PENTING 1: Install Pandoc (Solusi Error Anda)
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      # LANGKAH PENTING 2: Sesuaikan path requirements.txt (karena sudah pindah ke docs/)
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-      - name: Build
+          pip install -r docs/requirements.txt
+
+      # LANGKAH PENTING 3: Build
+      - name: Build Sphinx
         run: |
           sphinx-build -b html docs/ docs/_build/html
-      - name: Deploy
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
