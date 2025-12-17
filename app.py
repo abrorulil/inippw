@@ -47,9 +47,17 @@ def clean_text(text: str):
 
 
 def tokenize_words(text: str, language="english", do_stem=False):
-    toks = word_tokenize(text.lower())
+    # Prefer NLTK tokenization but fall back to a simple regex tokenizer
+    # because some NLTK punkt models (e.g., for Indonesian) may not be available
+    try:
+        toks = word_tokenize(text.lower())
+    except LookupError:
+        toks = re.findall(r"[a-zA-Z]+", text.lower())
+
+    # keep only alphabetic tokens
     words = [re.sub(r"[^a-zA-Z]", "", w) for w in toks]
     words = [w for w in words if w]
+
     if language == "english":
         sw = set(stopwords.words("english"))
     elif language == "indonesia":
