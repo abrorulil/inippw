@@ -1,0 +1,1607 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Topic Modeling Berita dengan LDA (Latent Dirichlet Allocation) &#8212; Proyek Analisis Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi_lda_berita';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Topic Modeling Berita dengan LDA (Latent Dirichlet Allocation)" href="klasifikasi_lda_abstrak.html" />
+    <link rel="prev" title="CBOW Embedding Berita" href="cbow_embeding_berita.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pp.png" class="logo__image only-light" alt="Proyek Analisis Data - Home"/>
+    <script>document.write(`<img src="_static/pp.png" class="logo__image only-dark" alt="Proyek Analisis Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Selamat datang di proyek PPW
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Halaman Utama</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Selamat Datang 👋</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pendahuluan &amp; Crawling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantar.html">Pengantar Pencarian dan Penambangan Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linkgraphscraping.html">Link Graph Scraping Teknik Industri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html">Crawling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingberita.html">Data Berita CNN Indonesia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingptatrunojoyo.html">Crawling PTA Trunojoyo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ptatrunojoyomanajemen.html">Crawling PTA Trunojoyo Prodi Manajemen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing &amp; Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_abstrak_indonesia.html">Preprocessing Abstrak Bahasa Indonesia</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html">Ekstraksi Fitur TF-IDF Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_abstrak.html">CBOW Embedding Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_berita.html">Preprocessing Berita</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_berita.html">Ekstraksi Fitur TF-IDF Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_berita.html">CBOW Embedding Berita</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analisis &amp; Clustering</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi LDA Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_abstrak.html">Klasifikasi LDA Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Word_Graph.html">Word Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pagerank2.html">Algoritma PageRank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphlnk.html">Graph Link Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/abrorulil/inippw" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/klasifikasi_lda_berita.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Topic Modeling Berita dengan LDA (Latent Dirichlet Allocation)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Topic-Modeling-Berita-dengan-LDA-(Latent-Dirichlet-Allocation)">
+<h1>Topic Modeling Berita dengan LDA (Latent Dirichlet Allocation)<a class="headerlink" href="#Topic-Modeling-Berita-dengan-LDA-(Latent-Dirichlet-Allocation)" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatentDirichletAllocation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 1: Membaca dan memproses file data</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 1: Membaca dan memproses file data...&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;hasil_preprocessing_berita.csv&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;hasil_preprocessing_berita.csv&#39; berhasil dimuat.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kategori yang tersedia: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kolom yang tersedia: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;File &#39;hasil_preprocessing_berita.csv&#39; tidak ditemukan. Pastikan file tersedia di direktori kerja.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data siap. Jumlah dokumen: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 2: Mempersiapkan dokumen untuk topic modeling</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 2: Mempersiapkan dokumen untuk topic modeling...&quot;</span><span class="p">)</span>
+<span class="c1"># Gunakan langsung kolom teks bersih hasil_preprocessing</span>
+<span class="n">docs_for_analysis</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil_preprocessing&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dokumen siap untuk analisis: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs_for_analysis</span><span class="p">)</span><span class="si">}</span><span class="s2"> dokumen&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 3: Membuat vectorizer dan matriks term-document</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 3: Membuat vectorizer dan matriks term-document...&quot;</span><span class="p">)</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span>
+    <span class="n">stop_words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dalam&quot;</span><span class="p">,</span> <span class="s2">&quot;dan&quot;</span><span class="p">,</span> <span class="s2">&quot;di&quot;</span><span class="p">,</span> <span class="s2">&quot;untuk&quot;</span><span class="p">,</span> <span class="s2">&quot;pada&quot;</span><span class="p">,</span> <span class="s2">&quot;dengan&quot;</span><span class="p">,</span> <span class="s2">&quot;yang&quot;</span><span class="p">,</span> <span class="s2">&quot;itu&quot;</span><span class="p">,</span> <span class="s2">&quot;ini&quot;</span><span class="p">],</span>
+    <span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_df</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="p">)</span>
+<span class="n">doc_term_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs_for_analysis</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriks term-document dibuat: </span><span class="si">{</span><span class="n">doc_term_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 1: Membaca dan memproses file data...
+File &#39;hasil_preprocessing_berita.csv&#39; berhasil dimuat.
+Data shape: (1600, 3)
+Kategori yang tersedia: [&#39;nasional&#39; &#39;internasional&#39; &#39;ekonomi&#39; &#39;olahraga&#39; &#39;teknologi&#39; &#39;otomotif&#39;
+ &#39;hiburan&#39; &#39;gaya-hidup&#39;]
+Kolom yang tersedia: [&#39;isi&#39;, &#39;hasil_preprocessing&#39;, &#39;kategori&#39;]
+Data siap. Jumlah dokumen: 1600
+------------------------------
+Tahap 2: Mempersiapkan dokumen untuk topic modeling...
+Dokumen siap untuk analisis: 1600 dokumen
+------------------------------
+Tahap 3: Membuat vectorizer dan matriks term-document...
+Matriks term-document dibuat: (1600, 1000)
+------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 4: Melatih model LDA untuk topic modeling</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 4: Melatih model LDA untuk topic modeling...&quot;</span><span class="p">)</span>
+<span class="n">n_topics</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Jumlah topik yang diinginkan (sesuai dengan 8 kategori)</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">LatentDirichletAllocation</span><span class="p">(</span>
+    <span class="n">n_components</span><span class="o">=</span><span class="n">n_topics</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">learning_method</span><span class="o">=</span><span class="s1">&#39;online&#39;</span>
+<span class="p">)</span>
+<span class="n">lda_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">doc_term_matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model LDA selesai dilatih!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 5: Mendapatkan topik untuk setiap dokumen</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 5: Mendapatkan topik untuk setiap dokumen...&quot;</span><span class="p">)</span>
+<span class="n">topic_assignments</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">doc_term_matrix</span><span class="p">)</span>
+<span class="n">topics</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">topic_assignments</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">topic_assignments</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik untuk setiap dokumen berhasil dihitung!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 6: Menampilkan hasil topik</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 6: Menampilkan hasil topik...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan kata-kata teratas untuk setiap topik</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">topic_words</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">topic_idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="n">top_words_idx</span> <span class="o">=</span> <span class="n">topic</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">10</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 10 kata teratas</span>
+    <span class="n">top_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">feature_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_words_idx</span><span class="p">]</span>
+    <span class="n">topic_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">top_words</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topik </span><span class="si">{</span><span class="n">topic_idx</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_words</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 4: Melatih model LDA untuk topic modeling...
+Model LDA selesai dilatih!
+------------------------------
+Tahap 5: Mendapatkan topik untuk setiap dokumen...
+Topik untuk setiap dokumen berhasil dihitung!
+------------------------------
+Tahap 6: Menampilkan hasil topik...
+Topik 0: indonesia, juta, usaha, film, persen, milik, mobil, harga, hadir, rp
+Topik 1: makan, sehat, konsumsi, kandung, tubuh, tingkat, bantu, orang, risiko, lemak
+Topik 2: israel, gaza, trump, palestina, kapal, as, negara, warga, hamas, serang
+Topik 3: kendara, korban, bangun, sekolah, jalan, polisi, gedung, pesantren, proses, orang
+Topik 4: wilayah, hujan, kondisi, gempa, barat, musim, alami, rumah, akibat, potensi
+Topik 5: air, minum, malaysia, jantung, susu, laut, perempuan, terbang, salah, main
+Topik 6: indonesia, arab, saudi, main, dunia, timnas, piala, laga, tanding, lawan
+Topik 7: menteri, perintah, rp, jakarta, uang, persen, bank, presiden, indonesia, negara
+------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 7: Analisis Proporsi Topik per Dokumen</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 7: Analisis proporsi topik per dokumen...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Membuat DataFrame untuk analisis proporsi</span>
+<span class="n">topic_analysis_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Dokumen&quot;</span><span class="p">:</span> <span class="n">docs_for_analysis</span><span class="p">,</span>
+    <span class="s2">&quot;Topik_Dominan&quot;</span><span class="p">:</span> <span class="n">topics</span><span class="p">,</span>
+    <span class="s2">&quot;Probabilitas_Dominan&quot;</span><span class="p">:</span> <span class="n">probabilities</span>
+<span class="p">})</span>
+
+<span class="c1"># Menambahkan proporsi untuk semua topik</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_analysis_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Proporsi_Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topic_assignments</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporsi topik untuk 5 dokumen pertama:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">topic_analysis_df</span><span class="p">[[</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik_Dominan&#39;</span><span class="p">,</span> <span class="s1">&#39;Probabilitas_Dominan&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 7.5: Analisis Mapping Topik ke Kategori Asli</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 7.5: Analisis mapping topik ke kategori asli...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis mapping topik ke kategori asli</span>
+<span class="n">topic_to_category</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_mask</span> <span class="o">=</span> <span class="n">topics</span> <span class="o">==</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">topic_mask</span><span class="p">):</span>
+        <span class="c1"># Ambil kategori asli untuk dokumen dalam topik ini</span>
+        <span class="n">topic_categories</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">topic_mask</span><span class="p">,</span> <span class="s1">&#39;kategori&#39;</span><span class="p">]</span>
+        <span class="n">most_common_category</span> <span class="o">=</span> <span class="n">topic_categories</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">topic_categories</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;Unknown&quot;</span>
+        <span class="n">topic_to_category</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">most_common_category</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> → Kategori: </span><span class="si">{</span><span class="n">most_common_category</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">topic_categories</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> dokumen)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis akurasi mapping</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Akurasi Mapping Topik ke Kategori:&quot;</span><span class="p">)</span>
+<span class="n">correct_mappings</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_docs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topic_to_category</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">topic_mask</span> <span class="o">=</span> <span class="n">topics</span> <span class="o">==</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">topic_mask</span><span class="p">):</span>
+        <span class="n">topic_categories</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">topic_mask</span><span class="p">,</span> <span class="s1">&#39;kategori&#39;</span><span class="p">]</span>
+        <span class="n">correct_count</span> <span class="o">=</span> <span class="p">(</span><span class="n">topic_categories</span> <span class="o">==</span> <span class="n">category</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">topic_categories</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% akurasi (</span><span class="si">{</span><span class="n">correct_count</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">topic_categories</span><span class="p">)</span><span class="si">}</span><span class="s2"> dokumen)&quot;</span><span class="p">)</span>
+        <span class="n">correct_mappings</span> <span class="o">+=</span> <span class="n">correct_count</span>
+
+<span class="n">overall_accuracy</span> <span class="o">=</span> <span class="n">correct_mappings</span> <span class="o">/</span> <span class="n">total_docs</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Akurasi Keseluruhan: </span><span class="si">{</span><span class="n">overall_accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% (</span><span class="si">{</span><span class="n">correct_mappings</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_docs</span><span class="si">}</span><span class="s2"> dokumen)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 8: Analisis Proporsi Term dalam Topik</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 8: Analisis proporsi term dalam topik...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Membuat DataFrame untuk analisis term dalam topik</span>
+<span class="n">term_topic_analysis</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">topic_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_components</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="n">topic_idx</span><span class="p">]</span>
+    <span class="c1"># Normalisasi untuk mendapatkan proporsi</span>
+    <span class="n">topic_proportions</span> <span class="o">=</span> <span class="n">topic_components</span> <span class="o">/</span> <span class="n">topic_components</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># Ambil 20 term teratas untuk setiap topik</span>
+    <span class="n">top_terms_idx</span> <span class="o">=</span> <span class="n">topic_components</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">20</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">term_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_terms_idx</span><span class="p">):</span>
+        <span class="n">term_topic_analysis</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;Topik&#39;</span><span class="p">:</span> <span class="n">topic_idx</span><span class="p">,</span>
+            <span class="s1">&#39;Term&#39;</span><span class="p">:</span> <span class="n">feature_names</span><span class="p">[</span><span class="n">term_idx</span><span class="p">],</span>
+            <span class="s1">&#39;Proporsi&#39;</span><span class="p">:</span> <span class="n">topic_proportions</span><span class="p">[</span><span class="n">term_idx</span><span class="p">],</span>
+            <span class="s1">&#39;Ranking&#39;</span><span class="p">:</span> <span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">})</span>
+
+<span class="n">term_topic_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">term_topic_analysis</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 term untuk setiap topik:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">topic_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_terms</span> <span class="o">=</span> <span class="n">term_topic_df</span><span class="p">[</span><span class="n">term_topic_df</span><span class="p">[</span><span class="s1">&#39;Topik&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">topic_idx</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Topik </span><span class="si">{</span><span class="n">topic_idx</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">topic_terms</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Ranking&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (proporsi: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Proporsi&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 7: Analisis proporsi topik per dokumen...
+Proporsi topik untuk 5 dokumen pertama:
+                                             Dokumen  Topik_Dominan  \
+0  [&#39;wakil&#39;, &#39;ketua&#39;, &#39;dprsufmi&#39;, &#39;dasco&#39;, &#39;ahmad...              7
+1  [&#39;jaksa&#39;, &#39;tuntut&#39;, &#39;jpu&#39;, &#39;tuntut&#39;, &#39;majelis&#39;...              7
+2  [&#39;menteri&#39;, &#39;kebudayaanfadli&#39;, &#39;zonmembeberkan...              3
+3  [&#39;purnawirawan&#39;, &#39;tnipolri&#39;, &#39;gabung&#39;, &#39;dalamk...              7
+4  [&#39;aktorammar&#39;, &#39;zonikembali&#39;, &#39;libat&#39;, &#39;edar&#39;,...              7
+
+   Probabilitas_Dominan
+0              0.986519
+1              0.993366
+2              0.413146
+3              0.696816
+4              0.669326
+------------------------------
+Tahap 7.5: Analisis mapping topik ke kategori asli...
+  Topik 0 → Kategori: hiburan (129 dokumen)
+  Topik 1 → Kategori: gaya-hidup (108 dokumen)
+  Topik 2 → Kategori: internasional (142 dokumen)
+  Topik 3 → Kategori: nasional (98 dokumen)
+  Topik 4 → Kategori: teknologi (55 dokumen)
+  Topik 5 → Kategori: gaya-hidup (17 dokumen)
+  Topik 6 → Kategori: olahraga (158 dokumen)
+  Topik 7 → Kategori: ekonomi (86 dokumen)
+
+Akurasi Mapping Topik ke Kategori:
+  Topik 0 (hiburan): 25.3% akurasi (129/510 dokumen)
+  Topik 1 (gaya-hidup): 74.5% akurasi (108/145 dokumen)
+  Topik 2 (internasional): 78.0% akurasi (142/182 dokumen)
+  Topik 3 (nasional): 60.9% akurasi (98/161 dokumen)
+  Topik 4 (teknologi): 46.2% akurasi (55/119 dokumen)
+  Topik 5 (gaya-hidup): 37.8% akurasi (17/45 dokumen)
+  Topik 6 (olahraga): 96.3% akurasi (158/164 dokumen)
+  Topik 7 (ekonomi): 31.4% akurasi (86/274 dokumen)
+
+Akurasi Keseluruhan: 49.6% (793/1600 dokumen)
+------------------------------
+Tahap 8: Analisis proporsi term dalam topik...
+Top 10 term untuk setiap topik:
+
+Topik 0:
+  1. indonesia (proporsi: 0.0185)
+  2. juta (proporsi: 0.0105)
+  3. usaha (proporsi: 0.0089)
+  4. film (proporsi: 0.0085)
+  5. persen (proporsi: 0.0085)
+  6. milik (proporsi: 0.0084)
+  7. mobil (proporsi: 0.0075)
+  8. harga (proporsi: 0.0073)
+  9. hadir (proporsi: 0.0071)
+  10. rp (proporsi: 0.0069)
+
+Topik 1:
+  1. makan (proporsi: 0.0298)
+  2. sehat (proporsi: 0.0229)
+  3. konsumsi (proporsi: 0.0171)
+  4. kandung (proporsi: 0.0164)
+  5. tubuh (proporsi: 0.0154)
+  6. tingkat (proporsi: 0.0146)
+  7. bantu (proporsi: 0.0130)
+  8. orang (proporsi: 0.0115)
+  9. risiko (proporsi: 0.0115)
+  10. lemak (proporsi: 0.0115)
+
+Topik 2:
+  1. israel (proporsi: 0.0440)
+  2. gaza (proporsi: 0.0230)
+  3. trump (proporsi: 0.0216)
+  4. palestina (proporsi: 0.0186)
+  5. kapal (proporsi: 0.0144)
+  6. as (proporsi: 0.0141)
+  7. negara (proporsi: 0.0136)
+  8. warga (proporsi: 0.0120)
+  9. hamas (proporsi: 0.0116)
+  10. serang (proporsi: 0.0112)
+
+Topik 3:
+  1. kendara (proporsi: 0.0192)
+  2. korban (proporsi: 0.0184)
+  3. bangun (proporsi: 0.0172)
+  4. sekolah (proporsi: 0.0162)
+  5. jalan (proporsi: 0.0161)
+  6. polisi (proporsi: 0.0134)
+  7. gedung (proporsi: 0.0123)
+  8. pesantren (proporsi: 0.0114)
+  9. proses (proporsi: 0.0112)
+  10. orang (proporsi: 0.0110)
+
+Topik 4:
+  1. wilayah (proporsi: 0.0226)
+  2. hujan (proporsi: 0.0205)
+  3. kondisi (proporsi: 0.0127)
+  4. gempa (proporsi: 0.0120)
+  5. barat (proporsi: 0.0118)
+  6. musim (proporsi: 0.0117)
+  7. alami (proporsi: 0.0116)
+  8. rumah (proporsi: 0.0112)
+  9. akibat (proporsi: 0.0102)
+  10. potensi (proporsi: 0.0097)
+
+Topik 5:
+  1. air (proporsi: 0.0334)
+  2. minum (proporsi: 0.0328)
+  3. malaysia (proporsi: 0.0231)
+  4. jantung (proporsi: 0.0178)
+  5. susu (proporsi: 0.0174)
+  6. laut (proporsi: 0.0171)
+  7. perempuan (proporsi: 0.0152)
+  8. terbang (proporsi: 0.0150)
+  9. salah (proporsi: 0.0137)
+  10. main (proporsi: 0.0131)
+
+Topik 6:
+  1. indonesia (proporsi: 0.0582)
+  2. arab (proporsi: 0.0447)
+  3. saudi (proporsi: 0.0436)
+  4. main (proporsi: 0.0294)
+  5. dunia (proporsi: 0.0293)
+  6. timnas (proporsi: 0.0282)
+  7. piala (proporsi: 0.0278)
+  8. laga (proporsi: 0.0216)
+  9. tanding (proporsi: 0.0154)
+  10. lawan (proporsi: 0.0149)
+
+Topik 7:
+  1. menteri (proporsi: 0.0256)
+  2. perintah (proporsi: 0.0194)
+  3. rp (proporsi: 0.0165)
+  4. jakarta (proporsi: 0.0158)
+  5. uang (proporsi: 0.0147)
+  6. persen (proporsi: 0.0101)
+  7. bank (proporsi: 0.0100)
+  8. presiden (proporsi: 0.0094)
+  9. indonesia (proporsi: 0.0093)
+  10. negara (proporsi: 0.0088)
+------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tabel LDA: Top terms per topik dan proporsi topik per dokumen</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabel LDA:&quot;</span><span class="p">)</span>
+
+<span class="c1"># 1) Tabel 10 term teratas per topik</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">top_terms_table</span> <span class="o">=</span> <span class="n">term_topic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Topik&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">top_terms_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gagal menampilkan tabel top terms: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2) Tabel proporsi topik per dokumen (contoh 10 dokumen)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">doc_topic_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">topic_assignments</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Proporsi_Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)])</span>
+    <span class="n">doc_topic_table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Topik_Dominan&#39;</span><span class="p">,</span> <span class="n">topics</span><span class="p">)</span>
+    <span class="n">doc_topic_table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Dokumen&#39;</span><span class="p">,</span> <span class="n">docs_for_analysis</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">doc_topic_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gagal menampilkan tabel proporsi dokumen-topik: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tabel LDA:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Topik</th>
+      <th>Term</th>
+      <th>Proporsi</th>
+      <th>Ranking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>indonesia</td>
+      <td>0.018468</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>juta</td>
+      <td>0.010518</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>usaha</td>
+      <td>0.008867</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>film</td>
+      <td>0.008532</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>persen</td>
+      <td>0.008513</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>7</td>
+      <td>persen</td>
+      <td>0.010075</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>7</td>
+      <td>bank</td>
+      <td>0.009993</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>7</td>
+      <td>presiden</td>
+      <td>0.009371</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>7</td>
+      <td>indonesia</td>
+      <td>0.009292</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>7</td>
+      <td>negara</td>
+      <td>0.008797</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>80 rows × 4 columns</p>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dokumen</th>
+      <th>Topik_Dominan</th>
+      <th>Proporsi_Topik_0</th>
+      <th>Proporsi_Topik_1</th>
+      <th>Proporsi_Topik_2</th>
+      <th>Proporsi_Topik_3</th>
+      <th>Proporsi_Topik_4</th>
+      <th>Proporsi_Topik_5</th>
+      <th>Proporsi_Topik_6</th>
+      <th>Proporsi_Topik_7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>['wakil', 'ketua', 'dprsufmi', 'dasco', 'ahmad...</td>
+      <td>7</td>
+      <td>0.001926</td>
+      <td>0.001926</td>
+      <td>0.001927</td>
+      <td>0.001927</td>
+      <td>0.001926</td>
+      <td>0.001925</td>
+      <td>0.001925</td>
+      <td>0.986519</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>['jaksa', 'tuntut', 'jpu', 'tuntut', 'majelis'...</td>
+      <td>7</td>
+      <td>0.000948</td>
+      <td>0.000948</td>
+      <td>0.000948</td>
+      <td>0.000948</td>
+      <td>0.000948</td>
+      <td>0.000947</td>
+      <td>0.000947</td>
+      <td>0.993366</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>['menteri', 'kebudayaanfadli', 'zonmembeberkan...</td>
+      <td>3</td>
+      <td>0.085777</td>
+      <td>0.000768</td>
+      <td>0.000768</td>
+      <td>0.413146</td>
+      <td>0.323988</td>
+      <td>0.101648</td>
+      <td>0.000768</td>
+      <td>0.073137</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>['purnawirawan', 'tnipolri', 'gabung', 'dalamk...</td>
+      <td>7</td>
+      <td>0.001473</td>
+      <td>0.001473</td>
+      <td>0.058114</td>
+      <td>0.001475</td>
+      <td>0.136408</td>
+      <td>0.102769</td>
+      <td>0.001472</td>
+      <td>0.696816</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>['aktorammar', 'zonikembali', 'libat', 'edar',...</td>
+      <td>7</td>
+      <td>0.001490</td>
+      <td>0.001492</td>
+      <td>0.001491</td>
+      <td>0.218974</td>
+      <td>0.104247</td>
+      <td>0.001491</td>
+      <td>0.001490</td>
+      <td>0.669326</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>['ketua', 'rawan', 'solidaritas', 'merah', 'pu...</td>
+      <td>7</td>
+      <td>0.001427</td>
+      <td>0.001422</td>
+      <td>0.001423</td>
+      <td>0.145900</td>
+      <td>0.001422</td>
+      <td>0.001423</td>
+      <td>0.001422</td>
+      <td>0.845561</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>['gerombol', 'orang', 'senjata', 'serang', 'wa...</td>
+      <td>3</td>
+      <td>0.001424</td>
+      <td>0.001422</td>
+      <td>0.126662</td>
+      <td>0.440074</td>
+      <td>0.332813</td>
+      <td>0.021094</td>
+      <td>0.001422</td>
+      <td>0.075089</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>['jaksa', 'tuntut', 'jpu', 'tuntut', 'mantan',...</td>
+      <td>7</td>
+      <td>0.119085</td>
+      <td>0.000523</td>
+      <td>0.000523</td>
+      <td>0.000524</td>
+      <td>0.000523</td>
+      <td>0.000525</td>
+      <td>0.000523</td>
+      <td>0.877773</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>['jaksa', 'tuntut', 'jpu', 'berat', 'jatuh', '...</td>
+      <td>7</td>
+      <td>0.000782</td>
+      <td>0.000782</td>
+      <td>0.000782</td>
+      <td>0.000782</td>
+      <td>0.000783</td>
+      <td>0.000782</td>
+      <td>0.000782</td>
+      <td>0.994524</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>['polda', 'metro', 'jaya', 'tangguh', 'penahan...</td>
+      <td>3</td>
+      <td>0.001606</td>
+      <td>0.196005</td>
+      <td>0.223331</td>
+      <td>0.572638</td>
+      <td>0.001604</td>
+      <td>0.001605</td>
+      <td>0.001604</td>
+      <td>0.001606</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 9: Visualisasi Hasil Topic Modeling</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 9: Visualisasi hasil topic modeling...&quot;</span><span class="p">)</span>
+
+<span class="c1"># 1. Visualisasi distribusi topik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Subplot 1: Distribusi dokumen per topik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">topic_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">),</span> <span class="n">topic_counts</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Topik&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Jumlah Dokumen&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribusi Dokumen per Topik&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">))</span>
+
+<span class="c1"># Subplot 2: Probabilitas rata-rata per topik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">avg_probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="n">topics</span> <span class="o">==</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">),</span> <span class="n">avg_probabilities</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Topik&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilitas Rata-rata&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Probabilitas Rata-rata per Topik&#39;</span><span class="p">)</span>
+
+<span class="c1"># Subplot 3: Heatmap proporsi topik untuk beberapa dokumen</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">sample_docs</span> <span class="o">=</span> <span class="n">topic_assignments</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># Ambil 10 dokumen pertama</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">sample_docs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.3f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Doc </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Proporsi Topik untuk 10 Dokumen Pertama&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Topik&#39;</span><span class="p">)</span>
+
+<span class="c1"># Subplot 4: Top words untuk setiap topik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">top_words_per_topic</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">top_words</span> <span class="o">=</span> <span class="n">topic_words</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># Ambil 5 kata teratas</span>
+    <span class="n">top_words_per_topic</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_words</span><span class="p">))</span>
+
+<span class="n">y_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">top_words_per_topic</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">topic_counts</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Jumlah Dokumen&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Topik dengan Kata-kata Kunci&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">words</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_words_per_topic</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">topic_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Subplot 5: Distribusi probabilitas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribusi Probabilitas Topik&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Probabilitas&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frekuensi&#39;</span><span class="p">)</span>
+
+<span class="c1"># Subplot 6: Perbandingan topik vs kategori asli</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1"># Bandingkan topik yang ditemukan dengan kategori asli</span>
+<span class="n">kategori_asli</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">kategori_asli</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">kategori_asli</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribusi Kategori Asli&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 9: Visualisasi hasil topic modeling...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/klasifikasi_lda_berita_5_1.png" src="_images/klasifikasi_lda_berita_5_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 10: Simpan Hasil Topic Modeling ke File CSV</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 10: Menyimpan hasil topic modeling ke file CSV...&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 1. Menyimpan Informasi Umum Setiap Topik ---</span>
+<span class="n">topic_info_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_info_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">&#39;Topik_ID&#39;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+        <span class="s1">&#39;Nama_Topik&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Kata_Kunci&#39;</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_words</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">5</span><span class="p">]),</span>  <span class="c1"># 5 kata teratas</span>
+        <span class="s1">&#39;Jumlah_Dokumen&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">topics</span> <span class="o">==</span> <span class="n">i</span><span class="p">),</span>
+        <span class="s1">&#39;Persentase&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span>
+    <span class="p">})</span>
+
+<span class="n">topic_info_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">topic_info_data</span><span class="p">)</span>
+<span class="n">topic_info_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;informasi_topik_lda.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;informasi_topik_lda.csv&#39; berhasil disimpan.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 2. Menyimpan Hasil Topik untuk Setiap Dokumen ---</span>
+<span class="n">hasil_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Dokumen&quot;</span><span class="p">:</span> <span class="n">docs_for_analysis</span><span class="p">,</span>
+    <span class="s2">&quot;Kategori_Asli&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s2">&quot;Topik_ID&quot;</span><span class="p">:</span> <span class="n">topics</span><span class="p">,</span>
+    <span class="s2">&quot;Probabilitas_Dominan&quot;</span><span class="p">:</span> <span class="n">probabilities</span>
+<span class="p">})</span>
+
+<span class="c1"># Menambahkan proporsi untuk semua topik</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">hasil_df</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Proporsi_Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">topic_assignments</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Menambahkan informasi topik</span>
+<span class="n">hasil_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">hasil_df</span><span class="p">,</span> <span class="n">topic_info_df</span><span class="p">[[</span><span class="s1">&#39;Topik_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Nama_Topik&#39;</span><span class="p">,</span> <span class="s1">&#39;Kata_Kunci&#39;</span><span class="p">]],</span>
+                   <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;Topik_ID&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Topik_ID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan mapping topik ke kategori (jika topic_to_category sudah didefinisikan)</span>
+<span class="k">if</span> <span class="s1">&#39;topic_to_category&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Kategori_Prediksi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Topik_ID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">topic_to_category</span><span class="p">)</span>
+    <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Mapping_Benar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Kategori_Asli&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Kategori_Prediksi&#39;</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Jika belum didefinisikan, buat mapping sederhana</span>
+    <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Kategori_Prediksi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+    <span class="n">hasil_df</span><span class="p">[</span><span class="s1">&#39;Mapping_Benar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">hasil_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;hasil_topik_per_dokumen_lda.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;hasil_topik_per_dokumen_lda.csv&#39; berhasil disimpan.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 3. Menyimpan Analisis Term dalam Topik ---</span>
+<span class="n">term_topic_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;analisis_term_dalam_topik_lda.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;analisis_term_dalam_topik_lda.csv&#39; berhasil disimpan.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 4. Menyimpan Ringkasan Statistik ---</span>
+<span class="c1"># Hitung kategori asli untuk statistik</span>
+<span class="n">kategori_asli</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># Buat summary stats dengan penanganan variabel yang mungkin belum didefinisikan</span>
+<span class="n">summary_stats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Total_Dokumen&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">docs_for_analysis</span><span class="p">),</span>
+    <span class="s1">&#39;Jumlah_Topik&#39;</span><span class="p">:</span> <span class="n">n_topics</span><span class="p">,</span>
+    <span class="s1">&#39;Jumlah_Fitur&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">),</span>
+    <span class="s1">&#39;Distribusi_Kategori_Asli&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kategori_asli</span><span class="p">),</span>
+    <span class="s1">&#39;Distribusi_Topik&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)],</span> <span class="n">topic_counts</span><span class="o">.</span><span class="n">tolist</span><span class="p">())),</span>
+    <span class="s1">&#39;Probabilitas_Rata_Rata&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)],</span> <span class="n">avg_probabilities</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1"># Tambahkan informasi mapping jika tersedia</span>
+<span class="k">if</span> <span class="s1">&#39;topic_to_category&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="n">summary_stats</span><span class="p">[</span><span class="s1">&#39;Mapping_Topik_Kategori&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;Topik_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)],</span> <span class="p">[</span><span class="n">topic_to_category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)]))</span>
+    <span class="n">summary_stats</span><span class="p">[</span><span class="s1">&#39;Akurasi_Mapping&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">overall_accuracy</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">summary_stats</span><span class="p">[</span><span class="s1">&#39;Mapping_Topik_Kategori&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Belum dianalisis&quot;</span>
+    <span class="n">summary_stats</span><span class="p">[</span><span class="s1">&#39;Akurasi_Mapping&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Belum dianalisis&quot;</span>
+
+<span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">summary_stats</span><span class="p">])</span>
+<span class="n">summary_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;ringkasan_topic_modeling_lda.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File &#39;ringkasan_topic_modeling_lda.csv&#39; berhasil disimpan.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proses topic modeling selesai!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total dokumen: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs_for_analysis</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah topik: </span><span class="si">{</span><span class="n">n_topics</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi dokumen per topik:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">topics</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> dokumen (</span><span class="si">{</span><span class="n">count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">File yang disimpan:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- informasi_topik_lda.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- hasil_topik_per_dokumen_lda.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- analisis_term_dalam_topik_lda.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- ringkasan_topic_modeling_lda.csv&quot;</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 10: Menyimpan hasil topic modeling ke file CSV...
+File &#39;informasi_topik_lda.csv&#39; berhasil disimpan.
+File &#39;hasil_topik_per_dokumen_lda.csv&#39; berhasil disimpan.
+File &#39;analisis_term_dalam_topik_lda.csv&#39; berhasil disimpan.
+File &#39;ringkasan_topic_modeling_lda.csv&#39; berhasil disimpan.
+------------------------------
+Proses topic modeling selesai!
+Total dokumen: 1600
+Jumlah topik: 8
+Distribusi dokumen per topik:
+  Topik 0: 510 dokumen (31.9%)
+  Topik 1: 145 dokumen (9.1%)
+  Topik 2: 182 dokumen (11.4%)
+  Topik 3: 161 dokumen (10.1%)
+  Topik 4: 119 dokumen (7.4%)
+  Topik 5: 45 dokumen (2.8%)
+  Topik 6: 164 dokumen (10.2%)
+  Topik 7: 274 dokumen (17.1%)
+
+File yang disimpan:
+- informasi_topik_lda.csv
+- hasil_topik_per_dokumen_lda.csv
+- analisis_term_dalam_topik_lda.csv
+- ringkasan_topic_modeling_lda.csv
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==============================================================================</span>
+<span class="c1"># Tahap 11: Analisis Mendalam dan Interpretasi Topik</span>
+<span class="c1"># ==============================================================================</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tahap 11: Analisis mendalam dan interpretasi topik...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis dokumen dengan probabilitas tertinggi untuk setiap topik</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dokumen dengan probabilitas tertinggi untuk setiap topik:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">topic_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_mask</span> <span class="o">=</span> <span class="n">topics</span> <span class="o">==</span> <span class="n">topic_idx</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">topic_mask</span><span class="p">):</span>
+        <span class="n">topic_probs</span> <span class="o">=</span> <span class="n">probabilities</span><span class="p">[</span><span class="n">topic_mask</span><span class="p">]</span>
+        <span class="n">max_prob_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">topic_probs</span><span class="p">)</span>
+        <span class="n">original_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">topic_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">max_prob_idx</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Topik </span><span class="si">{</span><span class="n">topic_idx</span><span class="si">}</span><span class="s2"> (Kata kunci: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_words</span><span class="p">[</span><span class="n">topic_idx</span><span class="p">][:</span><span class="mi">5</span><span class="p">])</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Dokumen terbaik: </span><span class="si">{</span><span class="n">docs_for_analysis</span><span class="p">[</span><span class="n">original_idx</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Probabilitas: </span><span class="si">{</span><span class="n">probabilities</span><span class="p">[</span><span class="n">original_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis term dengan proporsi tertinggi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Term dengan proporsi tertinggi untuk setiap topik:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">topic_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">topic_terms</span> <span class="o">=</span> <span class="n">term_topic_df</span><span class="p">[</span><span class="n">term_topic_df</span><span class="p">[</span><span class="s1">&#39;Topik&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">topic_idx</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Topik </span><span class="si">{</span><span class="n">topic_idx</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">topic_terms</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Proporsi&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis distribusi probabilitas</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Statistik Probabilitas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Rata-rata: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Median: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Standar deviasi: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Minimum: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Maksimum: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analisis perbandingan topik vs kategori asli</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analisis Perbandingan Topik vs Kategori Asli:&quot;</span><span class="p">)</span>
+<span class="n">kategori_asli</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi kategori asli:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">kategori_asli</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">kategori</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> dokumen&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distribusi topik yang ditemukan:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">topics</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Topik </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> dokumen&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KESIMPULAN TOPIC MODELING:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Menemukan topik dalam kumpulan teks corpus: ✓&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Ditemukan 8 topik tersembunyi dalam dataset&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Setiap topik memiliki kata kunci yang khas&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Mengetahui proporsi topik suatu dokumen: ✓&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Setiap dokumen memiliki proporsi untuk semua topik&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Topik dominan ditentukan berdasarkan probabilitas tertinggi&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Menemukan proporsi term di dalam topik: ✓&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Setiap term memiliki proporsi dalam setiap topik&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Term dengan proporsi tinggi menjadi kata kunci topik&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. Analisis Mapping Topik ke Kategori: ✓&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;overall_accuracy&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - Akurasi mapping: </span><span class="si">{</span><span class="n">overall_accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Setiap topik dipetakan ke kategori yang paling dominan&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Mapping topik ke kategori akan dianalisis di cell berikutnya&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Tahap 11: Analisis mendalam dan interpretasi topik...
+
+Dokumen dengan probabilitas tertinggi untuk setiap topik:
+
+Topik 0 (Kata kunci: indonesia, juta, usaha, film, persen):
+  Dokumen terbaik: [&#39;taylor&#39;, &#39;swiftresmi&#39;, &#39;rilis&#39;, &#39;album&#39;, &#39;the&#39;, &#39;life&#39;, &#39;of&#39;, &#39;a&#39;, &#39;showgirl&#39;, &#39;album&#39;, &#39;diskograf...
+  Probabilitas: 0.9964
+
+Topik 1 (Kata kunci: makan, sehat, konsumsi, kandung, tubuh):
+  Dokumen terbaik: [&#39;tolak&#39;, &#39;gurihnyakentang&#39;, &#39;gorengatau&#39;, &#39;renyah&#39;, &#39;keripik&#39;, &#39;junk&#39;, &#39;food&#39;, &#39;pilih&#39;, &#39;praktis&#39;, ...
+  Probabilitas: 0.9892
+
+Topik 2 (Kata kunci: israel, gaza, trump, palestina, kapal):
+  Dokumen terbaik: [&#39;kelompok&#39;, &#39;bersenjatahamasmenyatakan&#39;, &#39;jumat&#39;, &#39;sedia&#39;, &#39;bebas&#39;, &#39;sanderaisrael&#39;, &#39;hidup&#39;, &#39;ting...
+  Probabilitas: 0.9969
+
+Topik 3 (Kata kunci: kendara, korban, bangun, sekolah, jalan):
+  Dokumen terbaik: [&#39;ambruk&#39;, &#39;bangun&#39;, &#39;tingkat&#39;, &#39;lingkung&#39;, &#39;pondok&#39;, &#39;pesantren&#39;, &#39;ponpes&#39;, &#39;al&#39;, &#39;khozinysidoarjo&#39;...
+  Probabilitas: 0.9974
+
+Topik 4 (Kata kunci: wilayah, hujan, kondisi, gempa, barat):
+  Dokumen terbaik: [&#39;wilayah&#39;, &#39;cikini&#39;, &#39;camat&#39;, &#39;menteng&#39;, &#39;jakarta&#39;, &#39;pusat&#39;, &#39;guyur&#39;, &#39;hujan&#39;, &#39;es&#39;, &#39;selasa&#39;, &#39;sor...
+  Probabilitas: 0.9921
+
+Topik 5 (Kata kunci: air, minum, malaysia, jantung, susu):
+  Dokumen terbaik: [&#39;asosiasi&#39;, &#39;sepak&#39;, &#39;bolamalaysiafam&#39;, &#39;aju&#39;, &#39;banding&#39;, &#39;kait&#39;, &#39;sanksi&#39;, &#39;tujuh&#39;, &#39;main&#39;, &#39;natur...
+  Probabilitas: 0.9906
+
+Topik 6 (Kata kunci: indonesia, arab, saudi, main, dunia):
+  Dokumen terbaik: [&#39;patrick&#39;, &#39;kluivert&#39;, &#39;sebut&#39;, &#39;kalah&#39;, &#39;arab&#39;, &#39;saudi&#39;, &#39;babak&#39;, &#39;kualifikasi&#39;, &#39;piala&#39;, &#39;dunia&#39;,...
+  Probabilitas: 0.9956
+
+Topik 7 (Kata kunci: menteri, perintah, rp, jakarta, uang):
+  Dokumen terbaik: [&#39;saksi&#39;, &#39;ahli&#39;, &#39;menilainikita&#39;, &#39;mirzanitidak&#39;, &#39;tindak&#39;, &#39;pidana&#39;, &#39;cuci&#39;, &#39;uang&#39;, &#39;tppu&#39;, &#39;duga...
+  Probabilitas: 0.9955
+
+Term dengan proporsi tertinggi untuk setiap topik:
+
+Topik 0:
+  indonesia: 0.0185
+  juta: 0.0105
+  usaha: 0.0089
+  film: 0.0085
+  persen: 0.0085
+
+Topik 1:
+  makan: 0.0298
+  sehat: 0.0229
+  konsumsi: 0.0171
+  kandung: 0.0164
+  tubuh: 0.0154
+
+Topik 2:
+  israel: 0.0440
+  gaza: 0.0230
+  trump: 0.0216
+  palestina: 0.0186
+  kapal: 0.0144
+
+Topik 3:
+  kendara: 0.0192
+  korban: 0.0184
+  bangun: 0.0172
+  sekolah: 0.0162
+  jalan: 0.0161
+
+Topik 4:
+  wilayah: 0.0226
+  hujan: 0.0205
+  kondisi: 0.0127
+  gempa: 0.0120
+  barat: 0.0118
+
+Topik 5:
+  air: 0.0334
+  minum: 0.0328
+  malaysia: 0.0231
+  jantung: 0.0178
+  susu: 0.0174
+
+Topik 6:
+  indonesia: 0.0582
+  arab: 0.0447
+  saudi: 0.0436
+  main: 0.0294
+  dunia: 0.0293
+
+Topik 7:
+  menteri: 0.0256
+  perintah: 0.0194
+  rp: 0.0165
+  jakarta: 0.0158
+  uang: 0.0147
+
+Statistik Probabilitas:
+  Rata-rata: 0.7234
+  Median: 0.7533
+  Standar deviasi: 0.2073
+  Minimum: 0.2653
+  Maksimum: 0.9974
+
+Analisis Perbandingan Topik vs Kategori Asli:
+Distribusi kategori asli:
+  nasional: 200 dokumen
+  internasional: 200 dokumen
+  ekonomi: 200 dokumen
+  olahraga: 200 dokumen
+  teknologi: 200 dokumen
+  otomotif: 200 dokumen
+  hiburan: 200 dokumen
+  gaya-hidup: 200 dokumen
+
+Distribusi topik yang ditemukan:
+  Topik 0: 510 dokumen
+  Topik 1: 145 dokumen
+  Topik 2: 182 dokumen
+  Topik 3: 161 dokumen
+  Topik 4: 119 dokumen
+  Topik 5: 45 dokumen
+  Topik 6: 164 dokumen
+  Topik 7: 274 dokumen
+
+============================================================
+KESIMPULAN TOPIC MODELING:
+============================================================
+1. Menemukan topik dalam kumpulan teks corpus: ✓
+   - Ditemukan 8 topik tersembunyi dalam dataset
+   - Setiap topik memiliki kata kunci yang khas
+
+2. Mengetahui proporsi topik suatu dokumen: ✓
+   - Setiap dokumen memiliki proporsi untuk semua topik
+   - Topik dominan ditentukan berdasarkan probabilitas tertinggi
+
+3. Menemukan proporsi term di dalam topik: ✓
+   - Setiap term memiliki proporsi dalam setiap topik
+   - Term dengan proporsi tinggi menjadi kata kunci topik
+
+4. Analisis Mapping Topik ke Kategori: ✓
+   - Akurasi mapping: 49.6%
+   - Setiap topik dipetakan ke kategori yang paling dominan
+============================================================
+</pre></div></div>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cbow_embeding_berita.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CBOW Embedding Berita</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="klasifikasi_lda_abstrak.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Topic Modeling Berita dengan LDA (Latent Dirichlet Allocation)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abror Ulil
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

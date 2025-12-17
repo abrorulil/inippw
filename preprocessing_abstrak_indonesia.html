@@ -1,0 +1,9485 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Preprocessing Abstrak Bahasa Indonesia &#8212; Proyek Analisis Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'preprocessing_abstrak_indonesia';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TF-IDF Abstrak Indonesia" href="ekstraksi_fitur_tfidf_abstrak.html" />
+    <link rel="prev" title="Crawling PTA Trunojoyo Prodi Manajemen" href="ptatrunojoyomanajemen.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pp.png" class="logo__image only-light" alt="Proyek Analisis Data - Home"/>
+    <script>document.write(`<img src="_static/pp.png" class="logo__image only-dark" alt="Proyek Analisis Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Selamat datang di proyek PPW
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Halaman Utama</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Selamat Datang 👋</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pendahuluan &amp; Crawling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantar.html">Pengantar Pencarian dan Penambangan Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linkgraphscraping.html">Link Graph Scraping Teknik Industri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html">Crawling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingberita.html">Data Berita CNN Indonesia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingptatrunojoyo.html">Crawling PTA Trunojoyo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ptatrunojoyomanajemen.html">Crawling PTA Trunojoyo Prodi Manajemen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing &amp; Embedding</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Preprocessing Abstrak Bahasa Indonesia</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html">Ekstraksi Fitur TF-IDF Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_abstrak.html">CBOW Embedding Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_berita.html">Preprocessing Berita</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_berita.html">Ekstraksi Fitur TF-IDF Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_berita.html">CBOW Embedding Berita</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analisis &amp; Clustering</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_berita.html">Klasifikasi LDA Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_abstrak.html">Klasifikasi LDA Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Word_Graph.html">Word Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pagerank2.html">Algoritma PageRank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphlnk.html">Graph Link Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/abrorulil/inippw" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/preprocessing_abstrak_indonesia.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preprocessing Abstrak Bahasa Indonesia</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Abstrak Bahasa Indonesia</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#PREPROCESSING">PREPROCESSING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Hapus-Missing-Value-dan-Data-Duplicat">Hapus Missing Value dan Data Duplicat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Test-Cleaning">Test Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Tokenisasi">Tokenisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Stopword-Removal">Stopword Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Stemming">Stemming</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Preprocessing-Abstrak-Bahasa-Indonesia">
+<h1>Preprocessing Abstrak Bahasa Indonesia<a class="headerlink" href="#Preprocessing-Abstrak-Bahasa-Indonesia" title="Link to this heading">#</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load data from pta_manajemen.csv</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;pta_manajemen.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display basic information about the dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset shape:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">df</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Dataset shape: (1031, 8)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>penulis</th>
+      <th>judul</th>
+      <th>abstrak_id</th>
+      <th>abstrak_en</th>
+      <th>pembimbing_pertama</th>
+      <th>pembimbing_kedua</th>
+      <th>prodi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>80211100070</td>
+      <td>SATIYAH</td>
+      <td>PENGARUH FAKTOR-FAKTOR PELATIHAN DAN PENGEMBAN...</td>
+      <td>ABSTRAK\r\nSatiyah, Pengaruh Faktor-faktor Pel...</td>
+      <td>ABSTRACT\r\n\r\nIn an effort to increase labor...</td>
+      <td>Dra. Hj. S. Anugrahini Irawati, MM</td>
+      <td>Helmi Buyung Aulia,S,ST.SE,M.MT</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100211200002</td>
+      <td>Muhammad Zakaria Utomo</td>
+      <td>Pengukuran Website Quality Pada Situs Sistem A...</td>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+      <td>Academic portal system in University of Trunoj...</td>
+      <td>Dr. Ir. Nurita Andriani, MM</td>
+      <td>Nirma Kurriwati, SP, M.Si</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>80211100050</td>
+      <td>Wahyu Kurniawan</td>
+      <td>PENGARUH GAYA KEPEMIMPINAN DEMOKRATIK TERHADAP...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Dr. Dra. Hj. Iriani Ismail, MM</td>
+      <td>Dra. Hj. S. Anugrahini Irawati, MM</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>90211200001</td>
+      <td>Faishal</td>
+      <td>ANALISIS PERSEPSI BRAND ASSOCIATION MENURUT PE...</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>This study wanted to know the brand associatio...</td>
+      <td>Nurita Andriani</td>
+      <td>Yustina Chrismardani</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>80211100044</td>
+      <td>Hendri Wahyudi Prayitno</td>
+      <td>PENGARUH KEPEMIMPINAN DAN KOMPENSASI TERHADAP ...</td>
+      <td>Abstrak\r\nPenelitian ini menggunakan metode k...</td>
+      <td>Abstract\r\nThis research use quantitative met...</td>
+      <td>Dra. Hj. S Anugrahini Irawati, MM</td>
+      <td>Helmi Buyung Aulia,S,ST,SE,.MT</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1026</th>
+      <td>160211100071</td>
+      <td>Husnul Hotimah</td>
+      <td>Analisis Cost Volume Profit Untuk Menentukan T...</td>
+      <td>ABSTRAK\nPenelitian ini bertujuan untuk menget...</td>
+      <td>ABSTRACT\nThis study aims to determine the cal...</td>
+      <td>Hj. Evaliati Amaniyah, S.E., M.S.M.</td>
+      <td>NaN</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>1027</th>
+      <td>160211100291</td>
+      <td>Uswatun Hasanah</td>
+      <td>Pengaruh Pelatihan Dan Kompensasi Terhadap Pro...</td>
+      <td>ABSTRAK\nUswatun Hasanah, 160211100291, Pengar...</td>
+      <td>ABSTRACT\nUswatun Hasanah, 160211100291, The E...</td>
+      <td>Dr. Raden Mas Mochammad  Wispandono S.E ., MS</td>
+      <td>NaN</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>1028</th>
+      <td>160211100064</td>
+      <td>ACH FATHONI</td>
+      <td>PERAN SERVICE PERFORMANCE DAN CLIMATE ORGANIZA...</td>
+      <td>ABSTRAK\nTujuan dari penelitian ini adalah unt...</td>
+      <td>ABSTRACK\n           The purpose of this study...</td>
+      <td>YUDHI PRASETYA MADA, S.E., M.M.</td>
+      <td>NaN</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>1029</th>
+      <td>160211100030</td>
+      <td>INTAN YULLIA NINGSIH</td>
+      <td>BAURAN PROMOSI PADA DEALER YAMAHA TRETAN MOTOR...</td>
+      <td>ABSTRAK\nPenelitian ini bertujuan: (1) Untuk m...</td>
+      <td>ABSTRACK\nThis study aims: (1) To find out whe...</td>
+      <td>DR. MOHAMMAD ARIEF, S.E., M.M.</td>
+      <td>NaN</td>
+      <td>Manajemen</td>
+    </tr>
+    <tr>
+      <th>1030</th>
+      <td>160211100116</td>
+      <td>Widha Deby Andrea</td>
+      <td>Peran Teor Motivasi Herzberg Sebagai Mediator ...</td>
+      <td>Penelitian ini bertujuan untuk dapat mengetahu...</td>
+      <td>This study aims to find out about the effect o...</td>
+      <td>Mochammad Isa Anshori, S.E., M.Si.</td>
+      <td>NaN</td>
+      <td>Manajemen</td>
+    </tr>
+  </tbody>
+</table>
+<p>1031 rows × 8 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dataset info:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Dataset info:
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1031 entries, 0 to 1030
+Data columns (total 8 columns):
+ #   Column              Non-Null Count  Dtype
+---  ------              --------------  -----
+ 0   id                  1031 non-null   int64
+ 1   penulis             1029 non-null   object
+ 2   judul               1031 non-null   object
+ 3   abstrak_id          1026 non-null   object
+ 4   abstrak_en          1026 non-null   object
+ 5   pembimbing_pertama  1028 non-null   object
+ 6   pembimbing_kedua    937 non-null    object
+ 7   prodi               1031 non-null   object
+dtypes: int64(1), object(7)
+memory usage: 64.6+ KB
+</pre></div></div>
+</div>
+</section>
+<section id="PREPROCESSING">
+<h1>PREPROCESSING<a class="headerlink" href="#PREPROCESSING" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tampilkan data &quot;abstrak_id&quot;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak_id&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0       ABSTRAK\r\nSatiyah, Pengaruh Faktor-faktor Pel...
+1       Aplikasi nyata pemanfaatan teknologi informasi...
+2                                                     NaN
+3       Tujuan penelitian ini adalah untuk mengetahui ...
+4       Abstrak\r\nPenelitian ini menggunakan metode k...
+                              ...
+1026    ABSTRAK\nPenelitian ini bertujuan untuk menget...
+1027    ABSTRAK\nUswatun Hasanah, 160211100291, Pengar...
+1028    ABSTRAK\nTujuan dari penelitian ini adalah unt...
+1029    ABSTRAK\nPenelitian ini bertujuan: (1) Untuk m...
+1030    Penelitian ini bertujuan untuk dapat mengetahu...
+Name: abstrak_id, Length: 1031, dtype: object
+</pre></div></div>
+</div>
+<section id="Hapus-Missing-Value-dan-Data-Duplicat">
+<h2>Hapus Missing Value dan Data Duplicat<a class="headerlink" href="#Hapus-Missing-Value-dan-Data-Duplicat" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hapus baris dengan Missing Value di &#39;abstrak_id&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;abstrak_id&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Hapus data duplikat</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Test-Cleaning">
+<h2>Test Cleaning<a class="headerlink" href="#Test-Cleaning" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="c1"># Fungsi untuk membersihkan teks</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1"># Ubah ke huruf kecil</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># Hapus tanda baca</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># Hapus nomor</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="c1"># Terapkan pembersihan ke kolom &#39;abstrak_id&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cleaned_abstrak_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;abstrak_id&#39;</span><span class="p">,</span> <span class="s1">&#39;cleaned_abstrak_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abstrak_id</th>
+      <th>cleaned_abstrak_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABSTRAK\r\nSatiyah, Pengaruh Faktor-faktor Pel...</td>
+      <td>abstrak\r\nsatiyah pengaruh faktorfaktor pelat...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+      <td>aplikasi nyata pemanfaatan teknologi informasi...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abstrak\r\nPenelitian ini menggunakan metode k...</td>
+      <td>abstrak\r\npenelitian ini menggunakan metode k...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>abstrak\r\n\r\ntujuan penelitian ini adalah un...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Tokenisasi">
+<h2>Tokenisasi<a class="headerlink" href="#Tokenisasi" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fungsi untuk melakukan tokenisasi</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tokenize_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Terapkan tokenisasi ke kolom &#39;cleaned_abstrak_id&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;tokenized_abstrak_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cleaned_abstrak_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">tokenize_text</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan DataFrame dengan kolom hasil tokenisasi</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;cleaned_abstrak_id&#39;</span><span class="p">,</span> <span class="s1">&#39;tokenized_abstrak_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\User\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     C:\Users\User\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cleaned_abstrak_id</th>
+      <th>tokenized_abstrak_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>abstrak\r\nsatiyah pengaruh faktorfaktor pelat...</td>
+      <td>[abstrak, satiyah, pengaruh, faktorfaktor, pel...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>aplikasi nyata pemanfaatan teknologi informasi...</td>
+      <td>[aplikasi, nyata, pemanfaatan, teknologi, info...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>[tujuan, penelitian, ini, adalah, untuk, menge...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>abstrak\r\npenelitian ini menggunakan metode k...</td>
+      <td>[abstrak, penelitian, ini, menggunakan, metode...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>abstrak\r\n\r\ntujuan penelitian ini adalah un...</td>
+      <td>[abstrak, tujuan, penelitian, ini, adalah, unt...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Stopword-Removal">
+<h2>Stopword Removal<a class="headerlink" href="#Stopword-Removal" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="c1"># Dapatkan Stop Word bahasa Indonesia</span>
+<span class="n">list_stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">))</span>
+
+<span class="c1"># Fungsi untuk menghapus stop words</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list_stopwords</span><span class="p">]</span>
+
+<span class="c1"># Terapkan penghapusan Stop Word ke kolom &#39;tokenized_abstrak_id&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopwords_removed_abstrak_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tokenized_abstrak_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">remove_stopwords</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;tokenized_abstrak_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stopwords_removed_abstrak_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\User\AppData\Roaming\nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tokenized_abstrak_id</th>
+      <th>stopwords_removed_abstrak_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[abstrak, satiyah, pengaruh, faktorfaktor, pel...</td>
+      <td>[abstrak, satiyah, pengaruh, faktorfaktor, pel...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[aplikasi, nyata, pemanfaatan, teknologi, info...</td>
+      <td>[aplikasi, nyata, pemanfaatan, teknologi, info...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[tujuan, penelitian, ini, adalah, untuk, menge...</td>
+      <td>[tujuan, penelitian, persepsi, brand, associat...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[abstrak, penelitian, ini, menggunakan, metode...</td>
+      <td>[abstrak, penelitian, metode, kuantitatif, men...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[abstrak, tujuan, penelitian, ini, adalah, unt...</td>
+      <td>[abstrak, tujuan, penelitian, mengidentifikasi...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Stemming">
+<h2>Stemming<a class="headerlink" href="#Stemming" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>Sastrawi
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: Sastrawi in c:\users\user\appdata\local\programs\python\python313\lib\site-packages (1.0.1)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.Stemmer.StemmerFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StemmerFactory</span>
+
+<span class="c1"># Buat stemmer</span>
+<span class="n">factory</span> <span class="o">=</span> <span class="n">StemmerFactory</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_stemmer</span><span class="p">()</span>
+
+<span class="c1"># Fungsi untuk melakukan stemming</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+<span class="c1"># Terapkan stemming ke kolom &#39;stopwords_removed_abstrak_id&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopwords_removed_abstrak_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">stem_tokens</span><span class="p">)</span>
+
+<span class="c1"># Function to find and format stemmed word changes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_stemming_changes</span><span class="p">(</span><span class="n">original_tokens</span><span class="p">,</span> <span class="n">stemmed_tokens</span><span class="p">):</span>
+    <span class="n">changes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">original</span><span class="p">,</span> <span class="n">stemmed</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">original_tokens</span><span class="p">,</span> <span class="n">stemmed_tokens</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">original</span> <span class="o">!=</span> <span class="n">stemmed</span><span class="p">:</span>
+            <span class="n">changes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">original</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">stemmed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">changes</span>
+
+<span class="c1"># Dapatkan semua perubahan stemming dari kolom &#39;stopwords_removed_abstrak_id&#39; dan &#39;stemmed_abstrak_id&#39;</span>
+<span class="n">all_changes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">all_changes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_stemming_changes</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;stopwords_removed_abstrak_id&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Dapatkan perubahan unik dan urutkan</span>
+<span class="n">unique_changes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">all_changes</span><span class="p">)))</span>
+
+<span class="c1"># Cetak perubahan unik</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kata-kata yang mengalami stemming:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">unique_changes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;stopwords_removed_abstrak_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Kata-kata yang mengalami stemming:
+acuan : acu
+adukkan : aduk
+aini : ain
+akbari : akbar
+akibatnya : akibat
+aktivitasnya : aktivitas
+alasan : alas
+alfi : alf
+aliran : alir
+analisi : analis
+analisisi : analisis
+analisisis : analisis
+analisisnya : analisis
+ancaman : ancam
+andari : andar
+anggapan : anggap
+anggaran : anggar
+anggotanya : anggota
+angkatan : angkat
+angsuran : angsur
+apapun : apa
+arahan : arah
+arahnya : arah
+asii : asi
+asumsikan : asumsi
+atasan : atas
+aturan : atur
+bahkah : bah
+baiknya : baik
+bandingkan : banding
+bangkalan : bangkal
+bangunan : bangun
+bantuan : bantu
+banyaknya : banyak
+batasan : batas
+bauran : baur
+bawahan : bawah
+bawahannya : bawah
+bebasnya : bebas
+bekasi : bekas
+belajar : ajar
+belakangi : belakang
+belom : bom
+beragam : agam
+beralamat : alamat
+berari : ari
+berasal : asal
+berbagi : bagi
+berbahan : bahan
+berbalik : balik
+berbasis : bas
+berbeda : beda
+berbelanja : belanja
+berdagangan : dagang
+berdampak : dampak
+berdampingan : damping
+berdasar : dasar
+berdasarkan : dasar
+berdiri : diri
+berdistribusi : distribusi
+berdomisili : domisili
+beredar : edar
+berencana : rencana
+berfluktuasi : fluktuasi
+berfluktuatif : fluktuatif
+berfungsi : fungsi
+berganda : ganda
+bergerak : gerak
+berguna : guna
+berhasil : hasil
+berhasilnya : hasil
+berhati : hati
+berhenti : henti
+berhubungan : hubung
+beriklan : iklan
+berimbang : imbang
+berimplikasi : implikasi
+berinovasi : inovasi
+berinteraksi : interaksi
+berinvestasi : investasi
+berjalan : jalan
+berjalannya : jalan
+berjenis : jenis
+berjudul : judul
+berkaitan : kait
+berkala : kala
+berkategori : kategori
+berkecimpung : kecimpung
+berkelanjutan : lanjut
+berkelompok : kelompok
+berkeluarga : keluarga
+berkembang : kembang
+berkembangnya : kembang
+berkepentingan : penting
+berkerja : kerja
+berkesinambungan : sambung
+berketergantungan : gantung
+berkompetisi : kompetisi
+berkomunikasi : komunikasi
+berkontribusi : kontribusi
+berkorelasi : korelasi
+berkualitas : kualitas
+berkumpulnya : kumpul
+berkunjung : kunjung
+berkurang : kurang
+berlaku : laku
+berlandaskan : landas
+berlangganan : langgan
+berlangsungnya : langsung
+berlokasi : lokasi
+berlubang : lubang
+bermain : main
+berman : man
+bermanfaat : manfaat
+bermasalah : masalah
+berminat : minat
+bermunculan : muncul
+bermusyawarah : musyawarah
+bermutu : mutu
+berniat : niat
+bernilai : nila
+bernuansa : nuansa
+berorientasi : orientasi
+berpasangan : pasang
+berpatokan : patok
+berpedoman : pedoman
+berpenampilan : tampil
+berpengaruh : pengaruh
+berpengaruhi : pengaruh
+berpengruh : ruh
+berperan : peran
+berperilaku : perilaku
+berpindah : pindah
+berprestasi : prestasi
+berprofesi : profesi
+berputar : putar
+bersaing : saing
+bersamaan : sama
+bersamadan : samad
+bersangkutan : sangkut
+bersaudara : saudara
+berseberangan : berangan
+bersifat : sifat
+bersinergi : sinergi
+berstatus : status
+berstrata : strata
+bersumber : sumber
+bertahan : tahan
+bertambah : tambah
+bertanda : tanda
+bertanggung : tanggung
+bertegur : tegur
+bertempat : tempat
+bertentangan : tentang
+bertindak : tindak
+bertransaksi : transaksi
+bertugas : tugas
+bertujuan : tuju
+bertumbuh : tumbuh
+berumur : umur
+berupaya : upaya
+berusaha : usaha
+berusia : usia
+bervariasi : variasi
+berwisata : wisata
+besaran : besar
+besarnya : besar
+beserta : serta
+bidangnya : bidang
+bimbingan : bimbing
+binaan : bina
+bisnisnya : bisnis
+bulanan : bulan
+cakupan : cakup
+campuran : campur
+catatan : catat
+cermatnya : cermat
+daerahnya : daerah
+dagangan : dagang
+dananya : dana
+dapatkan : dapat
+dapatlah : dapat
+dasarnya : dasar
+datanya : data
+demangan : demang
+dependennya : dependen
+determinasinya : determinasi
+diadakan : ada
+diajukan : aju
+diakibatkan : akibat
+diakui : aku
+dialami : alami
+diambil : ambil
+diana : ana
+dianalisis : analis
+dianalisisi : analisis
+dianggap : anggap
+dianggarkan : anggar
+diarahkan : arah
+diartikan : arti
+diatas : atas
+diatasi : atas
+diaudit : audit
+diawali : awal
+dibagi : bagi
+dibagikan : bagi
+dibahas : bahas
+dibanding : banding
+dibandingkan : banding
+dibangun : bangun
+dibangunnya : bangun
+dibantu : bantu
+dibawa : bawa
+dibawah : bawah
+dibayar : bayar
+dibeli : beli
+dibenah : benah
+dibenak : benak
+dibentuk : bentuk
+diberlakukannya : laku
+dibiayai : biaya
+dibidang : bidang
+dibimbing : bimbing
+dibingungkan : bingung
+dibuktikan : bukti
+dibursa : bursa
+dibutuhkan : butuh
+dicapai : capai
+diciptakan : cipta
+didahului : dahulu
+didalam : dalam
+didalamnya : dalam
+didapatkan : dapat
+didapatkannya : dapat
+didasarkan : dasar
+didepan : depan
+diduga : duga
+didukung : dukung
+difokuskan : fokus
+digambarkan : gambar
+diganti : ganti
+digelar : gelar
+digemari : gari
+digunaan : guna
+digunkan : gun
+dihadapi : hadap
+dihadapkan : hadap
+diharapkan : harap
+dihasilkan : hasil
+dihasilkannya : hasil
+dihimpun : himpun
+dihindari : hindar
+dihipotesiskan : hipotesis
+dihitung : hitung
+dihubungkan : hubung
+diikuti : ikut
+diindikasi : indikasi
+diindikasikan : indikasi
+diinterpretasikan : interpretasi
+diinvestasikan : investasi
+diinvestasikannya : investasi
+diisi : isi
+dijadikan : jadi
+dijaga : jaga
+dijalankan : jalan
+dijamin : jamin
+dijangkau : jangkau
+dijual : jual
+dijualnya : jual
+dikaitkan : kait
+dikaji : kaji
+dikantor : kantor
+dikategorikan : kategori
+dikehendaki : hendak
+dikelola : kelola
+dikelompokkan : kelompok
+dikeluarkan : keluar
+dikeluhkan : keluh
+dikembangkan : kembang
+dikemudian : kemudi
+dikemukakan : muka
+dikenal : kenal
+diketaui : tau
+dikhususkan : khusus
+diklasifikasikan : klasifikasi
+dikonsumsi : konsumsi
+dikoreksi : koreksi
+dikumpulkan : kumpul
+dilaksanakan : laksana
+dilakukannya : laku
+dilanjutkan : lanjut
+dilantai : lantai
+dilapangan : lapang
+dilaporkan : lapor
+dilatar : latar
+dilengkapi : lengkap
+dilingkungan : lingkung
+dilokasi : lokasi
+diluar : luar
+dimana : mana
+dimanfaatkan : manfaat
+dimas : mas
+dimasa : masa
+dimasukkan : masuk
+dimediasi : mediasi
+dimiliki : milik
+dimilikinya : milik
+diminati : mati
+diminimalkan : minimal
+dinilai : nilai
+dinyatakan : nyata
+diolah : olah
+dioleh : oleh
+dioperasikan : operasi
+dipakai : pakai
+dipandang : pandang
+dipasar : pasar
+dipasarkan : pasar
+dipegang : pegang
+dipengaruhi : pengaruh
+dipengarui : aru
+dipentingkan : penting
+dipenuhi : penuh
+diperbaiki : baik
+dipercaya : percaya
+diperdagangkan : dagang
+diperhatikan : perhati
+diperkuat : kuat
+dipermudah : mudah
+diperoleh : oleh
+diperolehnya : oleh
+dipersenjatai : senjata
+dipersepsikan : persepsi
+dipertahankan : tahan
+dipertimbangkan : timbang
+diperusahaan : usaha
+dipikul : pikul
+dipilih : pilih
+dipimpin : pimpin
+dipimpinnya : pimpin
+diprediksi : prediksi
+diprediksikan : prediksi
+diproduksi : produksi
+dipromosikan : promosi
+dipublikasi : publikasi
+dipublikasikan : publikasi
+dipuskesmas : puskesmas
+dirasa : rasa
+dirasakan : rasa
+direduksi : reduksi
+direkomendasikan : rekomendasi
+dirilis : rilis
+dirintis : rintis
+dirumah : rumah
+disadari : sadar
+disalurkan : salur
+disambut : sambut
+disamping : samping
+disandarkan : sandar
+disarankan : saran
+disebabkan : sebab
+disebarkan : sebar
+disebuah : buah
+disediakan : sedia
+disektor : sektor
+diseleksi : seleksi
+diselesaikan : selesai
+disepakati : pakat
+diserahi : serahi
+diserahkan : serah
+disertai : serta
+disesuaikan : sesuai
+disetiap : tiap
+disetorkan : setor
+disimpukan : simpuk
+disimpulkan : simpul
+disitus : situs
+disukai : suka
+disusul : susul
+disusun : susun
+ditahan : tahan
+ditahun : tahun
+ditanam : tanam
+ditanami : tanam
+ditandai : tanda
+ditanggung : tanggung
+ditarik : tarik
+ditawarkan : tawar
+ditawarkannya : tawar
+diteliti : teliti
+ditempat : tempat
+ditempuh : tempuh
+ditemukan : temu
+ditentukan : tentu
+diterapkan : terap
+diterapkannya : terap
+diterbitkan : terbit
+diterima : terima
+diterimanya : terima
+ditetapkan : tetap
+ditimbulkan : timbul
+ditinggal : tinggal
+ditingkatkan : tingkat
+ditinjau : tinjau
+ditoko : toko
+ditolak : tolak
+ditunjang : tunjang
+ditunjukan : tunjuk
+dituntut : tuntut
+diuji : uji
+diukur : ukur
+diungkap : ungkap
+diusulkan : usul
+diutamakan : utama
+diwajibkan : wajib
+diwakili : wakil
+dorongan : dorong
+dugaan : duga
+dukungan : dukung
+eceran : ecer
+edaran : edar
+eksistensinya : eksistensi
+eksploratori : eksplorator
+explore_nganjuk : explore nganjuk
+faktornya : faktor
+formalnya : formal
+gabungan : gabung
+gagalnya : gagal
+gajii : gaji
+gambaran : gambar
+gandanya : ganda
+gazali : gazal
+gerakan : gera
+hadi : had
+halnya : hal
+harapan : harap
+harapannya : harap
+harian : hari
+hasi : has
+hasilnya : hasil
+helmi : helm
+hiburan : hibur
+hidayati : hidayat
+hubungan : hubung
+hukuman : hukum
+hunian : huni
+ikalan : ikal
+ikatan : ikat
+ikuti : ikut
+imbalan : imbal
+implementasikan : implementasi
+inayati : inayat
+independennya : independen
+ingatan : ingat
+investasikan : investasi
+investasinya : investasi
+jabaran : jabar
+jabatan : jabat
+jadikan : jadi
+jajaran : jajar
+jamali : jamal
+jaminan : jamin
+jangkauan : jangkau
+jaringan : jaring
+jurusan : jurus
+kajian : kaji
+kalangan : kalang
+kamali : kamal
+kapitalisasi : kapital
+karenakan : karena
+kategorikan : kategori
+keabsahan : absah
+keagamaan : agama
+keagenan : agen
+keahlian : ahli
+keahliannya : ahli
+keaktifan : aktif
+keakuratan : akurat
+keamanan : aman
+keamanannya : aman
+keandalan : andal
+keanggotaan : anggota
+kearah : arah
+keatas : atas
+kebanggaan : bangga
+kebangkrutan : bangkrut
+kebanyakan : banyak
+kebawah : bawah
+kebenaran : benar
+kebenarannya : benar
+keberadaan : ada
+keberadaannya : ada
+keberagaman : agam
+keberartian : arti
+keberhasilan : hasil
+keberlanjutan : lanjut
+kebersihan : bersih
+kebiasaan : biasa
+kebijakan : bijak
+kebudayaan : budaya
+kebutuhan : butuh
+kecamatan : camat
+kecantikan : cantik
+kecelakaan : celaka
+kecepatan : cepat
+kecerdasan : cerdas
+kecukupan : cukup
+kecurangan : curang
+kedalam : dalam
+kedatangan : datang
+kedelapan : delap
+kedepannya : depan
+kediri : diri
+kedisiplinan : disiplin
+kedudukan : duduk
+keefektifan : efektif
+keefisiensian : efisiensi
+keeja : eja
+keempat : empat
+keempatnya : empat
+keenam : enam
+kegagalan : gagal
+kegiatan : giat
+kegiatannya : giat
+kegunaan : guna
+kehadiran : hadir
+kehangatan : hangat
+kehidupan : hidup
+kehidupannya : hidup
+kehutanan : hutan
+keistimewaan : istimewa
+kejadian : jadi
+kekakuan : kaku
+kekayaan : kaya
+kekecewaan : kecewa
+kekeluargaan : keluarga
+kekinian : kini
+kekuasaan : kuasa
+kekuatan : kuat
+kekurangan : kurang
+kelancaran : lancar
+kelangsungan : langsung
+kelautan : laut
+kelayakan : layak
+kelebihan : lebih
+kelelahan : lelah
+kelemahan : lemah
+kelengkapan : lengkap
+keluarganya : keluarga
+keluarnya : keluar
+kelulusan : kelulus
+kelurahan : lurah
+kemahasiswaan : mahasiswa
+kemajuan : maju
+kemakmuran : makmur
+kemampuan : mampu
+kemandirian : mandiri
+kemangkiran : mangkir
+kemasan : kemas
+kematangan : matang
+kemauan : mau
+kemayoran : mayor
+kembalian : kembali
+kemenangan : menang
+kementerian : menteri
+kemerdekaan : merdeka
+kemitraan : mitra
+kemudahan : mudah
+kemudahannya : mudah
+kenaikan : naik
+kendaraan : kendara
+kenyamanan : nyaman
+kenyataan : nyata
+kenyataannya : nyata
+keorganisasian : organisasi
+kepatuhan : patuh
+kepedulian : peduli
+kepegawaian : pegawai
+kepekaan : peka
+kepemilikan : milik
+kepemilkan : mil
+kepemimpinan : pimpin
+kepemimpinannya : pimpin
+kependidikan : didik
+kependudukan : duduk
+kepentingan : penting
+kepercayaan : percaya
+keperluan : perlu
+kepimpinan : pimpin
+kepolisian : polisi
+kepribadian : pribadi
+keproduk : produk
+kepuasaan : puasa
+kepuasan : puas
+kepulangan : pulang
+kepustakaan : pustaka
+keputusan : putus
+keragaman : ragam
+kerahasiaan : rahasia
+kerajinan : rajin
+keramahan : ramah
+kerjanya : kerja
+kerugian : rugi
+kerumitan : kerumit
+kesadaran : sadar
+kesalahan : salah
+kesamben : samben
+kesatuan : satu
+kesawan : saw
+kesediaan : sedia
+kesehatan : sehat
+kesehatannya : sehat
+keseimbangan : imbang
+kesejahteraan : sejahtera
+keselamatan : selamat
+kesempatan : sempat
+kesempurnaan : sempurna
+kesemua : semua
+kesenian : seni
+kesenjangan : senjang
+keserasian : serasi
+kesesuaian : sesuai
+kesetaraan : tara
+kesetiaan : setia
+kesiapan : kesiap
+kesibukannya : sibuk
+kesimpulan : simpul
+kesimpulannya : simpul
+kestabilan : stabil
+kesuatu : suatu
+kesuksesan : sukses
+kesulitan : sulit
+kesusahan : susah
+keswadayaan : swadaya
+ketahui : tahu
+ketakutan : takut
+ketangguhan : tangguh
+ketatnya : ketat
+ketegasan : tegas
+ketekunan : tekun
+keteladanan : teladan
+ketentuan : tentu
+ketepatan : tepat
+keterampilan : terampil
+keterbatasan : batas
+keterbukaan : buka
+ketergantungan : gantung
+keterikatan : ikat
+keterkaitan : kait
+keterlambatan : lambat
+keterlibatan : libat
+ketersediaan : sedia
+ketersedian : dian
+ketertiban : tertib
+ketidak : tidak
+ketiga : tiga
+ketujuh : tujuh
+keuangan : uang
+keuangannya : uang
+keunggulan : unggul
+keunikan : uni
+keuntungan : untung
+kewajaran : wajar
+kewajiban : wajib
+kewajibannya : wajib
+kewenangan : wenang
+keyakinan : yakin
+kinera : kera
+kinerja : kerja
+kinerjanya : kerja
+kisaran : kisar
+komponennya : komponen
+konsekuensinya : konsekuensi
+konsumennya : konsumen
+kreativitasnya : kreativitas
+kuatkan : kuat
+kujungan : kujung
+kumpulan : kumpul
+kunjungan : kunjung
+kurangnya : kurang
+kusairi : sair
+lahirnya : lahir
+lainya : lai
+laksanakan : laksana
+lakukan : laku
+lambatnya : lambat
+lancarnya : lancar
+lapangan : lapang
+laporan : lapor
+larangan : larang
+lawangan : lawang
+layanan : layan
+lemahnya : lemah
+lesehan : leseh
+letaknya : letak
+lingkungan : lingkung
+lingkungannya : lingkung
+liniar : liar
+lukisan : lukis
+lulusan : lulus
+madai : mada
+mahmudi : mahmud
+majunya : maju
+makanan : makan
+maksimalnya : maksimal
+manakah : mana
+manfaatnya : manfaat
+maslah : mas
+masukan : masuk
+masyarakatnya : masyarakat
+melaksanakan : laksana
+melanjutkan : lanjut
+melaporkan : lapor
+melayani : layan
+melebihi : lebih
+melekat : lekat
+melibatkan : libat
+meliputi : liput
+meluas : luas
+melukiskan : lukis
+melunasi : lunas
+memacu : pacu
+memadai : pada
+memahami : paham
+memainkan : main
+memakai : pakai
+memakan : makan
+memaksa : paksa
+memaksimalkan : maksimal
+memaksimumkan : maksimum
+memanajemen : manajemen
+memanfaatkan : manfaat
+memasarkan : pasar
+mematuhi : patuh
+membagi : bagi
+membagikan : bagi
+membahas : bahas
+membahasan : bahas
+membaiknya : baik
+membandingkan : banding
+membangkitkan : bangkit
+membangun : bangun
+membantu : bantu
+membawa : bawa
+membayar : bayar
+membelanjai : belanja
+membeli : beli
+membenahi : benah
+membentuk : bentuk
+memberdayakan : daya
+membiayai : biaya
+membidik : bidik
+membimbing : bimbing
+membuka : buka
+membuktikan : bukti
+membutuhkan : butuh
+memediasi : mediasi
+memegang : pegang
+memelihara : pelihara
+memenangkan : menang
+memengaruhi : pengaruh
+memenuhi : penuh
+memepengaruhi : pengaruh
+memerhatikan : perhati
+memfokuskan : fokus
+memicu : picu
+memikirkan : pikir
+memilih : pilih
+memilihi : pilih
+memilik : milik
+memiliki : milik
+meminimalkan : minimal
+meminjamkan : pinjam
+memotivasi : motivasi
+mempekerjakan : kerja
+mempelajari : ajar
+mempengaruhi : pengaruh
+mempengaruhinya : pengaruh
+mempengeruhi : ruh
+memperbaiki : baik
+memperbarui : baru
+mempercayai : percaya
+memperhatikan : perhati
+memperkuat : kuat
+memperluas : luas
+mempermudah : mudah
+memperolah : olah
+memperoleh : oleh
+mempertahan : tahan
+mempertahankan : tahan
+mempertimbangkan : timbang
+memprediksi : prediksi
+memprediksikan : prediksi
+memprihatinkan : prihatin
+memprioritaskan : prioritas
+memproduksi : produksi
+mempromosikan : promosi
+mempublikasi : publikasi
+mempublikasikan : publikasi
+memuaskan : muas
+memudahkan : mudah
+memunculkan : muncul
+memutuskan : putus
+menabung : tabung
+menambah : tambah
+menanamkan : tanam
+menandakan : tanda
+menangani : tangan
+menarik : tarik
+menawarkan : tawar
+mencabut : cabut
+mencakup : cakup
+mencampur : campur
+mencapai : capai
+mencari : cari
+mencegah : cegah
+mencerminkan : cermin
+menciptakan : cipta
+mencoba : coba
+mendalam : dalam
+mendasar : dasar
+mendekati : dekat
+mendeskripsikan : deskripsi
+mendeteksi : deteksi
+mendiskripsikan : skripsi
+mendominasikan : dominasi
+mendorong : dorong
+menduduki : duduk
+mendukung : dukung
+menekan : tekan
+menekankan : tekan
+meneliti : teliti
+menelusuri : telusur
+menempati : tempat
+menempuh : tempuh
+menemui : temu
+menemukan : temu
+menengah : tengah
+menentu : tentu
+menentukan : tentu
+menerangkan : terang
+menerapkan : terap
+menerbitkan : terbit
+menerima : terima
+menerus : terus
+meneruskan : terus
+menetap : tetap
+menetapkan : tetap
+mengabaikan : abai
+mengacu : acu
+mengadakan : ada
+mengajar : ajar
+mengajukan : aju
+mengakibatkan : akibat
+mengakuisisi : akuisisi
+mengalami : alami
+mengalisis : alis
+mengambil : ambil
+menganalis : anal
+menganalisi : analis
+menganalisis : analis
+mengandung : kandung
+menganggur : anggur
+mengangkat : angkat
+menganti : anti
+mengantisipasi : antisipasi
+mengaplikasikan : aplikasi
+mengapresiasi : apresiasi
+mengarah : arah
+mengarahkan : arah
+mengasah : asah
+mengatasi : atas
+mengatur : atur
+mengeksplorasi : eksplorasi
+mengeliminasi : eliminasi
+mengelola : kelola
+mengeluarkan : keluar
+mengembangkan : kembang
+mengemis : emis
+mengenal : kenal
+mengenalkan : kenal
+mengetahu : tahu
+mengetahuan : tahu
+mengevaluasi : evaluasi
+menggambarkan : gambar
+mengganggu : ganggu
+menggeser : geser
+menggiring : giring
+mengguakan : gua
+menggunkan : gun
+menghabiskan : habis
+menghadapi : hadap
+menghambat : hambat
+mengharapkan : harap
+mengharuskan : harus
+menghasilkan : hasil
+menghemat : hemat
+menghimpun : himpun
+menghindari : hindar
+menghitung : hitung
+mengidentifikasi : identifikasi
+mengikuti : ikut
+mengindikasikan : indikasi
+mengintegrasikan : integrasi
+menginvestasikan : investasi
+mengkaji : kaji
+mengklasifikasikan : klasifikasi
+mengkombinasikan : kombinasi
+mengkomunikasikan : komunikasi
+mengkonsumsi : konsumsi
+mengonsumsi : konsumsi
+mengontrol : kontrol
+mengoptimalisasikan : optimalisasi
+mengoptimalkan : optimal
+menguasai : kuasa
+mengubah : ubah
+menguji : uji
+mengukur : ukur
+mengumpulkan : kumpul
+mengunjungi : unjung
+menguntungkan : untung
+mengurangi : kurang
+mengutamakan : utama
+menikah : meni
+menikmati : nikmat
+menilai : nilai
+menilaian : nilai
+menimbulkan : timbul
+meningkat : tingkat
+meningkatan : tingkat
+meningkatkan : tingkat
+meningkatnya : tingkat
+menipis : tip
+menjadikan : jadi
+menjadikannya : jadi
+menjaga : jaga
+menjalani : jalan
+menjalankan : jalan
+menjalin : jalin
+menjamin : jamin
+menjanjikan : janji
+menjelang : jelang
+menjual : jual
+menonjol : tonjol
+mensi : mens
+menstandarkan : standar
+mentaati : taat
+mentri : tri
+menujukan : tuju
+menumbuhkan : tumbuh
+menunjang : tunjang
+menunjukan : tunjuk
+menuntut : tuntut
+menurun : turun
+menurunkan : turun
+menurunnya : turun
+menyadari : sadar
+menyajikan : saji
+menyala : nyala
+menyalurkan : salur
+menyalurkannya : salur
+menyayangkan : sayang
+menyebabkan : sebab
+menyebar : sebar
+menyebarkan : sebar
+menyediakan : sedia
+menyehatkan : sehat
+menyelenggarakan : selenggara
+menyelesaikan : selesai
+menyelidiki : selidik
+menyenangkan : senang
+menyepelekan : sepele
+menyesuaikan : sesuai
+menyimpan : simpan
+menyimpang : simpang
+menyimpulkan : simpul
+menyita : sita
+menyukai : suka
+menyusun : susun
+meramalkan : ramal
+merambah : rambah
+merancang : rancang
+merangkap : rangkap
+merangsang : rangsang
+merasakan : rasa
+merealisasikan : realisasi
+merebut : rebut
+merebutkan : rebut
+merekomendasikan : rekomendasi
+merugikan : rugi
+merumuskan : rumus
+mestinya : mesti
+mewakili : wakil
+mewujudkan : wujud
+miliki : milik
+minimnya : minim
+minuman : minum
+modalnya : modal
+munculnya : muncul
+mursyidi : mursyid
+nabilah : nabi
+nasabahnya : nasabah
+nilainya : nilai
+nining : ning
+olahan : olah
+operasionalnya : operasional
+padangan : padang
+pahaman : paham
+pakaian : pakai
+paketan : paket
+paksaan : paksa
+pandangan : pandang
+paparan : papar
+pasangan : pasang
+pasarkan : pasar
+pasarnya : pasar
+pastian : pasti
+pastinya : pasti
+pebedaan : beda
+pedagang : dagang
+pedekatan : dekat
+pegadaian : gadai
+pegawainya : pegawai
+pejabat : jabat
+pejualan : jual
+pekandangan : kandang
+pekerja : kerja
+pekerjaan : kerja
+pekerjaannya : kerja
+pelabelan : label
+pelabuhan : labuh
+pelaksana : laksana
+pelaksanaan : laksana
+pelaku : laku
+pelanggan : langgan
+pelanggannya : langgan
+pelaporan : lapor
+pelatihan : latih
+pelayan : layan
+pelayanan : layan
+pelayanannya : layan
+pelayaran : layar
+pelengkap : lengkap
+pelibatan : libat
+pelindung : lindung
+pemahaman : paham
+pemakai : pakai
+pemandangan : pandang
+pemanfaatan : manfaat
+pemantauan : pantau
+pemarasan : maras
+pemasaran : pasar
+pemasarannya : pasar
+pemasukan : pasu
+pembagian : bagi
+pembahasan : bahas
+pembalian : balian
+pembangunan : bangun
+pembantu : bantu
+pembayaran : bayar
+pembayarannya : bayar
+pembebanan : beban
+pembelajaran : ajar
+pembelanjaan : belanja
+pembeli : beli
+pembelian : beli
+pembelin : bin
+pembenahan : benah
+pembentuk : bentuk
+pembentukan : bentuk
+pemberantasan : berantas
+pemberdaya : daya
+pemberdayaan : daya
+pemberdayakan : daya
+pemberian : beri
+pemberitaan : berita
+pembiayaan : biaya
+pembimbing : bimbing
+pembinaan : bina
+pembobotan : bobot
+pemborosan : boros
+pembuat : buat
+pembuktian : bukti
+pemebelian : beli
+pemecahan : pecah
+pemediasi : mediasi
+pemegang : pegang
+pemekasan : kas
+pemeliharaan : pelihara
+pemenuhan : penuh
+pemerataan : perata
+pemeriksaan : periksa
+pemerintah : perintah
+pemerintahan : perintah
+pemesanan : mesan
+pemetaan : meta
+pemikiran : pikir
+pemilihan : pilih
+pemilik : milik
+pemilu : milu
+pemimpin : pimpin
+pemindahan : pindah
+pemungutan : mungut
+pemutaran : putar
+penambahan : tambah
+penanaman : tanam
+penanganan : tangan
+penanggulangan : tanggulang
+penanggung : tanggung
+penarikan : tari
+penataan : tata
+penawaran : tawar
+pencahayaan : cahaya
+pencapaian : capai
+pencarian : cari
+pencatatan : catat
+pencegah : cegah
+pencitraan : citra
+pendaftaran : daftar
+pendahuluan : dahulu
+pendamping : damping
+pendampingan : damping
+pendanaan : dana
+pendapat : dapat
+pendapatan : dapat
+pendekatan : dekat
+pendeknya : pendek
+pendelegasian : delegasi
+pendidikan : didik
+pendidikian : kian
+pendiri : diri
+pendirian : diri
+penduduk : duduk
+pendukung : dukung
+penegakan : tega
+penelian : tian
+peneliti : teliti
+penelitian : teliti
+penelitiannya : teliti
+penempatan : tempat
+penentu : tentu
+penentuan : tentu
+penerangan : terang
+penerapan : terap
+penerapannya : terap
+penerima : terima
+penerimaan : terima
+penerimanya : terima
+pengadaan : ada
+pengadopsian : adopsi
+pengairan : air
+pengajar : ajar
+pengakuisisi : akuisisi
+pengalam : alam
+pengalaman : alam
+pengaman : kam
+pengamatan : amat
+pengambil : ambil
+pengambilan : ambil
+pengampilan : kampil
+pengangguran : anggur
+pengangkatan : angkat
+pengarahan : arah
+pengarih : arih
+pengaruhi : pengaruh
+pengaruhnya : pengaruh
+pengaturan : atur
+pengawas : awas
+pengawasan : awas
+pengayoman : ayom
+pengelola : kelola
+pengelolaan : kelola
+pengeluaran : keluar
+pengembalian : kembali
+pengembangan : kembang
+pengembangannya : kembang
+pengemis : emis
+pengenalan : kenal
+pengendalian : kendali
+pengepul : kepul
+pengertian : erti
+pengeruh : keruh
+pengesahannya : kesah
+pengetahuan : tahu
+penggambaran : gambar
+penggerak : gerak
+pengguna : guna
+penggunaan : guna
+penghambat : hambat
+penghambatan : hambat
+penghargaan : harga
+penghasilan : hasil
+penghematan : hemat
+penghitungan : hitung
+pengikut : ikut
+pengikutnya : ikut
+penginapan : inap
+pengirim : kirim
+pengiriman : kirim
+pengkajian : kaji
+pengolah : olah
+pengolahan : olah
+pengolahannya : olah
+pengoptimalisasian : optimalisasi
+pengorganisasian : organisasi
+pengrajin : rajin
+pengruh : ruh
+penguasaan : kuasa
+penguatan : kuat
+pengujian : uji
+pengujung : ujung
+pengukur : ukur
+pengukuran : ukur
+pengumpul : kumpul
+pengumpulan : kumpul
+pengumuman : umum
+pengungkapan : ungkap
+pengunjung : unjung
+pengurus : urus
+pengusaha : usaha
+penilaian : nilai
+peningkatan : tingkat
+penjabaran : jabar
+penjelasan : jelas
+penjemuran : jemur
+penjodohan : jodoh
+penjual : jual
+penjualan : jual
+penjualannya : jual
+pensiunan : pensiun
+penulis : tulis
+penulisan : tulis
+penunjang : tunjang
+penurunan : turun
+penutupan : tutup
+penyajian : saji
+penyakit : sakit
+penyaluran : salur
+penyambung : sambung
+penyebab : sebab
+penyebabnya : sebab
+penyebaran : sebar
+penyedap : sedap
+penyedia : sedia
+penyediaan : sedia
+penyelenggara : selenggara
+penyelenggaraan : selenggara
+penyelenggaraannya : selenggara
+penyelesaian : selesai
+penyemangat : semangat
+penyimpan : simpan
+penyimpangan : simpang
+penyuluh : suluh
+penyuluhan : suluh
+penyusunan : susun
+per_inv : per inv
+peralatan : alat
+peranan : peran
+peranannya : peran
+perangkapan : perangkap
+perannya : peran
+perantara : antara
+perasaan : asa
+perataan : perata
+peraturan : atur
+perawat : awat
+perawatan : awat
+perbadaan : bada
+perbaikan : baik
+perbaiki : baik
+perbandingan : banding
+perbankan : perban
+perbedaan : beda
+perbulan : bulan
+perdagangan : dagang
+perdagangkan : dagang
+perdangan : dang
+perean : pere
+perekonomian : ekonomi
+perekrutan : rekrut
+perencanaan : rencana
+pergerakan : gera
+pergudangan : gudang
+pergunakan : guna
+perguruan : guru
+perhatian : perhati
+perhatikan : perhati
+perhiasan : hias
+perhitungan : hitung
+perhitungannya : hitung
+perhotelan : hotel
+perhubungan : hubung
+perhutani : hutan
+periaku : peria
+perikanan : ikan
+periklanan : iklan
+perindustrian : industri
+peringatan : ingat
+perintis : rintis
+perkantoran : kantor
+perkapalan : kapal
+perkawinan : kawin
+perkebunan : kebun
+perkembangan : kembang
+perkenunan : nun
+perkoperasian : koperasi
+perkuliahan : kuliah
+perlakuan : laku
+perlembar : lembar
+perlindungan : lindung
+perluasan : luas
+permainan : main
+permasalah : masa
+permasalahan : masalah
+permintaan : minta
+permodalan : modal
+permulaan : mula
+pernyataan : nyata
+peroleh : oleh
+perolehan : oleh
+perorangan : orang
+perpaduan : padu
+perpengaruh : pengaruh
+perpindahan : pindah
+perpustakaan : pustaka
+perputaran : putar
+perreng : reng
+persaing : saing
+persaingan : saing
+persamaan : sama
+persediaan : sedia
+persembahan : sembah
+persepam : sepam
+perseroan : persero
+persial : sial
+pertahankan : tahan
+pertambangan : tambang
+pertanahan : tanah
+pertandingan : tanding
+pertanian : tani
+pertemuan : temu
+pertimbangan : timbang
+pertukaran : tukar
+pertumbuan : tumbu
+pertumbuh : tumbuh
+pertumbuhan : tumbuh
+perubahan : ubah
+perumahan : rumah
+perusahaan : usaha
+perusahaannya : usaha
+perusahan : usah
+perusahannya : usah
+pervariabel : variabel
+pesaing : saing
+pesaingnya : saing
+pesanan : pesan
+pesatnya : pesat
+peserta : serta
+petani : tani
+peternak : ternak
+petugas : tugas
+pewarnaan : warna
+pilihan : pilih
+pimpinan : pimpin
+pinjaman : pinjam
+populasinya : populasi
+produknya : produk
+produksinya : produksi
+produktifnya : produktif
+produktivitasi : produktivitas
+prosesnya : proses
+puasan : puas
+publikasikan : publikasi
+pujian : puji
+punahnya : punah
+rahmani : rahman
+ramadani : ramadan
+rasionya : rasio
+relase : rase
+reliabilitasnya : reliabilitas
+rendahnya : rendah
+respondennya : responden
+riilnya : riil
+rosi : ros
+ruangan : ruang
+rumahan : rumah
+rumusan : rumus
+r² : r
+sahamnya : saham
+saingan : saing
+sajian : saji
+saluran : salur
+sampelnya : sampel
+sasaran : sasar
+satuan : satu
+satunya : satu
+seacara : acara
+sealu : alu
+seara : ara
+sebabkan : sebab
+sebalik : balik
+sebanding : banding
+sebanya : seba
+sebarkan : sebar
+sebayak : bayak
+sebegai : bega
+sebutan : sebut
+seimbang : imbang
+seiring : iring
+sejalan : jalan
+sejatinya : sejati
+sejenis : jenis
+sekabupaten : kabupaten
+sekecamatan : camat
+sekedar : dar
+selebihnya : lebih
+semaksimal : maksimal
+seoptimal : optimal
+sepedah : dah
+sepenuhnya : sepenuh
+sepuluh : puluh
+seputar : putar
+seratus : ratus
+sesorang : sorang
+sesuaian : sesuai
+setahun : tahun
+setuju : tuju
+signifikanan : signifikan
+signifikannya : signifikan
+signifikansinya : signifikansi
+signifikasii : signifikasi
+sikapi : sikap
+simpanan : simpan
+simpulan : simpul
+simpulkan : simpul
+sisanya : sisa
+sosialnya : sosial
+strategisnya : strategis
+suasananya : suasana
+sulitnya : sulit
+sumbangan : sumbang
+sumbernya : sumber
+susi : sus
+tabungan : tabung
+tabunganku : tabung
+tagihan : tagih
+tahapan : tahap
+tahunan : tahun
+tahunnya : tahun
+talangan : talang
+tambahan : tambah
+tandai : tanda
+tanggapan : tanggap
+tanggungan : tanggung
+tantangan : tantang
+tawaran : tawar
+tekanan : tekan
+temuan : temu
+temukan : temu
+temukannya : temu
+tentukan : tentu
+tepatnya : tepat
+teradap : adap
+terapkan : terap
+teratas : atas
+teratur : atur
+terbagi : bagi
+terbaik : baik
+terbantu : bantu
+terbatas : batas
+terbentuk : bentuk
+terbesar : besar
+terbilang : bilang
+terbuka : buka
+terbukti : bukti
+tercantum : cantum
+tercapai : capai
+tercapainya : capa
+tercatat : catat
+tercipta : cipta
+terciptalah : cipta
+terciptanya : cipta
+terdaftar : daftar
+terealisasi : realisasi
+terencana : rencana
+terendah : rendah
+terfokus : fokus
+tergabung : gabung
+tergantung : gantung
+tergolong : golong
+teridentifikasi : identifikasi
+terikat : ikat
+terikatnya : ikat
+terindeks : indeks
+terindikasi : indikasi
+terintegrasi : integrasi
+terjaga : jaga
+terjalin : jalin
+terjangkau : jangkau
+terjual : jual
+terkait : kait
+terkandung : kandung
+terkecil : kecil
+terkecuali : kecuali
+terkelola : kelola
+terkenal : kenal
+terkesan : kes
+terkumpul : kumpul
+terlaksana : laksana
+terlaksananya : laksana
+terlambat : lambat
+terlambatnya : lambat
+terlaris : laris
+terlepas : lepas
+terletak : letak
+terlibat : libat
+termotivasi : motivasi
+terpadu : padu
+terpasang : pasang
+terpenting : penting
+terpenuhi : penuh
+terpenuhinya : penuh
+terperinci : perinci
+terpilih : pilih
+terpilihlah : pilih
+tersebar : sebar
+tersedia : sedia
+tersedianya : sedia
+terselesaikan : selesai
+tersendiri : sendiri
+terserap : serap
+tersertifikasi : sertifikasi
+terstruktur : struktur
+tertanam : tanam
+tertarik : tarik
+tertimbang : timbang
+tertinggi : tinggi
+tertuang : tuang
+tertutupi : tutup
+teruji : uji
+terwujud : wujud
+tidaknya : tidak
+timbulnya : timbul
+tindakan : tindak
+tingginya : tinggi
+tingkatan : tingkat
+tinjauan : tinjau
+toni : ton
+tugasnya : tugas
+tujuan : tuju
+tujuannya : tuju
+tumbuhnya : tumbuh
+tunjangan : tunjang
+tunjukan : tunjuk
+tunjukkan : tunjuk
+tuntunan : tuntun
+tuntutan : tuntut
+turunnya : turun
+uangnya : uang
+ukuran : ukur
+uraian : urai
+urusan : urus
+urutan : urut
+usahanya : usaha
+utamanya : utama
+variabelnya : variabel
+waspadai : waspada
+wawasan : wawas
+wilayahnya : wilayah
+x_ : x
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stopwords_removed_abstrak_id</th>
+      <th>stemmed_abstrak_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[abstrak, satiyah, pengaruh, faktorfaktor, pel...</td>
+      <td>[abstrak, satiyah, pengaruh, faktorfaktor, lat...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[aplikasi, nyata, pemanfaatan, teknologi, info...</td>
+      <td>[aplikasi, nyata, manfaat, teknologi, informas...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[tujuan, penelitian, persepsi, brand, associat...</td>
+      <td>[tuju, teliti, persepsi, brand, association, l...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[abstrak, penelitian, metode, kuantitatif, men...</td>
+      <td>[abstrak, teliti, metode, kuantitatif, tekan, ...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[abstrak, tujuan, penelitian, mengidentifikasi...</td>
+      <td>[abstrak, tuju, teliti, identifikasi, variabel...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># Gabungkan semua token yang bertangkai menjadi satu daftar</span>
+<span class="n">all_stemmed_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+<span class="c1"># Hitung frekuensi setiap kata</span>
+<span class="n">word_frequencies</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">all_stemmed_words</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan kata-kata yang paling umum dan frekuensinya</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top Most Frequent Words:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">frequency</span> <span class="ow">in</span> <span class="n">word_frequencies</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Top Most Frequent Words:
+pengaruh: 5550
+kerja: 5386
+teliti: 4381
+variabel: 3539
+usaha: 2535
+signifikan: 2440
+uji: 2363
+karyawan: 2256
+nilai: 1903
+hasil: 1781
+analisis: 1456
+positif: 1307
+sampel: 1174
+data: 1065
+putus: 1040
+tuju: 1022
+parsial: 996
+metode: 965
+simultan: 949
+tingkat: 927
+kunci: 891
+regresi: 886
+beli: 880
+indonesia: 853
+pt: 849
+puas: 844
+t: 776
+dasar: 767
+ganda: 745
+saham: 741
+teknik: 739
+ratio: 704
+sampling: 636
+x: 629
+return: 626
+bursa: 605
+milik: 602
+efek: 602
+daftar: 601
+ambil: 600
+bimbing: 584
+harga: 582
+produk: 564
+kuantitatif: 542
+linier: 539
+motivasi: 538
+bangkal: 536
+dominan: 534
+f: 481
+oleh: 478
+periode: 476
+responden: 474
+uang: 455
+hipotesis: 451
+kualitas: 450
+konsumen: 436
+bawah: 426
+pegawai: 426
+mm: 420
+bank: 413
+populasi: 408
+kabupaten: 408
+r: 407
+madura: 407
+koefisien: 401
+on: 395
+to: 392
+abstrak: 378
+merek: 370
+organisasi: 370
+equity: 360
+purposive: 354
+profitabilitas: 351
+faktor: 344
+studi: 344
+thitung: 333
+dekat: 332
+tbk: 332
+prestasi: 330
+disiplin: 329
+trunojoyo: 324
+pimpin: 324
+universitas: 323
+hitung: 312
+mahasiswa: 299
+asset: 299
+dr: 293
+surabaya: 292
+ukur: 289
+lingkung: 289
+modal: 288
+rasio: 282
+signifikansi: 278
+bei: 277
+komitmen: 272
+bebas: 267
+struktur: 258
+analis: 254
+promosi: 254
+debt: 254
+msi: 254
+langsung: 248
+layan: 245
+roa: 241
+camat: 240
+ttabel: 235
+kompensasi: 234
+pasar: 230
+sektor: 230
+laba: 229
+drs: 222
+citra: 220
+sisa: 219
+mana: 214
+ekonomi: 214
+ikat: 210
+tumbuh: 209
+jual: 208
+kembang: 207
+earning: 207
+biaya: 206
+asumsi: 205
+negatif: 203
+gaya: 202
+sehat: 201
+komunikasi: 200
+temu: 199
+of: 199
+klasik: 197
+persero: 197
+produktivitas: 196
+square: 194
+deskriptif: 194
+manajemen: 194
+daya: 193
+value: 193
+model: 192
+bersamasama: 186
+y: 185
+simpul: 184
+sumenep: 179
+stres: 178
+determinasi: 177
+mampu: 175
+bukti: 172
+kuesioner: 172
+batik: 171
+kumpul: 170
+independen: 169
+total: 169
+cabang: 168
+perilaku: 167
+fakultas: 166
+dividen: 165
+makan: 162
+budaya: 161
+dana: 161
+sosial: 160
+konflik: 160
+sumber: 159
+kompetensi: 158
+turnover: 158
+bisnis: 157
+orang: 156
+besar: 156
+bijak: 156
+share: 156
+b: 155
+ec: 155
+cerdas: 154
+beda: 151
+jenis: 151
+current: 150
+loyalitas: 148
+ajar: 147
+roe: 146
+langgan: 145
+fisik: 145
+size: 145
+pilih: 145
+investasi: 145
+hubung: 144
+pamekasan: 141
+sampang: 140
+tentu: 140
+salah: 139
+beta: 137
+peran: 137
+desa: 137
+putar: 137
+iklan: 136
+spss: 135
+minum: 134
+h: 133
+hj: 132
+likuiditas: 130
+fhitung: 129
+didik: 129
+wawancara: 128
+margin: 128
+laksana: 126
+stock: 126
+capital: 126
+program: 125
+validitas: 125
+rumah: 125
+industri: 125
+non: 124
+lapor: 124
+der: 124
+latih: 123
+pribadi: 122
+signifikasi: 122
+internal: 122
+instrumen: 120
+dapat: 120
+dependen: 118
+volume: 117
+karir: 117
+alat: 114
+net: 114
+terima: 113
+loan: 113
+dagang: 113
+price: 113
+reliabilitas: 112
+marketing: 112
+guna: 111
+individu: 110
+beban: 110
+baur: 109
+rajin: 109
+kriteria: 108
+random: 107
+guru: 107
+kas: 107
+dinas: 106
+persepsi: 106
+optimal: 106
+emosional: 106
+sekunder: 106
+banding: 105
+eva: 105
+adjusted: 104
+media: 104
+assets: 104
+dra: 103
+dukung: 102
+percaya: 102
+masyarakat: 102
+split: 102
+profit: 102
+leverage: 101
+variable: 101
+tabel: 100
+distribusi: 100
+added: 100
+pakai: 99
+strategi: 99
+otomotif: 99
+linear: 99
+manufaktur: 98
+barang: 98
+sub: 98
+a: 97
+kantor: 97
+produksi: 95
+kamal: 95
+eps: 95
+s: 95
+brand: 94
+finansial: 94
+alami: 93
+firm: 93
+aktivitas: 93
+wanita: 93
+hutang: 93
+manusia: 92
+bangkrut: 92
+bagi: 91
+portofolio: 91
+lamongan: 90
+kota: 90
+objek: 90
+proses: 88
+motor: 88
+sebar: 87
+statistik: 86
+jabat: 86
+minat: 86
+akuisisi: 86
+alam: 86
+bunga: 86
+intervening: 86
+payout: 85
+operasional: 85
+sikap: 84
+unjung: 84
+fasilitas: 84
+jamin: 83
+koperasi: 83
+risiko: 82
+toko: 82
+masalah: 82
+sesuai: 81
+ftabel: 81
+kunjung: 80
+suku: 79
+ldr: 79
+growth: 79
+terap: 78
+bantu: 77
+wisata: 77
+faktorfaktor: 76
+observasi: 76
+kondisi: 76
+gresik: 76
+tenaga: 76
+prediksi: 76
+real: 76
+corporate: 75
+aktiva: 74
+butuh: 74
+estate: 74
+bahas: 73
+npl: 72
+nasabah: 72
+cr: 72
+helm: 71
+atribut: 71
+sedia: 71
+kelompok: 71
+piutang: 71
+market: 71
+saing: 70
+jalur: 70
+zscore: 70
+syariah: 70
+car: 70
+capai: 69
+pesan: 69
+olah: 68
+tunjuk: 68
+altman: 68
+economic: 68
+etos: 67
+intention: 67
+konsumsi: 67
+awat: 67
+ud: 67
+financial: 67
+indeks: 66
+dividend: 66
+dampak: 66
+selamat: 66
+inflasi: 66
+online: 65
+rumus: 65
+mandiri: 64
+mudji: 64
+bentuk: 63
+investor: 63
+liput: 63
+manajerial: 63
+pindah: 63
+book: 63
+interpersonal: 62
+perban: 62
+harap: 61
+jasa: 61
+masuk: 61
+pustaka: 61
+cv: 61
+duga: 61
+tugas: 61
+kuswinarno: 61
+orientasi: 61
+negara: 60
+buyung: 59
+kategori: 59
+skala: 59
+anugrahini: 59
+empati: 58
+demokratis: 58
+kuat: 58
+image: 58
+bersih: 58
+bumi: 58
+informasi: 57
+sebab: 57
+bambang: 57
+heru: 57
+solvabilitas: 57
+perintah: 57
+store: 57
+penuh: 56
+locus: 56
+utama: 55
+alkirom: 55
+irawati: 55
+judul: 55
+umkm: 55
+ismail: 55
+kreativitas: 55
+control: 55
+indah: 54
+public: 54
+iriani: 54
+job: 54
+nyata: 53
+and: 53
+sepeda: 53
+rendah: 53
+roi: 53
+nim: 53
+keluarga: 52
+gatot: 52
+m: 52
+wispandono: 52
+mva: 52
+kapal: 52
+pbv: 52
+prasetyo: 51
+faidal: 51
+zulkifli: 51
+echsan: 51
+arus: 51
+property: 51
+kualitatif: 50
+tari: 50
+sakit: 50
+jangka: 50
+deposit: 50
+adequacy: 50
+simple: 49
+risk: 49
+performing: 49
+lokasi: 49
+pln: 49
+social: 49
+sama: 49
+aulia: 49
+tahan: 49
+awas: 49
+pranjoto: 49
+likert: 48
+daerah: 48
+kelola: 48
+semangat: 48
+for: 48
+proporsi: 48
+purnamawati: 48
+anam: 48
+wildan: 48
+institusional: 48
+makhmud: 48
+tiga: 48
+slovin: 48
+insentif: 48
+bopo: 48
+human: 48
+identifikasi: 47
+honda: 47
+empat: 47
+bumn: 47
+tato: 47
+semen: 47
+csr: 47
+tanjung: 47
+untung: 46
+karakteristik: 46
+tulis: 46
+sidoarjo: 46
+tetap: 45
+perhati: 45
+efektivitas: 45
+finance: 45
+masingmasing: 45
+kuasa: 45
+kemas: 45
+nugroho: 45
+tabung: 45
+ms: 45
+sadar: 44
+nokia: 44
+investment: 44
+rm: 44
+smartphone: 44
+eksternal: 44
+manfaat: 43
+performance: 43
+ratarata: 43
+spi: 43
+normalitas: 43
+stratified: 42
+atas: 42
+chairul: 42
+jaya: 42
+management: 42
+mediasi: 42
+bidang: 41
+tanggap: 41
+turun: 41
+hidup: 41
+kait: 41
+gani: 41
+farmasi: 41
+governance: 41
+mudah: 40
+satu: 40
+belanja: 40
+pos: 40
+relationship: 40
+self: 40
+the: 40
+handphone: 40
+banyak: 40
+tinggi: 40
+sudarsono: 40
+kredit: 40
+bina: 40
+cipta: 39
+maksimal: 39
+test: 39
+ekuitas: 39
+springate: 39
+leasing: 39
+intelektual: 39
+sistem: 38
+baik: 38
+surya: 38
+sejahtera: 38
+jalan: 38
+go: 38
+rokok: 38
+sig: 38
+merger: 38
+dokumentasi: 38
+relation: 38
+puskesmas: 38
+good: 38
+dok: 38
+perspektif: 38
+bri: 37
+kpri: 37
+skripsi: 37
+rp: 37
+mkes: 37
+interior: 37
+dimensi: 36
+muhammad: 36
+gerak: 36
+yamaha: 36
+organisasional: 36
+probabilitas: 36
+rotasi: 36
+subsektor: 36
+distress: 36
+tuntut: 35
+primer: 35
+jawa: 35
+yustina: 35
+garam: 35
+kimia: 35
+z: 35
+rentabilitas: 35
+pantai: 35
+tahun: 35
+kepala: 35
+sharpe: 35
+spiritual: 35
+etika: 35
+employee: 35
+sdm: 34
+wilayah: 34
+sample: 34
+makmur: 34
+alternatif: 34
+anggota: 34
+product: 34
+over: 34
+st: 34
+sales: 34
+intrinsik: 34
+negeri: 33
+jadi: 33
+kab: 33
+msm: 33
+asosiasi: 33
+telang: 33
+as: 33
+experiential: 33
+evaluasi: 33
+efikasi: 33
+semsi: 33
+ubah: 32
+internet: 32
+jurus: 32
+merah: 32
+tempat: 32
+npm: 32
+analisa: 32
+iklim: 32
+rencana: 32
+capm: 32
+tahu: 31
+partisipasi: 31
+kehandalan: 31
+nirma: 31
+quality: 31
+interest: 31
+customer: 31
+lihat: 31
+korelasi: 31
+tehnik: 31
+salur: 31
+pegang: 31
+sederhana: 31
+giat: 31
+turn: 31
+level: 31
+mmt: 31
+wisatawan: 31
+swasta: 31
+efektif: 30
+moch: 30
+psikologis: 30
+mix: 30
+nasional: 30
+lq: 30
+had: 30
+semm: 30
+lengkap: 30
+dpr: 30
+taraf: 30
+mochammad: 30
+zmijewski: 30
+btn: 30
+reward: 30
+gaji: 30
+putri: 30
+significant: 30
+komisaris: 30
+destinasi: 30
+terampil: 29
+utm: 29
+lapang: 29
+timur: 29
+pribanus: 29
+chrismardani: 29
+tarik: 29
+komponen: 29
+abnormal: 29
+tanggung: 29
+urus: 29
+nila: 29
+mitra: 29
+kharismatik: 29
+cluster: 29
+kuisioner: 28
+versi: 28
+akademik: 28
+deskripsi: 28
+inovasi: 28
+wantara: 28
+kurriwati: 28
+efficacy: 28
+sidogiri: 28
+tolak: 28
+dunia: 28
+marinal: 28
+museum: 28
+tunjang: 28
+publikasi: 28
+bojonegoro: 28
+unit: 28
+mas: 28
+slope: 28
+efisien: 27
+xl: 27
+umur: 27
+usia: 27
+kesiap: 27
+cahaya: 27
+opportunity: 27
+tim: 27
+informan: 27
+indoprima: 27
+audit: 27
+dewan: 27
+laku: 26
+personal: 26
+accidental: 26
+software: 26
+purnomo: 26
+lembaga: 26
+tanah: 26
+industry: 26
+adiluhung: 26
+efisiensi: 26
+muh: 26
+responsibility: 26
+selesai: 26
+pdam: 26
+libat: 26
+abadi: 26
+skill: 26
+gambar: 25
+status: 25
+sipil: 25
+area: 25
+adira: 25
+kartu: 25
+quick: 25
+paired: 25
+rekrutmen: 25
+desain: 25
+empiris: 25
+nur: 25
+fathor: 25
+pratama: 25
+saranasegara: 25
+present: 25
+bahan: 25
+rate: 25
+assurance: 25
+kerjasama: 25
+diri: 25
+operating: 25
+undervalued: 25
+unstandarized: 25
+coefficient: 25
+dosen: 24
+atmosfer: 24
+badan: 24
+swalayan: 24
+lurah: 24
+publisitas: 24
+air: 24
+aspek: 24
+satisfaction: 24
+burneh: 24
+bangun: 24
+catat: 24
+mohammad: 24
+experience: 24
+cash: 24
+kendali: 24
+kosmetik: 24
+operasi: 24
+damping: 24
+properti: 24
+khas: 24
+aktif: 23
+agung: 23
+pangsa: 23
+service: 23
+multi: 23
+timbang: 23
+nurita: 23
+andriani: 23
+evaliati: 23
+dalam: 23
+rakyat: 23
+dwi: 23
+dinamika: 23
+sense: 23
+ii: 23
+general: 23
+nurul: 23
+pondok: 23
+tambang: 23
+subjek: 23
+behavior: 23
+obligasi: 23
+aman: 22
+fitur: 22
+kenal: 22
+indikator: 22
+seluler: 22
+bundling: 22
+raya: 22
+international: 22
+instrument: 22
+fashion: 22
+ssi: 22
+amaniyah: 22
+probability: 22
+atur: 22
+arah: 22
+alfamart: 22
+si: 22
+sp: 22
+rasa: 22
+transportasi: 22
+yahya: 22
+apt: 22
+independent: 22
+tani: 22
+standar: 22
+earnings: 22
+atmosphere: 22
+instagram: 22
+amat: 21
+dealer: 21
+resiko: 21
+business: 21
+path: 21
+restoran: 21
+ir: 21
+ayu: 21
+latar: 21
+inventory: 21
+relate: 21
+reksadana: 21
+pricing: 21
+sari: 21
+mustika: 21
+jenuh: 21
+citizenship: 21
+supervisi: 21
+trading: 21
+pensiun: 21
+scorecard: 21
+word: 21
+mouth: 21
+need: 21
+suasana: 20
+analysis: 20
+kurang: 20
+setia: 20
+ecer: 20
+isi: 20
+saji: 20
+gigi: 20
+blega: 20
+persentase: 20
+beri: 20
+internasional: 20
+feel: 20
+think: 20
+act: 20
+index: 20
+drsec: 20
+prasetya: 20
+hotel: 20
+taman: 20
+karya: 20
+divisi: 20
+aparatur: 20
+organizational: 20
+overvalued: 20
+komite: 20
+insecurity: 20
+mulut: 20
+laut: 19
+survei: 19
+display: 19
+asal: 19
+anak: 19
+chicken: 19
+frekuensi: 19
+graha: 19
+timbul: 19
+elektronik: 19
+letak: 19
+tanda: 19
+tengah: 19
+imbang: 19
+jakarta: 19
+mada: 19
+syarif: 19
+kramat: 19
+telekomunikasi: 19
+responsiveness: 19
+rekan: 19
+produsen: 19
+exterior: 19
+bkm: 19
+mayor: 19
+bidikmisi: 19
+ungkap: 19
+semester: 19
+situs: 18
+kontribusi: 18
+niat: 18
+label: 18
+angka: 18
+luar: 18
+system: 18
+inovatif: 18
+event: 18
+gabung: 18
+kereta: 18
+c: 18
+yudhi: 18
+fungsional: 18
+moh: 18
+santri: 18
+group: 18
+psikologi: 18
+tangible: 18
+kebun: 18
+kec: 18
+transformasional: 18
+duduk: 18
+winata: 18
+score: 18
+punishment: 18
+ikan: 17
+fokus: 17
+sistematis: 17
+penting: 17
+tawar: 17
+mojokerto: 17
+mengunakan: 17
+televisi: 17
+gudang: 17
+profesionalisme: 17
+konsep: 17
+bas: 17
+modern: 17
+asuransi: 17
+pinjam: 17
+potensi: 17
+jombang: 17
+timbal: 17
+i: 17
+cost: 17
+effect: 17
+one: 17
+api: 17
+panca: 17
+kurs: 17
+anggar: 17
+anggap: 17
+kontrol: 17
+layout: 17
+aneka: 17
+ocb: 17
+stress: 17
+peneltian: 17
+dimoderasi: 17
+ownership: 17
+rugi: 17
+polres: 17
+peringkat: 17
+murni: 17
+berwirausaha: 17
+grover: 17
+madya: 17
+instansi: 16
+teknis: 16
+variabelvariabel: 16
+unggul: 16
+sifat: 16
+survey: 16
+muncul: 16
+suyono: 16
+sukses: 16
+facebook: 16
+mohamad: 16
+bmt: 16
+ugt: 16
+pasta: 16
+nyaman: 16
+dar: 16
+acak: 16
+hadap: 16
+branding: 16
+plaza: 16
+pademawu: 16
+indosat: 16
+infrastruktur: 16
+reksa: 16
+vii: 16
+presiden: 16
+tua: 16
+windows: 15
+p: 15
+setiyo: 15
+pambudi: 15
+pabrik: 15
+alpha: 15
+jaga: 15
+elemen: 15
+activity: 15
+bagus: 15
+jensen: 15
+wajib: 15
+ttest: 15
+salon: 15
+pesantren: 15
+raden: 15
+ro: 15
+personil: 15
+jenjang: 15
+tata: 15
+aset: 15
+ipo: 15
+instan: 15
+karier: 15
+proportionate: 15
+teamwork: 15
+kud: 15
+afektif: 15
+electronic: 15
+upaya: 14
+seleksi: 14
+tinjau: 14
+mutu: 14
+koefisiensi: 14
+fenomena: 14
+landas: 14
+filsafat: 14
+positivisme: 14
+akibat: 14
+segi: 14
+free: 14
+paket: 14
+naik: 14
+pasang: 14
+blackberry: 14
+tangga: 14
+pekerjaankeluarga: 14
+kuantitas: 14
+kali: 14
+maju: 14
+arief: 14
+tambah: 14
+baku: 14
+family: 14
+tekhnik: 14
+no: 14
+wardah: 14
+reduksi: 14
+tangan: 14
+telkom: 14
+calon: 14
+belakang: 14
+negative: 14
+niaga: 14
+nonprobability: 14
+markowitz: 14
+babat: 14
+pocong: 14
+related: 14
+ahli: 14
+indomaret: 14
+kerupuk: 14
+intellectual: 14
+organization: 14
+green: 14
+konten: 14
+irawatimm: 13
+website: 13
+distro: 13
+research: 13
+lunak: 13
+reabilitas: 13
+minimal: 13
+kecuali: 13
+benar: 13
+dorong: 13
+ikut: 13
+this: 13
+home: 13
+cepat: 13
+pecah: 13
+suramadu: 13
+minyak: 13
+norma: 13
+paham: 13
+kaji: 13
+e: 13
+nusantara: 13
+investama: 13
+indikasi: 13
+bni: 13
+fundamental: 13
+farma: 13
+sekolah: 13
+hypermart: 13
+empathy: 13
+anugerah: 13
+jiwa: 13
+wewenang: 13
+promotion: 13
+polisi: 13
+hutan: 13
+target: 13
+emphaty: 13
+invesment: 13
+wilcoxon: 13
+fit: 13
+mts: 13
+jl: 13
+rsud: 13
+attributes: 13
+lulus: 13
+d: 13
+moderasi: 13
+sanksi: 13
+heteroskedastisitas: 13
+gun: 13
+kelapa: 13
+diklat: 13
+santosa: 13
+akurasi: 13
+financing: 13
+affective: 13
+buku: 13
+development: 13
+engagement: 13
+islam: 13
+kotor: 13
+shopee: 13
+mc: 13
+menganalisa: 12
+teknologi: 12
+desember: 12
+tipe: 12
+vario: 12
+bpr: 12
+sarana: 12
+kuci: 12
+barat: 12
+dewi: 12
+format: 12
+is: 12
+strategy: 12
+tunggal: 12
+expected: 12
+pandang: 12
+tambrin: 12
+item: 12
+layak: 12
+kembali: 12
+unsur: 12
+awareness: 12
+socah: 12
+positioning: 12
+susun: 12
+pepsodent: 12
+galis: 12
+intrapersonal: 12
+eka: 12
+rawat: 12
+inap: 12
+akuntansi: 12
+paramedis: 12
+publik: 12
+kamar: 12
+prinsip: 12
+produktif: 12
+identitas: 12
+ihsg: 12
+koefesien: 12
+keluar: 12
+terbit: 12
+iv: 12
+dps: 12
+sensus: 12
+bayar: 12
+speedy: 12
+republik: 12
+safrizal: 12
+perum: 12
+reliability: 12
+sstsemmt: 12
+masa: 12
+tukar: 12
+central: 12
+partisipatif: 12
+aqua: 12
+telepon: 12
+mie: 12
+dara: 12
+guano: 12
+respon: 12
+q: 12
+tangibility: 12
+pragaan: 12
+out: 12
+demokratik: 12
+outsourcing: 12
+kub: 12
+matang: 12
+wirausaha: 12
+gregor: 12
+akurat: 11
+prioritas: 11
+riset: 11
+mart: 11
+deviden: 11
+indicator: 11
+exchange: 11
+astra: 11
+komputer: 11
+tanam: 11
+varibel: 11
+perceived: 11
+sulit: 11
+karsa: 11
+tri: 11
+tradisional: 11
+overhead: 11
+wujud: 11
+study: 11
+peristiwa: 11
+bentoel: 11
+swot: 11
+imbal: 11
+puluh: 11
+asia: 11
+fungsi: 11
+islamic: 11
+vixion: 11
+wakil: 11
+treynor: 11
+tekstil: 11
+budi: 11
+nomor: 11
+camplong: 11
+prospek: 11
+bumiputera: 11
+usah: 11
+bcg: 11
+integritas: 11
+siti: 11
+alas: 11
+sri: 11
+up: 11
+rahayu: 11
+strata: 11
+prokrastinasi: 11
+kelamin: 11
+amdk: 11
+serba: 11
+sobel: 11
+sedaap: 11
+labour: 11
+autokorelasi: 11
+grey: 11
+utara: 11
+personel: 11
+terminal: 11
+npf: 11
+emping: 11
+melinjo: 11
+attendant: 11
+tahap: 11
+agen: 11
+regional: 11
+sustainable: 11
+asrama: 11
+pojur: 11
+polana: 11
+ix: 11
+auditor: 11
+serta: 10
+administrasi: 10
+skor: 10
+association: 10
+inti: 10
+langkah: 10
+consumer: 10
+asih: 10
+method: 10
+komposisi: 10
+sampoerna: 10
+bintang: 10
+penelitan: 10
+pusat: 10
+resmi: 10
+ciri: 10
+sial: 10
+retun: 10
+variasi: 10
+anwar: 10
+teh: 10
+in: 10
+pola: 10
+ada: 10
+standart: 10
+mandala: 10
+lancar: 10
+lombang: 10
+matrik: 10
+bep: 10
+safety: 10
+prodi: 10
+muka: 10
+garmen: 10
+monica: 10
+lanjut: 10
+ajb: 10
+pariwisata: 10
+trisakti: 10
+posisi: 10
+gading: 10
+keramik: 10
+porselen: 10
+kaca: 10
+set: 10
+insidental: 10
+transaksional: 10
+pal: 10
+legitimasi: 10
+beat: 10
+presentase: 10
+ddm: 10
+multikolinearitas: 10
+kopi: 10
+bubuk: 10
+qr: 10
+halal: 10
+nganjuk: 10
+sarung: 10
+bakery: 10
+ha: 10
+paksa: 10
+referensi: 10
+mebel: 10
+direksi: 10
+terasi: 10
+macajah: 10
+seacon: 10
+gcg: 10
+tobins: 10
+ragam: 10
+room: 10
+krisis: 10
+kewirausahaan: 10
+xiaomi: 10
+response: 10
+pay: 10
+expenditure: 10
+pangeran: 10
+tuban: 10
+udang: 10
+aplikasi: 9
+kendala: 9
+sempat: 9
+berturutturut: 9
+teori: 9
+stressor: 9
+nonfinansial: 9
+ptpln: 9
+purchasing: 9
+putra: 9
+kredibilitas: 9
+gantung: 9
+marga: 9
+tiket: 9
+ibuibu: 9
+keluargapekerjaan: 9
+dungkek: 9
+benah: 9
+kawin: 9
+visi: 9
+merk: 9
+acu: 9
+simpan: 9
+batas: 9
+hukum: 9
+curve: 9
+single: 9
+theory: 9
+menur: 9
+k: 9
+ho: 9
+kaki: 9
+tujuh: 9
+cari: 9
+mataram: 9
+manajer: 9
+place: 9
+bangga: 9
+mio: 9
+senang: 9
+kuswinarnomsi: 9
+otoriter: 9
+sisi: 9
+lemah: 9
+gross: 9
+liquidity: 9
+eq: 9
+candi: 9
+tindak: 9
+park: 9
+transparansi: 9
+birokrasi: 9
+gain: 9
+cetak: 9
+ahmad: 9
+spesifikasi: 9
+factor: 9
+tangguh: 9
+income: 9
+koefisisen: 9
+involvement: 9
+devisa: 9
+nescafe: 9
+term: 9
+selfefficacy: 9
+perempuan: 9
+tepat: 9
+ovop: 9
+semadura: 9
+resources: 9
+rgec: 9
+flow: 9
+realibility: 9
+variables: 9
+common: 9
+perfoming: 9
+prosedur: 9
+hotelhotel: 9
+burnout: 9
+repurchase: 9
+person: 9
+power: 9
+emas: 9
+domestic: 9
+gdp: 9
+konstruksi: 9
+juang: 9
+gedog: 9
+magang: 9
+bumdes: 9
+pena: 9
+covid: 9
+selenggara: 8
+perangkat: 8
+luas: 8
+pd: 8
+syarat: 8
+gerai: 8
+listrik: 8
+tom: 8
+jerry: 8
+emis: 8
+keywords: 8
+ingat: 8
+purchase: 8
+lestari: 8
+indofood: 8
+klik: 8
+anti: 8
+preferensi: 8
+konvensional: 8
+tidak: 8
+permai: 8
+jupiter: 8
+rasiorasio: 8
+produktifitas: 8
+cair: 8
+kopontren: 8
+bawa: 8
+syamrabu: 8
+devi: 8
+sentra: 8
+efektifitas: 8
+sasar: 8
+ketat: 8
+januari: 8
+puasa: 8
+emotional: 8
+nopember: 8
+obyek: 8
+sudarsonomm: 8
+angkat: 8
+jii: 8
+lembar: 8
+menang: 8
+proppo: 8
+selling: 8
+iii: 8
+terjun: 8
+mania: 8
+indra: 8
+wajar: 8
+utang: 8
+statistika: 8
+planning: 8
+goal: 8
+gas: 8
+tqm: 8
+pelihara: 8
+sambung: 8
+incidental: 8
+sabun: 8
+iq: 8
+sq: 8
+singkong: 8
+departemen: 8
+sukolilo: 8
+switching: 8
+biologis: 8
+operator: 8
+expense: 8
+rank: 8
+discount: 8
+batubara: 8
+regression: 8
+asta: 8
+kemahasiswaanfakultas: 8
+generasi: 8
+suluh: 8
+kognitif: 8
+android: 8
+probolinggo: 8
+fcf: 8
+positive: 8
+sprite: 8
+sop: 8
+ooredoo: 8
+ben: 8
+malabis: 8
+consumption: 8
+smk: 8
+career: 8
+profitability: 8
+concern: 8
+logistik: 8
+tambak: 8
+gula: 8
+samper: 8
+ekstraorganisasi: 8
+shu: 8
+soft: 8
+gadai: 8
+phk: 8
+bulog: 8
+vannamei: 8
+rantai: 8
+importance: 7
+ulang: 7
+decision: 7
+rangka: 7
+meguji: 7
+purpossive: 7
+influence: 7
+at: 7
+with: 7
+that: 7
+fluktuatif: 7
+supra: 7
+penlitian: 7
+attention: 7
+jembatan: 7
+enam: 7
+aktifitas: 7
+petis: 7
+proporsional: 7
+sido: 7
+aju: 7
+shampoo: 7
+uni: 7
+saran: 7
+datadata: 7
+reaksi: 7
+syarifah: 7
+ambami: 7
+rato: 7
+ebu: 7
+tehadap: 7
+garnier: 7
+kompetitif: 7
+bobot: 7
+unilever: 7
+mutasi: 7
+arbitrage: 7
+trust: 7
+transaksi: 7
+bilang: 7
+isotonik: 7
+pocari: 7
+sweat: 7
+bluto: 7
+collector: 7
+energi: 7
+disfungsional: 7
+peluang: 7
+kuadran: 7
+unik: 7
+al: 7
+rentang: 7
+soul: 7
+menu: 7
+bmc: 7
+esteem: 7
+radiant: 7
+setting: 7
+signed: 7
+serviceability: 7
+kes: 7
+forensik: 7
+casablanca: 7
+pu: 7
+bakmi: 7
+gili: 7
+kripik: 7
+muris: 7
+wulandari: 7
+sempurna: 7
+akuntabilitas: 7
+takut: 7
+kreatifitas: 7
+coping: 7
+has: 7
+matahari: 7
+tretan: 7
+absah: 7
+interaksi: 7
+kayana: 7
+working: 7
+hijau: 7
+msquare: 7
+mean: 7
+bepengaruh: 7
+pta: 7
+retained: 7
+tupperware: 7
+bidaskspread: 7
+stadion: 7
+long: 7
+terhadapa: 7
+kerjax: 7
+samarinda: 7
+lebih: 7
+underpricing: 7
+sindia: 7
+maron: 7
+kospin: 7
+services: 7
+branch: 7
+east: 7
+retention: 7
+whether: 7
+determine: 7
+dpk: 7
+bonus: 7
+minimarket: 7
+heterokedastisitas: 7
+impulse: 7
+buying: 7
+multikolinieritas: 7
+bahari: 7
+gunung: 7
+belva: 7
+farindo: 7
+ninja: 7
+labuh: 7
+esop: 7
+mistik: 7
+shop: 7
+mikro: 7
+hard: 7
+utilitas: 7
+mogok: 7
+songkok: 7
+awing: 7
+ambassador: 7
+city: 7
+ppsdm: 7
+extraversion: 7
+achievement: 7
+affiliation: 7
+milenial: 7
+eservice: 7
+esatisfaction: 7
+eloyalty: 7
+wayang: 7
+fva: 7
+volatilitas: 7
+keras: 7
+melati: 7
+kencana: 7
+tekan: 6
+pns: 6
+wispandonosems: 6
+wildansemsi: 6
+banking: 6
+foster: 6
+celebrity: 6
+endorser: 6
+expertise: 6
+behavioral: 6
+uswatun: 6
+perusahaanperusahaan: 6
+dukuh: 6
+kupang: 6
+focus: 6
+berbedabeda: 6
+reputasi: 6
+pasien: 6
+kopergu: 6
+komunikator: 6
+susu: 6
+berat: 6
+es: 6
+krim: 6
+walls: 6
+men: 6
+achmad: 6
+jalin: 6
+patner: 6
+misi: 6
+horizontal: 6
+simpang: 6
+ujit: 6
+nya: 6
+diversifikasi: 6
+hanjaya: 6
+jannah: 6
+cafe: 6
+point: 6
+masjid: 6
+dramm: 6
+normal: 6
+fstatistik: 6
+hasanah: 6
+realisasi: 6
+ruang: 6
+jatim: 6
+lpkr: 6
+kalbe: 6
+proportional: 6
+arti: 6
+istimewa: 6
+estetika: 6
+hicard: 6
+menteri: 6
+hambat: 6
+ujung: 6
+karyawannya: 6
+simutan: 6
+oli: 6
+enduro: 6
+delegasi: 6
+relatif: 6
+saronggi: 6
+process: 6
+sunsilk: 6
+clean: 6
+fresh: 6
+hikam: 6
+gagal: 6
+cak: 6
+dono: 6
+yoghurt: 6
+cimory: 6
+panin: 6
+star: 6
+agus: 6
+supervisiatasan: 6
+mau: 6
+apollo: 6
+buat: 6
+jajar: 6
+bi: 6
+yield: 6
+federal: 6
+catch: 6
+activities: 6
+longterm: 6
+pikir: 6
+drsecbambang: 6
+pomade: 6
+transmigrasi: 6
+satpam: 6
+provider: 6
+kaliotik: 6
+guardian: 6
+jungle: 6
+ning: 6
+sma: 6
+situasi: 6
+conscientiousness: 6
+civic: 6
+virtue: 6
+ponsel: 6
+kadur: 6
+arafat: 6
+sumbang: 6
+ketapang: 6
+garansi: 6
+ladang: 6
+selisih: 6
+murah: 6
+konstan: 6
+aspirasi: 6
+saudara: 6
+makam: 6
+warung: 6
+mbak: 6
+nik: 6
+spesial: 6
+ceker: 6
+ayam: 6
+heuristik: 6
+memliki: 6
+lindung: 6
+ito: 6
+master: 6
+ritel: 6
+cegah: 6
+bbri: 6
+untr: 6
+pasif: 6
+wijaya: 6
+deposite: 6
+wardhana: 6
+partially: 6
+du: 6
+pont: 6
+roda: 6
+rri: 6
+binatang: 6
+sumekar: 6
+oleholeh: 6
+multikolonieritas: 6
+ri: 6
+bukit: 6
+pada: 6
+pelindo: 6
+retail: 6
+remunerasi: 6
+grujugan: 6
+gapura: 6
+plastindo: 6
+perata: 6
+perusahaaan: 6
+labang: 6
+pkh: 6
+grand: 6
+kalimas: 6
+lukas: 6
+resource: 6
+triana: 6
+setiyarini: 6
+revolution: 6
+humor: 6
+slogan: 6
+lokus: 6
+capacity: 6
+peer: 6
+paytren: 6
+rahn: 6
+ptsmelting: 6
+unjuk: 6
+islami: 6
+relasi: 6
+village: 6
+otokrasi: 6
+migas: 6
+cepu: 6
+albarokah: 6
+pakandangan: 6
+hirarki: 6
+oprasional: 6
+drahjsanugrahini: 5
+tingkah: 5
+kondusif: 5
+portal: 5
+implementasi: 5
+depot: 5
+profesional: 5
+pangarengan: 5
+arifin: 5
+fenomenologi: 5
+cacat: 5
+klasiksedangkan: 5
+top: 5
+attractiveness: 5
+terhdap: 5
+terang: 5
+kecewa: 5
+ana: 5
+strength: 5
+diskriptif: 5
+kritis: 5
+location: 5
+form: 5
+united: 5
+realibilitas: 5
+padu: 5
+ink: 5
+desire: 5
+action: 5
+global: 5
+statistic: 5
+klasifikasi: 5
+lubang: 5
+goreng: 5
+sania: 5
+siddiq: 5
+banyuanyar: 5
+indomilk: 5
+jamu: 5
+angin: 5
+manyar: 5
+martabak: 5
+hawaii: 5
+rs: 5
+subyektif: 5
+squere: 5
+lg: 5
+buka: 5
+suka: 5
+lambat: 5
+ramah: 5
+indo: 5
+samasama: 5
+botol: 5
+sosro: 5
+loser: 5
+winner: 5
+aktual: 5
+average: 5
+time: 5
+ruh: 5
+sems: 5
+miftahul: 5
+break: 5
+icmd: 5
+member: 5
+makro: 5
+zulkiflimsi: 5
+bappeda: 5
+danamon: 5
+unvr: 5
+wira: 5
+nama: 5
+angket: 5
+gemini: 5
+money: 5
+dahulu: 5
+bonding: 5
+reciprocity: 5
+mahasiswi: 5
+milyar: 5
+muas: 5
+cantik: 5
+suara: 5
+klampar: 5
+mi: 5
+huda: 5
+jabar: 5
+package: 5
+integrasi: 5
+ka: 5
+keyword: 5
+bulan: 5
+anggraini: 5
+kakek: 5
+ssimm: 5
+sinar: 5
+mega: 5
+sumberrejo: 5
+pinasthika: 5
+rmramayana: 5
+tegas: 5
+kendara: 5
+peneliian: 5
+access: 5
+emotion: 5
+spimm: 5
+ganisemsi: 5
+ios: 5
+delapan: 5
+berpegaruh: 5
+solusi: 5
+fakta: 5
+operational: 5
+efficiency: 5
+meni: 5
+glagah: 5
+megetahui: 5
+harta: 5
+table: 5
+marina: 5
+semsm: 5
+ma: 5
+annur: 5
+bengkel: 5
+displin: 5
+rahman: 5
+agama: 5
+serpong: 5
+damai: 5
+irna: 5
+giligenting: 5
+altruism: 5
+courtesy: 5
+sportsmanship: 5
+choirul: 5
+standardized: 5
+smartfren: 5
+konveksi: 5
+nine: 5
+triangulasi: 5
+samsung: 5
+hutama: 5
+external: 5
+implikasi: 5
+prilaku: 5
+pucuk: 5
+harum: 5
+adjust: 5
+elnusa: 5
+perak: 5
+offering: 5
+age: 5
+rgatot: 5
+religi: 5
+pulau: 5
+selection: 5
+timing: 5
+ability: 5
+purpose: 5
+maksima: 5
+goods: 5
+purnamawatisemsi: 5
+building: 5
+teri: 5
+crispy: 5
+daun: 5
+kelor: 5
+filma: 5
+soap: 5
+bayu: 5
+karateristik: 5
+jati: 5
+lar: 5
+profile: 5
+koordinasi: 5
+through: 5
+java: 5
+bakat: 5
+yan: 5
+tren: 5
+ratu: 5
+visual: 5
+auditorial: 5
+kinestetik: 5
+rekreasi: 5
+nugget: 5
+tirta: 5
+gtt: 5
+laras: 5
+shopping: 5
+lifestyle: 5
+karita: 5
+muslim: 5
+outdoor: 5
+im: 5
+relations: 5
+kavila: 5
+sreseh: 5
+sae: 5
+delegatif: 5
+thitungsebesar: 5
+nikko: 5
+kedaton: 5
+noan: 5
+lepas: 5
+kawasaki: 5
+stratifiedcluster: 5
+ln: 5
+opini: 5
+going: 5
+collateral: 5
+antiseptik: 5
+lifebuoy: 5
+dettol: 5
+tourism: 5
+otokratis: 5
+enlargement: 5
+konang: 5
+eror: 5
+memoderasi: 5
+interaktif: 5
+demografis: 5
+farmatradingdandistributioncabang: 5
+ptgapura: 5
+shipyard: 5
+ketidakamanan: 5
+subjektif: 5
+meta: 5
+jaddih: 5
+cakraningrat: 5
+friday: 5
+killer: 5
+feb: 5
+shift: 5
+disclosure: 5
+baureno: 5
+positifsebesar: 5
+komisioner: 5
+adversitas: 5
+talent: 5
+knowledge: 5
+dakwah: 5
+tv: 5
+masalembu: 5
+huni: 5
+climate: 5
+faktual: 4
+kiddrock: 4
+cranberries: 4
+aksidental: 4
+rekomendasi: 4
+pedagogik: 4
+credit: 4
+reza: 4
+retailing: 4
+merchandise: 4
+kwanyar: 4
+mentor: 4
+sponsor: 4
+kerjakaryawan: 4
+respondenteknik: 4
+respondenuntuk: 4
+iwan: 4
+coffee: 4
+pejagan: 4
+seharihari: 4
+statistical: 4
+geger: 4
+magnitude: 4
+generality: 4
+effort: 4
+minta: 4
+kertas: 4
+notebook: 4
+deterjen: 4
+rinso: 4
+noda: 4
+domisili: 4
+fleksibilitas: 4
+recovery: 4
+aida: 4
+celaka: 4
+new: 4
+v: 4
+maan: 4
+ghodaqo: 4
+sedap: 4
+masako: 4
+tuna: 4
+hdiya: 4
+kirim: 4
+komunikan: 4
+umpan: 4
+elemenelemen: 4
+campur: 4
+u: 4
+mild: 4
+hati: 4
+flashdisk: 4
+toshiba: 4
+pantene: 4
+hidayat: 4
+kandung: 4
+pesat: 4
+khusus: 4
+strategis: 4
+pulang: 4
+driver: 4
+syaiful: 4
+kontrak: 4
+liner: 4
+ie: 4
+lokal: 4
+institusi: 4
+capa: 4
+wahyuni: 4
+pajak: 4
+coba: 4
+mall: 4
+series: 4
+yayasan: 4
+kuala: 4
+klse: 4
+philippines: 4
+pse: 4
+strait: 4
+times: 4
+sti: 4
+juli: 4
+indonesian: 4
+kai: 4
+kecil: 4
+tstatistik: 4
+significance: 4
+drsecmakhmud: 4
+pertanggungjawaban: 4
+ulfa: 4
+janji: 4
+zak: 4
+biji: 4
+pintar: 4
+buruk: 4
+hargavalue: 4
+pttrisakti: 4
+dilatarbelakangi: 4
+handjaya: 4
+prosentase: 4
+aji: 4
+pendek: 4
+leseh: 4
+berkah: 4
+ilaahi: 4
+rumput: 4
+warna: 4
+sepam: 4
+sepakbola: 4
+interview: 4
+harus: 4
+matriks: 4
+products: 4
+abd: 4
+wahyudi: 4
+otonomi: 4
+science: 4
+inisiatif: 4
+epic: 4
+pamong: 4
+praja: 4
+bodo: 4
+permata: 4
+cenderung: 4
+perijinan: 4
+early: 4
+warning: 4
+underwriting: 4
+jangkau: 4
+hari: 4
+asa: 4
+penelitia: 4
+aksesoris: 4
+spmsi: 4
+agam: 4
+perlu: 4
+formasi: 4
+berhatihati: 4
+kabel: 4
+hjs: 4
+akuisitor: 4
+merck: 4
+hadir: 4
+disproportionate: 4
+direct: 4
+silmultan: 4
+aktualisasi: 4
+penilitian: 4
+maulina: 4
+ancam: 4
+ciptadent: 4
+jeruk: 4
+banyuates: 4
+ttable: 4
+golong: 4
+waskita: 4
+akr: 4
+corporindo: 4
+iring: 4
+drsecmudji: 4
+upt: 4
+instalasi: 4
+coefficients: 4
+tanggal: 4
+serius: 4
+abdul: 4
+apple: 4
+credibility: 4
+pratista: 4
+drmuhammad: 4
+menujukkan: 4
+medco: 4
+interinsco: 4
+multikolonearitas: 4
+serikat: 4
+equityroe: 4
+ainur: 4
+mra: 4
+initial: 4
+mekanisme: 4
+parahyangan: 4
+bukopin: 4
+sedangakan: 4
+kalang: 4
+seringkali: 4
+politik: 4
+halim: 4
+nugrohospimm: 4
+diproksikan: 4
+gelora: 4
+pemoderasi: 4
+silmutan: 4
+construction: 4
+informatika: 4
+performa: 4
+indovision: 4
+emiten: 4
+pihakpihak: 4
+pasuruan: 4
+susanti: 4
+it: 4
+ain: 4
+bhumikam: 4
+shamitra: 4
+batangbatang: 4
+anal: 4
+stratifield: 4
+panas: 4
+country: 4
+utami: 4
+urut: 4
+turnoverkaryawan: 4
+sky: 4
+vision: 4
+alamien: 4
+underwriter: 4
+adro: 4
+bbca: 4
+bmri: 4
+asi: 4
+ach: 4
+irr: 4
+duta: 4
+error: 4
+proxi: 4
+mown: 4
+affect: 4
+kinerjakaryawan: 4
+bidikimisi: 4
+jones: 4
+picu: 4
+humas: 4
+serasi: 4
+eri: 4
+ytm: 4
+siginifikan: 4
+larang: 4
+computer: 4
+kecamtan: 4
+firdaus: 4
+mekar: 4
+outflow: 4
+tax: 4
+efektivias: 4
+zavgren: 4
+controlling: 4
+fdr: 4
+otoritas: 4
+peneitian: 4
+indonsia: 4
+asemrowo: 4
+da: 4
+shareprice: 4
+paternalistik: 4
+keramahtamahan: 4
+rayon: 4
+bc: 4
+ridha: 4
+nom: 4
+jdid: 4
+kaizen: 4
+ptbri: 4
+ukm: 4
+fulmer: 4
+akrual: 4
+warunk: 4
+upnormal: 4
+akun: 4
+platform: 4
+snowball: 4
+abel: 4
+eiger: 4
+jumiang: 4
+suami: 4
+culture: 4
+mindset: 4
+ebpi: 4
+normatif: 4
+joko: 4
+widodo: 4
+ulp: 4
+institutional: 4
+seni: 4
+reporting: 4
+ifr: 4
+akasha: 4
+kino: 4
+martina: 4
+berto: 4
+mandom: 4
+rvar: 4
+peri: 4
+mrandung: 4
+situasional: 4
+lingkungann: 4
+webqual: 3
+diagram: 3
+kartesius: 3
+presepsi: 3
+autoritarian: 3
+laissezfaire: 3
+anova: 3
+pegawaidikantor: 3
+dianalisa: 3
+optik: 3
+perinci: 3
+idola: 3
+ali: 3
+businees: 3
+trustworthiness: 3
+yakin: 3
+biasa: 3
+jaring: 3
+teridiri: 3
+used: 3
+result: 3
+by: 3
+can: 3
+hindar: 3
+kandidat: 3
+excess: 3
+hm: 3
+benarbenar: 3
+acer: 3
+kotler: 3
+aksesibilitas: 3
+crismardani: 3
+kmo: 3
+malam: 3
+decisions: 3
+farid: 3
+shampo: 3
+determinan: 3
+tiaptiap: 3
+eksplanatif: 3
+fely: 3
+bahwasannya: 3
+pokok: 3
+tarif: 3
+vip: 3
+key: 3
+prima: 3
+tempuh: 3
+mengatahui: 3
+balik: 3
+merkkonsumen: 3
+deviasi: 3
+intern: 3
+apj: 3
+objekobjek: 3
+safetytingkat: 3
+cvp: 3
+cermin: 3
+tamirul: 3
+bedasarkan: 3
+tenggara: 3
+directory: 3
+laili: 3
+dll: 3
+tunai: 3
+delisting: 3
+domian: 3
+kegiatankegiatan: 3
+ningsih: 3
+bp: 3
+indera: 3
+dian: 3
+realty: 3
+lippo: 3
+karawaci: 3
+klbf: 3
+eoq: 3
+mesan: 3
+pasir: 3
+bata: 3
+putih: 3
+rit: 3
+hemat: 3
+lekat: 3
+rekening: 3
+drsecmsi: 3
+pnm: 3
+fund: 3
+danareksa: 3
+kualitaskinerja: 3
+edar: 3
+tian: 3
+fitri: 3
+madinah: 3
+maruf: 3
+contractor: 3
+supplier: 3
+tambrinmm: 3
+hipotesa: 3
+neraca: 3
+circle: 3
+apsari: 3
+pratiwi: 3
+penelitin: 3
+psikis: 3
+rambut: 3
+kaya: 3
+klub: 3
+riil: 3
+nonfisik: 3
+mobil: 3
+yogi: 3
+physical: 3
+evidence: 3
+murid: 3
+multiniaga: 3
+azeze: 3
+mediatel: 3
+undangundang: 3
+individual: 3
+sendang: 3
+stasiun: 3
+drh: 3
+ika: 3
+ari: 3
+sumbu: 3
+main: 3
+wafa: 3
+cross: 3
+erat: 3
+cerelia: 3
+dispendaloka: 3
+patuh: 3
+cakup: 3
+obyektifitas: 3
+pegantenan: 3
+idx: 3
+promotional: 3
+advertising: 3
+aditya: 3
+dependent: 3
+rukmana: 3
+proksi: 3
+stabil: 3
+features: 3
+conformance: 3
+durability: 3
+finish: 3
+daryavaria: 3
+laboratoria: 3
+tempo: 3
+scan: 3
+pacific: 3
+pyridam: 3
+scheringplough: 3
+angsur: 3
+terus: 3
+interprestasi: 3
+halhal: 3
+tama: 3
+raharja: 3
+asah: 3
+fisiologis: 3
+lux: 3
+kausal: 3
+buah: 3
+bangkalanuntuk: 3
+hatimah: 3
+ringan: 3
+maxi: 3
+daler: 3
+sudut: 3
+masruroh: 3
+summarecon: 3
+rintis: 3
+harindra: 3
+biografis: 3
+hidayah: 3
+yg: 3
+kendangsari: 3
+vivi: 3
+tritunggal: 3
+tutup: 3
+senantiasa: 3
+gempol: 3
+pendowo: 3
+tanjungbumi: 3
+smkn: 3
+tantang: 3
+samping: 3
+petrocentral: 3
+stsemmt: 3
+arif: 3
+racing: 3
+ganise: 3
+abdullah: 3
+tikung: 3
+sektoral: 3
+kruskall: 3
+kineja: 3
+sholihah: 3
+nilainilai: 3
+heteroskedastisitasregresi: 3
+moderated: 3
+banten: 3
+predikat: 3
+muda: 3
+efesien: 3
+mesinmesin: 3
+forklip: 3
+wati: 3
+india: 3
+investa: 3
+atraktif: 3
+explanatori: 3
+suryawinata: 3
+plastik: 3
+rangkap: 3
+herding: 3
+reliabelity: 3
+drhj: 3
+padelegan: 3
+kandatel: 3
+khoirul: 3
+siginifikansi: 3
+interveningpenelitian: 3
+songgoriti: 3
+origin: 3
+asing: 3
+genteng: 3
+karangpenang: 3
+fishbein: 3
+wisnu: 3
+karywan: 3
+absen: 3
+ganggu: 3
+alm: 3
+tediri: 3
+kc: 3
+dominanpenelitian: 3
+ritma: 3
+prenduan: 3
+yusuf: 3
+lyly: 3
+akra: 3
+podomoro: 3
+land: 3
+staf: 3
+blacklitterman: 3
+fcfe: 3
+bbni: 3
+agency: 3
+estimasi: 3
+pegaruh: 3
+employees: 3
+multiple: 3
+using: 3
+ismaildra: 3
+pulp: 3
+learning: 3
+boma: 3
+bisma: 3
+club: 3
+mci: 3
+hospitality: 3
+sabar: 3
+malang: 3
+reliablitas: 3
+kbs: 3
+cognitive: 3
+experiental: 3
+atmosfir: 3
+sembada: 3
+sangkut: 3
+bram: 3
+direktur: 3
+triliun: 3
+sd: 3
+koleksi: 3
+launching: 3
+duko: 3
+era: 3
+analsis: 3
+pemkab: 3
+smp: 3
+raas: 3
+ekspor: 3
+hi: 3
+ole: 3
+olang: 3
+resto: 3
+personality: 3
+yakult: 3
+npv: 3
+rohmi: 3
+loyality: 3
+rincian: 3
+organik: 3
+visibility: 3
+drhjiriani: 3
+leading: 3
+coincident: 3
+antisipasi: 3
+kapital: 3
+skunder: 3
+takmir: 3
+harkan: 3
+himpun: 3
+antara: 3
+deteksi: 3
+formula: 3
+hagen: 3
+tenun: 3
+profitablitas: 3
+bhayangkara: 3
+moestadjab: 3
+department: 3
+ainun: 3
+cerita: 3
+estat: 3
+cowell: 3
+receivables: 3
+kayu: 3
+atraksi: 3
+enrichment: 3
+tresna: 3
+art: 3
+pmii: 3
+faridiawati: 3
+berdasarakan: 3
+mengetahuii: 3
+slopeng: 3
+badur: 3
+validasi: 3
+agris: 3
+sport: 3
+indotruck: 3
+modifikasi: 3
+ohlson: 3
+eksplorasi: 3
+supply: 3
+web: 3
+parameter: 3
+div: 3
+responsibillity: 3
+ptpal: 3
+tag: 3
+ltdter: 3
+businesss: 3
+eksplanatori: 3
+subsektorpropertidanreal: 3
+crdebt: 3
+lending: 3
+lder: 3
+valuasi: 3
+zulpah: 3
+kamalmadura: 3
+bani: 3
+hasyim: 3
+sanggar: 3
+azalea: 3
+hr: 3
+permen: 3
+rebut: 3
+sedudo: 3
+followers: 3
+assistance: 3
+others: 3
+expressing: 3
+feelings: 3
+incentives: 3
+helping: 3
+company: 3
+assfak: 3
+assyuhada: 3
+isa: 3
+anshori: 3
+destination: 3
+edukasi: 3
+ledre: 3
+super: 3
+balanced: 3
+ektp: 3
+jenang: 3
+kenjeran: 3
+kos: 3
+gubug: 3
+inst: 3
+podho: 3
+joyo: 3
+manajamen: 3
+mayora: 3
+permkukmv: 3
+burden: 3
+variability: 3
+tuntutantuntutan: 3
+retrun: 3
+prudential: 3
+life: 3
+kerudung: 3
+syifa: 3
+petrosida: 3
+sono: 3
+tepung: 3
+kebutuhankebutuhan: 2
+probality: 2
+lukis: 2
+ki: 2
+barokah: 2
+prambon: 2
+dharma: 2
+lai: 2
+haryono: 2
+dokumen: 2
+reduction: 2
+kapuas: 2
+optimalisasi: 2
+respondenuji: 2
+man: 2
+sumur: 2
+respect: 2
+similarity: 2
+cdm: 2
+katakunci: 2
+profesi: 2
+praktek: 2
+liquid: 2
+solution: 2
+investmen: 2
+sholeh: 2
+mawapres: 2
+know: 2
+ofis: 2
+bigger: 2
+eat: 2
+soto: 2
+glorious: 2
+quantitative: 2
+while: 2
+from: 2
+kisar: 2
+tva: 2
+gera: 2
+cutoffpoint: 2
+adaro: 2
+energy: 2
+armstrong: 2
+servisecape: 2
+mahasiwa: 2
+konfirmatori: 2
+tampil: 2
+sungguhsungguh: 2
+novianti: 2
+variebel: 2
+statis: 2
+mineral: 2
+kesan: 2
+menggunaka: 2
+tinggal: 2
+prajoto: 2
+vareabel: 2
+kamalia: 2
+mutiara: 2
+varabel: 2
+sinifikan: 2
+mini: 2
+moderat: 2
+irawan: 2
+activitybased: 2
+costing: 2
+abcs: 2
+cermat: 2
+abc: 2
+kelas: 2
+starfood: 2
+paciran: 2
+clustered: 2
+menejerial: 2
+cvyudhistira: 2
+cvwest: 2
+akirom: 2
+kompetisi: 2
+xxe: 2
+overreaction: 2
+aar: 2
+cumulative: 2
+sapta: 2
+pusaka: 2
+spgn: 2
+arianto: 2
+pasti: 2
+kombinasi: 2
+trada: 2
+maritime: 2
+interpretasi: 2
+selvi: 2
+sejarah: 2
+perang: 2
+nuansa: 2
+habis: 2
+dillakukan: 2
+ramal: 2
+least: 2
+proyeksi: 2
+septy: 2
+terdafatar: 2
+purposif: 2
+harmonis: 2
+hangat: 2
+rahmawati: 2
+criteria: 2
+anggur: 2
+yag: 2
+eksistensi: 2
+eliminasi: 2
+februari: 2
+pilar: 2
+imajinasi: 2
+pria: 2
+surat: 2
+ratnasari: 2
+bca: 2
+bandung: 2
+ta: 2
+yuliana: 2
+kemudi: 2
+kreteria: 2
+sutera: 2
+asri: 2
+smgr: 2
+proyek: 2
+reorder: 2
+berpengraruh: 2
+amanah: 2
+november: 2
+dekriptif: 2
+bondingikatan: 2
+empathyempati: 2
+reciprocitytimbal: 2
+trustkepercayaan: 2
+anna: 2
+unsurunsur: 2
+bojonegoroputera: 2
+chrismardanissimm: 2
+alamat: 2
+koran: 2
+pedoman: 2
+rizal: 2
+simpel: 2
+made: 2
+ardi: 2
+mita: 2
+muhamad: 2
+sosail: 2
+singkat: 2
+kandang: 2
+ah: 2
+musik: 2
+udara: 2
+konservasi: 2
+adlah: 2
+hibur: 2
+mengggunakan: 2
+ketidakjelasan: 2
+bhinneka: 2
+cow: 2
+sapi: 2
+perah: 2
+diferensiasi: 2
+haji: 2
+qurban: 2
+suzuki: 2
+ertiga: 2
+people: 2
+wali: 2
+ptkaber: 2
+abstraksi: 2
+kausalitas: 2
+wispandonose: 2
+kemuning: 2
+pkpri: 2
+persuasi: 2
+terhadapkeputusan: 2
+ghani: 2
+aprilia: 2
+terdiridari: 2
+victoria: 2
+ocbc: 2
+nisp: 2
+agroniaga: 2
+koesioner: 2
+ews: 2
+prestai: 2
+boston: 2
+outlet: 2
+tangibles: 2
+sahamsaham: 2
+senin: 2
+selasa: 2
+rabu: 2
+kamis: 2
+jumat: 2
+sectional: 2
+ernawati: 2
+alfian: 2
+keja: 2
+wildanse: 2
+stationary: 2
+wicaksono: 2
+pruduktifitas: 2
+trunojoya: 2
+responsive: 2
+tangiblebuktifisik: 2
+reliabilitykehandalan: 2
+responsivenessdayatanggap: 2
+assurancejaminan: 2
+emphatyempati: 2
+alis: 2
+mengikutsertakan: 2
+skpd: 2
+objektifitas: 2
+imam: 2
+kriteriakriteria: 2
+dewasa: 2
+even: 2
+standard: 2
+standarstandar: 2
+signifakan: 2
+ekonomis: 2
+interisco: 2
+anlisis: 2
+operasipendapatan: 2
+haryati: 2
+determinansi: 2
+hjevaliati: 2
+amaniyahsemsm: 2
+aesthetics: 2
+nurhayati: 2
+kerjadan: 2
+waspada: 2
+indofarma: 2
+poshang: 2
+drsech: 2
+maksimum: 2
+respek: 2
+safitri: 2
+orangorang: 2
+verbal: 2
+jayanti: 2
+dosenpembimbing: 2
+purposivesampling: 2
+hakim: 2
+safrizalst: 2
+semmt: 2
+adala: 2
+pukesmas: 2
+konstanta: 2
+sgnifikan: 2
+grafis: 2
+atika: 2
+hotim: 2
+absensi: 2
+pelaksanaanya: 2
+bangkalaserta: 2
+nun: 2
+agresif: 2
+karyawanpada: 2
+cadang: 2
+sepenuh: 2
+terhada: 2
+simulitan: 2
+komariah: 2
+wenang: 2
+prakarsa: 2
+faridatul: 2
+agustus: 2
+charoen: 2
+pokphand: 2
+mediacom: 2
+tambangraya: 2
+megah: 2
+cbp: 2
+axiata: 2
+desi: 2
+pr: 2
+rudal: 2
+faidalsemm: 2
+fauzan: 2
+khalifah: 2
+bangkalandibawah: 2
+sematamata: 2
+reliabel: 2
+valid: 2
+ratna: 2
+bedah: 2
+soetomo: 2
+saadah: 2
+strategik: 2
+sunan: 2
+cendana: 2
+putraputri: 2
+hal: 2
+ibm: 2
+penelitiian: 2
+keckamal: 2
+mengguanakan: 2
+dengn: 2
+keputusanpembelian: 2
+fariz: 2
+gua: 2
+rizka: 2
+induktif: 2
+ramadhan: 2
+yunus: 2
+mahmud: 2
+hairul: 2
+tentang: 2
+hasilhasil: 2
+karyawa: 2
+berengaruh: 2
+rohman: 2
+khoirur: 2
+ismawati: 2
+kesehatanya: 2
+anisa: 2
+mufat: 2
+thirotul: 2
+liliyah: 2
+wallish: 2
+transformasi: 2
+treatment: 2
+brpt: 2
+suli: 2
+swadaya: 2
+siginfikan: 2
+mahal: 2
+rizky: 2
+maratus: 2
+konsentrasi: 2
+umi: 2
+taker: 2
+neutral: 2
+kartini: 2
+firda: 2
+darmawan: 2
+gray: 2
+signifkan: 2
+sholikhah: 2
+sembilan: 2
+kuadrat: 2
+solvabel: 2
+jasuindo: 2
+perkasa: 2
+warga: 2
+himawan: 2
+treynordan: 2
+winda: 2
+kepurtusan: 2
+yulia: 2
+evaliyati: 2
+amaniyahse: 2
+diah: 2
+lagged: 2
+ria: 2
+jln: 2
+tingat: 2
+disposition: 2
+giring: 2
+disposisi: 2
+pucipta: 2
+safrizalstsemmt: 2
+ptindovision: 2
+reliabelityresponsiveness: 2
+akbar: 2
+badak: 2
+berecana: 2
+novell: 2
+pharmaceutical: 2
+laboratories: 2
+sofiatul: 2
+daari: 2
+novi: 2
+polsek: 2
+setiawan: 2
+fajar: 2
+blumbungan: 2
+dialog: 2
+judgement: 2
+pelangganpenelitian: 2
+gap: 2
+hasill: 2
+tingkatsignifikan: 2
+fauzi: 2
+ros: 2
+multiatribut: 2
+beliefe: 2
+wingko: 2
+modernisasi: 2
+mnc: 2
+ptmnc: 2
+fhitungftabel: 2
+abai: 2
+pekerjaanya: 2
+produkx: 2
+citrta: 2
+faza: 2
+dah: 2
+tabulasi: 2
+perdana: 2
+perusahaandengan: 2
+jsmr: 2
+scma: 2
+zaman: 2
+terbuktiditerima: 2
+hrsc: 2
+faridah: 2
+indocement: 2
+pranjotosemm: 2
+hasiluji: 2
+valu: 2
+itmg: 2
+absolute: 2
+percentage: 2
+meggunakan: 2
+keungan: 2
+sofyan: 2
+kepemilian: 2
+inswn: 2
+mediating: 2
+results: 2
+directly: 2
+indirect: 2
+novita: 2
+jtv: 2
+puji: 2
+otakotak: 2
+bandeng: 2
+widya: 2
+gajah: 2
+adquacy: 2
+perawatberpengaruh: 2
+runtun: 2
+dipublikasihkan: 2
+propotional: 2
+discretionary: 2
+accruals: 2
+modified: 2
+emsi: 2
+acidental: 2
+chandra: 2
+determnasi: 2
+katagori: 2
+gawih: 2
+damayanti: 2
+bergandaberdasarkan: 2
+zuliana: 2
+burn: 2
+literatur: 2
+utuk: 2
+sepulu: 2
+telkomsel: 2
+center: 2
+khoirun: 2
+jelas: 2
+efendi: 2
+petrokimia: 2
+komparatif: 2
+rating: 2
+sholehah: 2
+count: 2
+pp: 2
+uniliever: 2
+adhi: 2
+pakuwon: 2
+sumarecon: 2
+erp: 2
+miliar: 2
+batang: 2
+abdur: 2
+layar: 2
+sayusan: 2
+ni: 2
+n: 2
+preposisi: 2
+efe: 2
+evaluation: 2
+ife: 2
+pi: 2
+danarta: 2
+sooko: 2
+ttabelsebesar: 2
+fikri: 2
+signifikanterhadapkeputusan: 2
+ratioper: 2
+sehatdua: 2
+ketrampilan: 2
+identity: 2
+attitude: 2
+benefit: 2
+berpengaruah: 2
+eko: 2
+surabayapenelitian: 2
+logit: 2
+intermediasi: 2
+adi: 2
+risa: 2
+keofisien: 2
+usahashu: 2
+cukup: 2
+manunggal: 2
+kerjansebagai: 2
+dol: 2
+attraction: 2
+komunitas: 2
+kolerasi: 2
+personnel: 2
+bkd: 2
+influenced: 2
+bergandahasil: 2
+datang: 2
+turis: 2
+impor: 2
+vector: 2
+auto: 2
+koefesiensi: 2
+cocok: 2
+minim: 2
+peduli: 2
+jam: 2
+musrifah: 2
+nagelkerke: 2
+umum: 2
+donald: 2
+trump: 2
+amerika: 2
+wedani: 2
+lilik: 2
+dta: 2
+ldar: 2
+utomo: 2
+tujuaan: 2
+asimetris: 2
+belonging: 2
+adopsi: 2
+depan: 2
+likuditas: 2
+perusahaansub: 2
+dibawahbimbingan: 2
+samplingmetode: 2
+inferensial: 2
+rahasia: 2
+ananda: 2
+roagross: 2
+sofware: 2
+paternalistikx: 2
+crew: 2
+surabayakota: 2
+daop: 2
+viii: 2
+wana: 2
+kepalakepala: 2
+sekeckadur: 2
+kabpamekasan: 2
+drrmmoch: 2
+pttrijaya: 2
+perkasasidoarjo: 2
+bahagia: 2
+elok: 2
+sentosa: 2
+kuliah: 2
+enlargementdan: 2
+enrichmentsecara: 2
+signifikanterhadap: 2
+stage: 2
+muhammadiyah: 2
+dahlan: 2
+signinfikansi: 2
+syamsul: 2
+hasilthitung: 2
+ayahya: 2
+penenlitian: 2
+pim: 2
+empaty: 2
+asstsemmt: 2
+backup: 2
+poin: 2
+klinik: 2
+mamfaat: 2
+jabatanx: 2
+kepuasankerja: 2
+thitungttabel: 2
+candra: 2
+tekun: 2
+kartika: 2
+ketua: 2
+perofit: 2
+body: 2
+heteroskedatisitas: 2
+jurnal: 2
+purnama: 2
+tanggulangin: 2
+radja: 2
+cellular: 2
+kuantitatifpopulasi: 2
+variabelkomisarisindependen: 2
+dewandireksi: 2
+way: 2
+kurniawan: 2
+wcta: 2
+devisi: 2
+kaprang: 2
+abraham: 2
+maslow: 2
+peusahaan: 2
+petikemas: 2
+novitasari: 2
+determinai: 2
+dyah: 2
+structural: 2
+annual: 2
+report: 2
+adelia: 2
+prasarana: 2
+diketahuibahwainformasilaba: 2
+arosbaya: 2
+amin: 2
+w: 2
+skilldansoft: 2
+lebihkecildari: 2
+requested: 2
+amount: 2
+sharing: 2
+estimate: 2
+tengket: 2
+maneron: 2
+sinyal: 2
+tagih: 2
+vs: 2
+technology: 2
+artaboga: 2
+cemerlang: 2
+textile: 2
+garmentgo: 2
+devidend: 2
+discounted: 2
+wallis: 2
+kera: 2
+nolai: 2
+singosarimalang: 2
+output: 2
+planned: 2
+pudak: 2
+permbu: 2
+padusan: 2
+pacet: 2
+interval: 2
+kokop: 2
+explore nganjuk: 2
+jatinom: 2
+agri: 2
+sandal: 2
+apparel: 2
+ecommerce: 2
+partisipan: 2
+ecmudji: 2
+pelatian: 2
+nova: 2
+tomorrow: 2
+argopuro: 2
+ternak: 2
+wn: 2
+postif: 2
+cerai: 2
+mati: 2
+digital: 2
+dispendukcapil: 2
+wahana: 2
+jepara: 2
+xz: 2
+zy: 2
+luluk: 2
+etex: 2
+divre: 2
+viscap: 2
+tangibel: 2
+csi: 2
+thitungx: 2
+sminfra: 2
+kolmogorovsmirnov: 2
+spbu: 2
+shif: 2
+rejowinangun: 2
+demokratikmotivasi: 2
+kelulus: 2
+eksploratif: 2
+monoton: 2
+kreatif: 2
+karyawandengan: 2
+manajerialkebijakan: 2
+sm: 2
+infra: 2
+cpa: 2
+heteroskesdastisitas: 2
+sensitifitas: 2
+pdn: 2
+kukm: 2
+april: 2
+proaktif: 2
+vp: 2
+hijab: 2
+qiqoid: 2
+perforing: 2
+jennah: 2
+provinsi: 2
+metodologi: 2
+sisebesar: 2
+komisi: 2
+ragung: 2
+pengarengan: 2
+intelligence: 2
+aq: 2
+dow: 2
+nikkei: 2
+alif: 2
+margo: 2
+rukun: 2
+samben: 2
+pearsial: 2
+penelitiaan: 2
+pandemic: 2
+pandemi: 2
+tapioka: 2
+pkl: 2
+susah: 2
+atm: 2
+signifkansi: 2
+kjpp: 2
+gear: 2
+satiyah: 1
+auliasstsemmt: 1
+pengembnagan: 1
+observasional: 1
+analitik: 1
+instruktur: 1
+trunjoyo: 1
+kuantitaif: 1
+mahasiswasampelpenelitianiniadalahmahasiswaangkatan: 1
+ikp: 1
+jelasdetail: 1
+ter: 1
+update: 1
+krs: 1
+khs: 1
+transkrip: 1
+kip: 1
+field: 1
+pengolaha: 1
+cranberriess: 1
+apresisasikan: 1
+kepemimpinanx: 1
+aththaariq: 1
+drrm: 1
+sertifikasi: 1
+judgmental: 1
+kepribadiandan: 1
+abidin: 1
+syahkesimpulan: 1
+autoritariansecara: 1
+laissezfairesecara: 1
+dealler: 1
+dikatagorikan: 1
+conclusion: 1
+drawing: 1
+verification: 1
+omzet: 1
+periodik: 1
+retailimg: 1
+praktekpaktek: 1
+sumbr: 1
+orgnisasional: 1
+rahbini: 1
+andal: 1
+jasaindah: 1
+evans: 1
+bangkalannamun: 1
+bangakalanvariabel: 1
+fals: 1
+menngunakan: 1
+erangkat: 1
+minet: 1
+miant: 1
+meniliti: 1
+lahir: 1
+peria: 1
+prihatin: 1
+etnografis: 1
+sosialisasi: 1
+modus: 1
+operandi: 1
+sociology: 1
+teory: 1
+adnya: 1
+abtrak: 1
+khasanah: 1
+presatasi: 1
+diatribusi: 1
+semanagt: 1
+agustini: 1
+melakuukan: 1
+akuisisimelakukan: 1
+alih: 1
+assetperusahaan: 1
+sharekelima: 1
+pairedsamples: 1
+tandatanda: 1
+bangkalansecara: 1
+xterhadap: 1
+also: 1
+whichsuch: 1
+having: 1
+ppengaruh: 1
+use: 1
+approach: 1
+population: 1
+entireall: 1
+doingconducting: 1
+hence: 1
+get: 1
+responder: 1
+collecting: 1
+into: 1
+library: 1
+mention: 1
+tied: 1
+prove: 1
+consisting: 1
+or: 1
+together: 1
+be: 1
+concluded: 1
+both: 1
+which: 1
+have: 1
+surabayadibimbing: 1
+surabayametode: 1
+mebagikan: 1
+penetuan: 1
+rasional: 1
+returns: 1
+erb: 1
+ci: 1
+otopart: 1
+agro: 1
+goodyear: 1
+indika: 1
+tractors: 1
+tjiwi: 1
+hening: 1
+ary: 1
+pemimbing: 1
+vairabel: 1
+habibah: 1
+hamper: 1
+rekrutmenpengembangan: 1
+mempunyah: 1
+serviscape: 1
+ulfiyatun: 1
+mutohharoh: 1
+journal: 1
+economics: 1
+perlahanlahan: 1
+geser: 1
+praktis: 1
+rilis: 1
+detikcom: 1
+menetukan: 1
+interdependent: 1
+miserablenilai: 1
+kecukuperatan: 1
+lampu: 1
+nyala: 1
+rapi: 1
+mulus: 1
+patroli: 1
+mogokban: 1
+bocordll: 1
+anissa: 1
+liniear: 1
+kusniyah: 1
+muzanni: 1
+tertahadap: 1
+otomatis: 1
+kriterian: 1
+ike: 1
+miranti: 1
+kurriwatispmsi: 1
+menitikberatkan: 1
+purprosive: 1
+maret: 1
+memakaiuji: 1
+robatal: 1
+kosumen: 1
+ditribusi: 1
+kian: 1
+kominkator: 1
+sigifikan: 1
+assocations: 1
+loyalty: 1
+madurateknik: 1
+maduravariabel: 1
+aduk: 1
+lembur: 1
+characteristics: 1
+usage: 1
+users: 1
+consumers: 1
+systematic: 1
+debit: 1
+britama: 1
+steel: 1
+user: 1
+kurniawati: 1
+subyekti: 1
+memilki: 1
+kuncikecerdasan: 1
+softwere: 1
+mutira: 1
+guji: 1
+berdasrkan: 1
+simultas: 1
+sembah: 1
+massita: 1
+taufik: 1
+berdomisiliwarga: 1
+sulaiman: 1
+profitabilitasdibawah: 1
+bagaiman: 1
+langkahlangkah: 1
+mnghitung: 1
+inventesmen: 1
+suhardianto: 1
+bauaran: 1
+hargapromosi: 1
+kacamatan: 1
+diteiliti: 1
+hendra: 1
+kuswinanrno: 1
+survai: 1
+quota: 1
+systemabcsuntuk: 1
+distorsi: 1
+kalkulasi: 1
+telusur: 1
+biayabiaya: 1
+deskriftif: 1
+rinci: 1
+kefektifan: 1
+kuisoner: 1
+secaa: 1
+kepamilikan: 1
+words: 1
+porporsional: 1
+marianal: 1
+kuswinarmo: 1
+lutfi: 1
+muazzah: 1
+dosem: 1
+decade: 1
+day: 1
+week: 1
+overreactio: 1
+jelang: 1
+lebaran: 1
+deduktif: 1
+faktafakta: 1
+teoriteori: 1
+abnormar: 1
+menggungguli: 1
+pentingperusahaan: 1
+lingkungannyadalam: 1
+adalahu: 1
+ntuk: 1
+ujivaliditasuji: 1
+asum: 1
+siklasik: 1
+penjelasany: 1
+popuasi: 1
+penggunasecara: 1
+lukman: 1
+waqi: 1
+mahkmud: 1
+hendak: 1
+sekuritas: 1
+potofolio: 1
+pleh: 1
+hadiatullah: 1
+earned: 1
+fixed: 1
+puncak: 1
+moment: 1
+cronbach: 1
+tail: 1
+yusri: 1
+evarika: 1
+nrp: 1
+lombangpenelitian: 1
+sel: 1
+refti: 1
+kpp: 1
+danbudaya: 1
+kantorpln: 1
+rancang: 1
+bsm: 1
+pahlawan: 1
+merdeka: 1
+bioskop: 1
+wisma: 1
+ariyati: 1
+sangsi: 1
+bergandaperiode: 1
+oktober: 1
+lumpur: 1
+peneletian: 1
+cab: 1
+gerbang: 1
+kertasusila: 1
+univesitas: 1
+kepercyaan: 1
+peruasahaan: 1
+gerbong: 1
+dang: 1
+hana: 1
+sunarsih: 1
+shareinflasi: 1
+tonjol: 1
+niloai: 1
+anugrahiniirawatimm: 1
+padat: 1
+sita: 1
+koofisien: 1
+pelatihanpelatihan: 1
+outbond: 1
+berdeda: 1
+rewardreward: 1
+lailia: 1
+paru: 1
+pemendagri: 1
+pergub: 1
+penggunaaan: 1
+boros: 1
+andrian: 1
+agaf: 1
+zainab: 1
+turnoverdebt: 1
+miftah: 1
+kompetitorkompetitor: 1
+bimbinga: 1
+meyebutkan: 1
+menghasilka: 1
+collection: 1
+periods: 1
+aktivatms: 1
+cutoff: 1
+propindo: 1
+carson: 1
+regency: 1
+order: 1
+quantity: 1
+kam: 1
+asizah: 1
+reliabiltas: 1
+indli: 1
+roudlotul: 1
+pintarpintar: 1
+nikmatul: 1
+hoiriyah: 1
+tempatdistribusi: 1
+adalahdiskriptif: 1
+treynordanjensenobjekpenelitianpadapenelitianiniadalah: 1
+aaaamanahsyariah: 1
+dandanareksasyariahberimbang: 1
+menggunakana: 1
+aaa: 1
+pambudise: 1
+sbi: 1
+sulaihah: 1
+abthal: 1
+asyraf: 1
+agatha: 1
+adetya: 1
+id: 1
+xe: 1
+konsuman: 1
+kara: 1
+strategistrategi: 1
+meningkatkanmemuaskan: 1
+wwwrumahmadanicom: 1
+chatting: 1
+amiruddin: 1
+hendry: 1
+bangakalan: 1
+pemebelianj: 1
+poduk: 1
+nanda: 1
+balas: 1
+adil: 1
+jasajasanya: 1
+rangsang: 1
+putera: 1
+kompesasi: 1
+sumirah: 1
+rase: 1
+penjulannya: 1
+setyo: 1
+egy: 1
+afrian: 1
+rizki: 1
+bentu: 1
+menunujukkan: 1
+tambrinmmdan: 1
+febrianto: 1
+dharmawan: 1
+marketix: 1
+anggun: 1
+faiqotul: 1
+muna: 1
+linieritas: 1
+maksud: 1
+analisisa: 1
+urai: 1
+bibit: 1
+instansiinstansi: 1
+jemur: 1
+hardik: 1
+keputsan: 1
+faqih: 1
+qoriwildani: 1
+ratus: 1
+persen: 1
+tele: 1
+surabayajumlah: 1
+pertamina: 1
+tbbm: 1
+sampangmadura: 1
+alatalat: 1
+kuntitatif: 1
+samsuki: 1
+reny: 1
+nurhalimah: 1
+sensitivitas: 1
+adiluhing: 1
+nilam: 1
+hemastuti: 1
+pantau: 1
+pmu: 1
+tanding: 1
+olahraga: 1
+padatdi: 1
+coefisien: 1
+balian: 1
+harismatullah: 1
+anugerahini: 1
+perangkap: 1
+pretasi: 1
+aisiyah: 1
+arifatin: 1
+maharani: 1
+bidik: 1
+segmen: 1
+mpv: 1
+indpenden: 1
+grantiyono: 1
+pagar: 1
+batu: 1
+pagarbatu: 1
+kholis: 1
+hakam: 1
+anwarul: 1
+kaber: 1
+karyawandari: 1
+paradigma: 1
+rencanarencana: 1
+sasaransasaran: 1
+rkpd: 1
+relevan: 1
+eselon: 1
+pradityo: 1
+kusumajani: 1
+komunikas: 1
+arau: 1
+anik: 1
+arismah: 1
+pengaruhcitra: 1
+produku: 1
+musthofa: 1
+wantaradrsmm: 1
+dansuyonose: 1
+koefisen: 1
+tiketkepuasan: 1
+wiwik: 1
+sriwahyuni: 1
+berdasarkasn: 1
+kawasan: 1
+bodopasuruandibawah: 1
+bachrowi: 1
+cisarua: 1
+mountain: 1
+dairy: 1
+cisaruabogor: 1
+masayarakat: 1
+hs: 1
+bnp: 1
+icb: 1
+boi: 1
+artha: 1
+saw: 1
+mayapada: 1
+setiana: 1
+bdan: 1
+armada: 1
+yulfian: 1
+yonif: 1
+risqiyatul: 1
+maqfiroh: 1
+seraca: 1
+vendy: 1
+bkph: 1
+jatirejo: 1
+squarese: 1
+pengrahan: 1
+consulting: 1
+kuliner: 1
+consuling: 1
+vertikal: 1
+question: 1
+mark: 1
+lapuk: 1
+erti: 1
+stars: 1
+arena: 1
+anakanak: 1
+integration: 1
+franchise: 1
+bekerjasama: 1
+soda: 1
+cows: 1
+delivery: 1
+perasaaan: 1
+kombangan: 1
+alf: 1
+robin: 1
+swalayanswalayan: 1
+semua: 1
+ujif: 1
+fachrezi: 1
+toserba: 1
+kuning: 1
+muji: 1
+kebijakankebijakan: 1
+intentions: 1
+gilang: 1
+khasogi: 1
+cvcerelia: 1
+anwari: 1
+pengrajn: 1
+penggajianupah: 1
+muttaqin: 1
+taat: 1
+yulita: 1
+dikonsumnsi: 1
+ide: 1
+fiturfitur: 1
+nseries: 1
+multimedia: 1
+eseries: 1
+senjata: 1
+henti: 1
+atrbut: 1
+manakan: 1
+ramayana: 1
+xberpengaruh: 1
+fausah: 1
+kujung: 1
+so: 1
+sebesarbesarnya: 1
+gelar: 1
+eventevent: 1
+akomodasi: 1
+kedaikedai: 1
+souvenir: 1
+pengelolahan: 1
+galih: 1
+industriadapun: 1
+sumeneppenelitian: 1
+yuntuk: 1
+variabeldilakukan: 1
+analisiskualitatif: 1
+asumsiklasik: 1
+regersi: 1
+bahwasecara: 1
+stimultan: 1
+humaini: 1
+directori: 1
+nasirudin: 1
+xmenpunyai: 1
+xmempunyai: 1
+lantai: 1
+rentan: 1
+kaitanya: 1
+untik: 1
+yields: 1
+fluktuasi: 1
+ainul: 1
+yaqin: 1
+prabayar: 1
+reliabiliitas: 1
+univeristas: 1
+wilauddin: 1
+profabilitas: 1
+mahat: 1
+mafirya: 1
+bakti: 1
+maduraskripsi: 1
+bangkalandi: 1
+drahj: 1
+sst: 1
+mt: 1
+bangkalanmengambil: 1
+karyawanjenis: 1
+karyawanselanjutnya: 1
+bangkalanhasil: 1
+rsebesar: 1
+hilang: 1
+inforemasi: 1
+euangan: 1
+estese: 1
+contruction: 1
+pasial: 1
+fortune: 1
+fms: 1
+ecchairul: 1
+fadilah: 1
+faizati: 1
+nalawiyah: 1
+purposiv: 1
+sharereturn: 1
+invesmentharga: 1
+raih: 1
+ratioloan: 1
+deposito: 1
+cimb: 1
+margindannet: 1
+setiowati: 1
+acces: 1
+istighosah: 1
+purwati: 1
+roereturn: 1
+crcurrent: 1
+ida: 1
+rohyani: 1
+samplingdari: 1
+mvebve: 1
+mann: 1
+whitney: 1
+fitria: 1
+sonia: 1
+sampiling: 1
+easthetics: 1
+ne: 1
+gara: 1
+sberpengaruh: 1
+ella: 1
+liatul: 1
+maufiroh: 1
+metodenaltman: 1
+smijewski: 1
+terdafatr: 1
+tbkpt: 1
+finda: 1
+mardianawati: 1
+sewa: 1
+lina: 1
+indrawati: 1
+indonesa: 1
+ptenergi: 1
+persadatbk: 1
+analisia: 1
+altmanzscore: 1
+deposan: 1
+mangement: 1
+aku: 1
+organisai: 1
+mariyam: 1
+prasteyo: 1
+klasi: 1
+siyami: 1
+padan: 1
+terkinik: 1
+fitriya: 1
+peristiwaperistiwa: 1
+aktivitasaktivitas: 1
+akrab: 1
+ajeng: 1
+reni: 1
+hudan: 1
+dardiri: 1
+septiawan: 1
+pomede: 1
+distibusi: 1
+menjadiibu: 1
+wanitayang: 1
+karenaingin: 1
+milikidalam: 1
+karyawati: 1
+karyawatinya: 1
+atautidak: 1
+dalamkeluarga: 1
+madurapopulasi: 1
+bergandadari: 1
+marti: 1
+ekowatianalisis: 1
+kabupatan: 1
+lamonganskripsi: 1
+idr: 1
+transakasi: 1
+luqmanul: 1
+assohidi: 1
+imroatus: 1
+soleha: 1
+adap: 1
+posotif: 1
+lailatul: 1
+qodriyah: 1
+ismaildramm: 1
+bangkalani: 1
+kuncisikapmotivasikinerja: 1
+supriadi: 1
+anaisis: 1
+tdak: 1
+lely: 1
+nurvillah: 1
+alisyahbana: 1
+wisapandono: 1
+ketidaktepatan: 1
+uppkh: 1
+pengolahanya: 1
+citrawaty: 1
+gnakan: 1
+kepemipinan: 1
+tranforsional: 1
+ptmarina: 1
+stimulant: 1
+karismatik: 1
+mohtaufik: 1
+drhpribanus: 1
+drsmm: 1
+formulasi: 1
+yenni: 1
+indriani: 1
+propfitabilitas: 1
+opoortunity: 1
+profitabilitasgrowth: 1
+liquita: 1
+purnamasari: 1
+maxii: 1
+kpeutusan: 1
+andy: 1
+saputro: 1
+mengetauhi: 1
+alberrina: 1
+febrianti: 1
+lamonongan: 1
+pambudisemm: 1
+awal: 1
+tindakantindakan: 1
+yuliani: 1
+fanti: 1
+ariska: 1
+inerja: 1
+uumnya: 1
+efesiensi: 1
+ercapai: 1
+riko: 1
+fitrianto: 1
+daeler: 1
+pegalaman: 1
+sadarusman: 1
+perserotbk: 1
+zulfi: 1
+djamil: 1
+menundanunda: 1
+zebra: 1
+zbra: 1
+humpuss: 1
+intermoda: 1
+hits: 1
+tram: 1
+irwan: 1
+sugiantoro: 1
+mengoptimalakan: 1
+tingakat: 1
+aguustus: 1
+hmakhmud: 1
+motode: 1
+menimimumkan: 1
+henia: 1
+arisanti: 1
+legalitas: 1
+prrudal: 1
+serahi: 1
+karyawanmengetahui: 1
+taerhadap: 1
+organizatioanal: 1
+mempuyai: 1
+agustin: 1
+informaasi: 1
+idayatul: 1
+wildam: 1
+syafrina: 1
+prahmana: 1
+tara: 1
+responsivitas: 1
+rule: 1
+law: 1
+trnsparansi: 1
+ati: 1
+munfaati: 1
+aktifitasnya: 1
+tinggitujuan: 1
+suksess: 1
+guruvariabel: 1
+muflihatul: 1
+azizah: 1
+caplital: 1
+fatimatuz: 1
+zehroh: 1
+kama: 1
+minnum: 1
+responde: 1
+purpoosive: 1
+ridwan: 1
+rifai: 1
+ikal: 1
+untukmengetahui: 1
+menggunakanaccidental: 1
+ujivaliditas: 1
+datayaitu: 1
+smartfrenberartihipotesis: 1
+dapatdikatakan: 1
+achiyat: 1
+munir: 1
+faisol: 1
+rozi: 1
+qurrata: 1
+ayyun: 1
+satistik: 1
+tika: 1
+wwwsahamokcom: 1
+wwwidxcoid: 1
+wwwyahoofinancecom: 1
+date: 1
+tedapatnya: 1
+afriani: 1
+hmalkirom: 1
+romli: 1
+kecerdasn: 1
+bangklan: 1
+integral: 1
+departement: 1
+explanatory: 1
+aziz: 1
+dalil: 1
+peniliti: 1
+jodoh: 1
+kaku: 1
+beliau: 1
+buhori: 1
+tambrindosen: 1
+delap: 1
+masyakat: 1
+endang: 1
+hariyani: 1
+drmohammad: 1
+corporation: 1
+finlandia: 1
+protokol: 1
+gsm: 1
+cdma: 1
+wcdma: 1
+umts: 1
+zte: 1
+cina: 1
+eksplorator: 1
+penasaran: 1
+eric: 1
+meygawan: 1
+sorang: 1
+tuntun: 1
+kadang: 1
+jarang: 1
+kontra: 1
+berdapak: 1
+aidul: 1
+rhosal: 1
+yudianto: 1
+alghazali: 1
+kohler: 1
+kurriawati: 1
+kredibilitascredibility: 1
+priyadi: 1
+carnplldrnim: 1
+dietahui: 1
+tebukti: 1
+selamet: 1
+puskesmaskamal: 1
+kkamal: 1
+gandakecerdasan: 1
+paramidis: 1
+fatah: 1
+fauzul: 1
+salam: 1
+sulung: 1
+hidayatur: 1
+afandi: 1
+much: 1
+roziqin: 1
+segenap: 1
+zaini: 1
+kompleks: 1
+tentusaja: 1
+teoritis: 1
+umtuk: 1
+pacu: 1
+periklananpromosi: 1
+maximal: 1
+prasetiyo: 1
+metic: 1
+laris: 1
+susul: 1
+kalah: 1
+hermawati: 1
+masud: 1
+addaroyni: 1
+interpesonal: 1
+gresike: 1
+bankbank: 1
+signfikan: 1
+alisul: 1
+musarofah: 1
+ptladang: 1
+shofa: 1
+walmarwaanalisis: 1
+ihss: 1
+manufakturperhitungan: 1
+konsisten: 1
+bksl: 1
+cnko: 1
+ikai: 1
+jprs: 1
+cnkofpniikaijprs: 1
+bkslbrptcnkoikaijprspyfasuli: 1
+tirt: 1
+ikaiinpcjprs: 1
+tirtsaham: 1
+diterimasedangkan: 1
+kinsistensi: 1
+ketidakbedaan: 1
+bahruddin: 1
+kemyaoran: 1
+pranata: 1
+yahoo: 1
+alfiyatus: 1
+sekunderdata: 1
+nol: 1
+juliana: 1
+sdmterhadap: 1
+diponegoro: 1
+prinsipprinsip: 1
+tuang: 1
+teladan: 1
+luqman: 1
+erika: 1
+elva: 1
+mardiana: 1
+kulsum: 1
+surabayadibawah: 1
+reparasi: 1
+pabean: 1
+cantian: 1
+utari: 1
+loyal: 1
+univeritas: 1
+mimin: 1
+aspirasidan: 1
+haris: 1
+dhuha: 1
+priambodo: 1
+determinasihasil: 1
+intrumen: 1
+romlah: 1
+drecmakhmud: 1
+initialmpublic: 1
+assetroa: 1
+mahaisiwa: 1
+kurriwatisp: 1
+berjumalah: 1
+pengambillan: 1
+reabilitassedangkan: 1
+sedaapberdasarkan: 1
+meknisme: 1
+antaralain: 1
+uii: 1
+nita: 1
+yumiarsih: 1
+sofia: 1
+wardani: 1
+aversedidapatkan: 1
+woori: 1
+mestika: 1
+renita: 1
+arum: 1
+krisvianika: 1
+amaliah: 1
+garmant: 1
+drsbambang: 1
+ebit: 1
+munawarah: 1
+drdrs: 1
+mengunjugi: 1
+actdan: 1
+terkatnya: 1
+ptcitra: 1
+dandrs: 1
+saksitha: 1
+ramai: 1
+minimum: 1
+astri: 1
+drsecmkes: 1
+nplterhadap: 1
+objekpenelitianiniadalah: 1
+denganmenggunakanlaporankeuanganpublikasiperiode: 1
+predikisi: 1
+aru: 1
+ratioldr: 1
+cahyadi: 1
+sendiril: 1
+magfirah: 1
+kontinum: 1
+dokumendokumen: 1
+dony: 1
+membandingankan: 1
+roduk: 1
+opulasi: 1
+psikolgi: 1
+abdurrochman: 1
+bidask: 1
+spread: 1
+angga: 1
+juwita: 1
+kusuma: 1
+luziana: 1
+prantjoto: 1
+sulvia: 1
+sharpetreynor: 1
+schroder: 1
+plus: 1
+manulife: 1
+jensenpeneliti: 1
+berikutpada: 1
+sharpereksa: 1
+treynorreksa: 1
+jensenreksa: 1
+aningtyas: 1
+eni: 1
+siswati: 1
+fadjriya: 1
+rosa: 1
+nesscafe: 1
+mafazatun: 1
+mps: 1
+aqnes: 1
+sakti: 1
+hamidah: 1
+didiuga: 1
+fihendri: 1
+pemodasi: 1
+pfofitabilitas: 1
+veteran: 1
+paersial: 1
+makmmur: 1
+zainuddin: 1
+sutau: 1
+prospect: 1
+effectall: 1
+rizza: 1
+ariyandi: 1
+beprestasi: 1
+indovison: 1
+anni: 1
+misbahus: 1
+solehah: 1
+brsa: 1
+ltd: 1
+rentabilitasroe: 1
+rentabilas: 1
+kediriapakah: 1
+kedirihasil: 1
+akhmad: 1
+syafiudin: 1
+azhar: 1
+nikmatun: 1
+nisa: 1
+tstudi: 1
+samplingsebanyak: 1
+hafiludin: 1
+gadingrejo: 1
+yarol: 1
+insa: 1
+kabupten: 1
+ftable: 1
+evi: 1
+iqbal: 1
+zidni: 1
+drrmmochammad: 1
+kepeimpinan: 1
+siswandi: 1
+mafrudhatul: 1
+fitriyah: 1
+pamekasansampang: 1
+marie: 1
+fathan: 1
+gumul: 1
+fhasil: 1
+tertib: 1
+tega: 1
+ayom: 1
+komando: 1
+soekarno: 1
+hatta: 1
+bangkalanberdasarkan: 1
+msidan: 1
+baggian: 1
+lamonganpenelitian: 1
+kuesionerpopulasi: 1
+menggunakanpropotional: 1
+koefisiien: 1
+rofii: 1
+ketelibatan: 1
+dengtan: 1
+bahtiar: 1
+hayati: 1
+jenisjenis: 1
+populasinnya: 1
+islamiyah: 1
+onevillage: 1
+karyawancv: 1
+ara: 1
+slamet: 1
+martodirdjo: 1
+interveningberdasarkan: 1
+aris: 1
+rasyidityo: 1
+munirhad: 1
+suryo: 1
+adhim: 1
+yudi: 1
+dimensibukti: 1
+selanjutnyadata: 1
+denganmenggunakan: 1
+dimensikehandalan: 1
+ketidakpuasan: 1
+servqual: 1
+nilaithitungsebesar: 1
+thitunguntukvariabelmotivasipegawaisebesar: 1
+ftabeldantingkatsignifikan: 1
+hditerimadan: 1
+hditolak: 1
+effendi: 1
+coo: 1
+keanekaragaman: 1
+ideal: 1
+originterhadap: 1
+ddilakukan: 1
+kinerj: 1
+abu: 1
+pengambilanl: 1
+produsksi: 1
+prduksi: 1
+karyaw: 1
+tronojoyo: 1
+hendy: 1
+prasetia: 1
+dinata: 1
+aminatuz: 1
+zulia: 1
+bejumlah: 1
+atributatribut: 1
+netral: 1
+harapankeinginan: 1
+danturnover: 1
+tinggidominan: 1
+kecbabat: 1
+yamh: 1
+besardominan: 1
+seruruh: 1
+tinggivariabel: 1
+tngkat: 1
+terhaap: 1
+ibnu: 1
+absussalam: 1
+reliabelitas: 1
+abalisis: 1
+ningrat: 1
+bnk: 1
+kcp: 1
+kuantutatif: 1
+peniliaian: 1
+pembelianstudy: 1
+latif: 1
+merkyang: 1
+dominanuntuk: 1
+respondensugiono: 1
+tidakmempunyai: 1
+hnilai: 1
+huntuk: 1
+pembuatx: 1
+pemakaix: 1
+pembeliany: 1
+hasanul: 1
+mustakim: 1
+organisasidan: 1
+bimbinganhelmibuyungauliasstmmtdanfaidalsemm: 1
+gairah: 1
+tugasnyasebalik: 1
+kondusifseperti: 1
+sehatiri: 1
+hatihubungan: 1
+kompakantara: 1
+miningkatkan: 1
+organisasiyang: 1
+relative: 1
+karekteristik: 1
+ringanapa: 1
+samad: 1
+regresipengaruh: 1
+dibuktikanpada: 1
+kinirja: 1
+karyawansehingga: 1
+kinerjabegitu: 1
+kunciloyalitas: 1
+dawam: 1
+rw: 1
+alayki: 1
+uswatul: 1
+ulya: 1
+indonesiapadatahun: 1
+overpricingpada: 1
+perusahaanunderpricing: 1
+variabelreputasi: 1
+prospektus: 1
+financeuntuk: 1
+afrizal: 1
+asdp: 1
+ferry: 1
+koefsisen: 1
+poisitif: 1
+cake: 1
+pastry: 1
+donuts: 1
+head: 1
+office: 1
+drajat: 1
+insudtri: 1
+liliek: 1
+chusnaeni: 1
+ijin: 1
+pirt: 1
+kesah: 1
+ku: 1
+bingung: 1
+benak: 1
+sumarwan: 1
+ilmiah: 1
+sugiyono: 1
+averse: 1
+aqida: 1
+erlina: 1
+asetturnovernet: 1
+hairus: 1
+simulta: 1
+syaifullah: 1
+hak: 1
+mengetahuibagaimana: 1
+kacapada: 1
+tekhnikpengambilan: 1
+debton: 1
+dersebesar: 1
+generalibiitas: 1
+relevansi: 1
+praktikal: 1
+bauk: 1
+kendati: 1
+objektif: 1
+patok: 1
+skp: 1
+idle: 1
+pasu: 1
+bl: 1
+rom: 1
+kittiyeh: 1
+pelatihanperbaikan: 1
+ulama: 1
+komariyah: 1
+unversitas: 1
+type: 1
+rejeki: 1
+nabilla: 1
+lelly: 1
+martha: 1
+listiyah: 1
+milika: 1
+assesment: 1
+mahardika: 1
+arih: 1
+minunman: 1
+husnol: 1
+chotimah: 1
+mae: 1
+mse: 1
+mape: 1
+mpe: 1
+amalia: 1
+penelitain: 1
+sulistiyo: 1
+rini: 1
+casr: 1
+positf: 1
+elfira: 1
+oktaviana: 1
+diproksi: 1
+barep: 1
+affandy: 1
+investigasi: 1
+mesti: 1
+bagianbagian: 1
+andika: 1
+linda: 1
+diantantri: 1
+fcfpengaruh: 1
+ldrdebt: 1
+ratioder: 1
+farhad: 1
+riza: 1
+primadi: 1
+rahmatin: 1
+inayatin: 1
+stakeholders: 1
+terkadang: 1
+stakeholdersnya: 1
+menunjukkn: 1
+nafi: 1
+aden: 1
+aprril: 1
+lidya: 1
+hardini: 1
+nonparametric: 1
+title: 1
+isthe: 1
+retentionand: 1
+intentionto: 1
+javathe: 1
+purposes: 1
+are: 1
+javarespondents: 1
+respondentsthe: 1
+indicate: 1
+impact: 1
+keywordsemployee: 1
+kiky: 1
+lela: 1
+kholilah: 1
+utarad: 1
+jakartac: 1
+ningrum: 1
+nstrumen: 1
+mentari: 1
+karyawansampel: 1
+mayorita: 1
+profitabilits: 1
+tingka: 1
+fauziyah: 1
+esensial: 1
+tedaftar: 1
+sekunderteknik: 1
+bah: 1
+interiskotbk: 1
+intensitas: 1
+prabu: 1
+energitbk: 1
+fato: 1
+ptmedco: 1
+internasionaltbk: 1
+apriliyanto: 1
+ecmakhmud: 1
+susarsono: 1
+pengaruhpositif: 1
+karyawanlah: 1
+maimunatus: 1
+aecara: 1
+carbopoldr: 1
+kuncin: 1
+afifatul: 1
+arifah: 1
+puspita: 1
+inventasi: 1
+diinventasikannya: 1
+perawatsebagai: 1
+perawatsampel: 1
+samplingberdasarkan: 1
+berpengaruhtidaklangsung: 1
+kerjaperawat: 1
+ozammil: 1
+fakulas: 1
+eg: 1
+students: 1
+styles: 1
+bel: 1
+aplha: 1
+pyd: 1
+menentuka: 1
+nuril: 1
+mubin: 1
+faridatus: 1
+parsil: 1
+asroril: 1
+jaza: 1
+nyegerin: 1
+fauziyyatul: 1
+iffah: 1
+laila: 1
+pekerjapegawai: 1
+domiinan: 1
+karunia: 1
+triyanto: 1
+millionaire: 1
+indoesia: 1
+eksperimen: 1
+klan: 1
+ageng: 1
+prestya: 1
+sasana: 1
+erwin: 1
+sulistiowarno: 1
+hildatul: 1
+fajaria: 1
+peningkaktan: 1
+kinerjakaryawanroom: 1
+nidya: 1
+gladisella: 1
+rio: 1
+satrianto: 1
+madha: 1
+perokonomian: 1
+akhirakhir: 1
+berita: 1
+punah: 1
+satwasatwa: 1
+lisma: 1
+agustien: 1
+gari: 1
+nofvi: 1
+plazapenelitian: 1
+mkesdan: 1
+kuantitatifteknik: 1
+tangibilityberpengaruh: 1
+perusahaanotomotif: 1
+parsialvariabel: 1
+ilvi: 1
+fe: 1
+sebesarapa: 1
+jibril: 1
+wahid: 1
+jabbar: 1
+applikasi: 1
+rofikhoh: 1
+gudange: 1
+takwa: 1
+keputusa: 1
+hasildari: 1
+psikologiberpengaruh: 1
+terdiridarifaktor: 1
+faizal: 1
+perusaahaan: 1
+provit: 1
+saifur: 1
+multifinace: 1
+keenganan: 1
+berangan: 1
+karyawanpegawai: 1
+organisasiinstansi: 1
+relationnya: 1
+sohiburrida: 1
+dianaisis: 1
+sulton: 1
+bahri: 1
+banyuanyarpamekasan: 1
+ramadan: 1
+publicty: 1
+took: 1
+akh: 1
+taufikurrahman: 1
+analisisregresi: 1
+heri: 1
+kusnadi: 1
+satria: 1
+multikoloneritas: 1
+heterodektisitas: 1
+xiii: 1
+taufiqqi: 1
+rizkiah: 1
+kebupaten: 1
+husen: 1
+nasikh: 1
+sdmnya: 1
+transferabilitas: 1
+dependabilitas: 1
+konfirmabilitas: 1
+puspo: 1
+kudkoperasi: 1
+rutin: 1
+holcim: 1
+prakasa: 1
+rustam: 1
+gdyr: 1
+lpin: 1
+nips: 1
+pras: 1
+smsm: 1
+hanifah: 1
+yunianti: 1
+kuesionerangket: 1
+selanjutnyadari: 1
+dengab: 1
+alokasi: 1
+proposional: 1
+tria: 1
+oktami: 1
+cabut: 1
+izin: 1
+trilyun: 1
+talang: 1
+ganti: 1
+juta: 1
+diskriminan: 1
+rika: 1
+maulidiva: 1
+purwosari: 1
+genap: 1
+menurunya: 1
+pasuruandapat: 1
+sigfikan: 1
+hidayatul: 1
+muslimah: 1
+hafiyatus: 1
+assessment: 1
+pan: 1
+sinarmas: 1
+ditetapkantujuan: 1
+indri: 1
+waqiatun: 1
+moden: 1
+untu: 1
+sim: 1
+asam: 1
+diharapkann: 1
+chrismardanissi: 1
+cukai: 1
+globalisasi: 1
+konsekuensi: 1
+kulitas: 1
+reliabilias: 1
+populadi: 1
+proportionated: 1
+bergandan: 1
+nirwan: 1
+syahri: 1
+lebar: 1
+kecimpung: 1
+oordoo: 1
+siswa: 1
+profesionalitas: 1
+perofesionalisme: 1
+choiroh: 1
+memilihevent: 1
+dangang: 1
+febuari: 1
+produktifitan: 1
+sempel: 1
+bayak: 1
+apak: 1
+siknifikan: 1
+kepauasn: 1
+regresik: 1
+manganalisis: 1
+jannata: 1
+wantar: 1
+strengths: 1
+weaknesses: 1
+opportunities: 1
+threats: 1
+internalexternal: 1
+qspm: 1
+strategic: 1
+matrix: 1
+plafon: 1
+daerahkecamatan: 1
+supermarket: 1
+ekternal: 1
+sedangratarata: 1
+maras: 1
+pilhanan: 1
+niali: 1
+siska: 1
+mil: 1
+g: 1
+mojokertopelaksanaan: 1
+perusahaansesuai: 1
+rekrut: 1
+tepattujuan: 1
+honorer: 1
+bergandahasilpenelitian: 1
+bahwafhitung: 1
+simultanbersamasama: 1
+slopekemiringan: 1
+hisbul: 1
+bahar: 1
+kongkrit: 1
+septian: 1
+dir: 1
+trebukti: 1
+simultanmetode: 1
+pembeliandengannilai: 1
+pembeliandengannilait: 1
+danvariabelcitra: 1
+merekmempunyai: 1
+pembeliandengan: 1
+sampangyaitubahwakeputusan: 1
+merekhal: 1
+kuncipengaruh: 1
+rawan: 1
+areadua: 1
+sehattiga: 1
+arealima: 1
+sehatsatu: 1
+areaempat: 1
+sharp: 1
+dohme: 1
+pharma: 1
+scpi: 1
+adista: 1
+samsul: 1
+pracak: 1
+kunsumen: 1
+dinamis: 1
+akhlak: 1
+mulia: 1
+penelittian: 1
+stratayaitu: 1
+personalitas: 1
+berpengartuh: 1
+mahasisiwa: 1
+variabelariabel: 1
+aosiasi: 1
+haulamuna: 1
+syaifina: 1
+yaklut: 1
+multikolonieroitas: 1
+yangh: 1
+arifullah: 1
+hardy: 1
+meode: 1
+hildi: 1
+rachmad: 1
+afdorul: 1
+secar: 1
+kaayawan: 1
+elistiyani: 1
+yuliansyah: 1
+pembiayan: 1
+huatang: 1
+panjangdalam: 1
+shield: 1
+menguntungakan: 1
+bin: 1
+penelitiansebanyak: 1
+puspitaningrum: 1
+nonbank: 1
+belas: 1
+menjelskan: 1
+inayafatul: 1
+ulfah: 1
+drdrsecchairul: 1
+anammkes: 1
+opersional: 1
+syahril: 1
+muharrom: 1
+nonfinancial: 1
+kodisi: 1
+neagara: 1
+pere: 1
+subsistem: 1
+perbankantujuan: 1
+swastahasil: 1
+rebih: 1
+swastakesimpulan: 1
+setandart: 1
+setadart: 1
+mulyana: 1
+menunjuikkan: 1
+berjudulpengaruh: 1
+outsoucing: 1
+subvariabel: 1
+koefiien: 1
+ptmarinal: 1
+edo: 1
+fatwa: 1
+retni: 1
+febrisasi: 1
+andar: 1
+pegawa: 1
+organisas: 1
+heteroskedastiitas: 1
+variablevariabel: 1
+smanika: 1
+langusng: 1
+sujarwo: 1
+multifinance: 1
+noseojk: 1
+fitra: 1
+pranjotose: 1
+bada: 1
+stok: 1
+puspitasari: 1
+dfl: 1
+depeden: 1
+stefan: 1
+william: 1
+bnc: 1
+invesmnet: 1
+samplingdengan: 1
+profitabbbilitas: 1
+sukomanunggal: 1
+absrak: 1
+listed: 1
+astina: 1
+mtambrin: 1
+noer: 1
+shaula: 1
+dijelaskanoleh: 1
+jamilatul: 1
+abstract: 1
+feryda: 1
+board: 1
+under: 1
+guidance: 1
+enforced: 1
+was: 1
+conducted: 1
+quantitatively: 1
+distributing: 1
+questionnaires: 1
+technique: 1
+processed: 1
+showed: 1
+shows: 1
+rest: 1
+equal: 1
+other: 1
+seba: 1
+derrisiko: 1
+faizah: 1
+yangdigunakan: 1
+ilwan: 1
+dteliti: 1
+var: 1
+runtut: 1
+issi: 1
+moneter: 1
+meminimalisir: 1
+mukhlis: 1
+indoenesia: 1
+richa: 1
+afifah: 1
+zmiewski: 1
+apresiasi: 1
+ekspresi: 1
+mangkir: 1
+slopel: 1
+respondenberdasarkan: 1
+ismi: 1
+rulita: 1
+atngibility: 1
+memggunakan: 1
+profitabilty: 1
+inddependen: 1
+isnanda: 1
+anamdrs: 1
+ydalam: 1
+megananda: 1
+virgiastutik: 1
+mdan: 1
+kuantitatifmetode: 1
+perusahaanuntuk: 1
+leveragesecara: 1
+kepemiliksn: 1
+studipada: 1
+perusahaandalam: 1
+overall: 1
+maghfirotul: 1
+fikawati: 1
+qomariyah: 1
+signif: 1
+firmansyah: 1
+samhaji: 1
+pilpres: 1
+mohkosim: 1
+drsmudji: 1
+satfungsi: 1
+rayaberpengaruh: 1
+berujumlah: 1
+fhitungsebesar: 1
+ftabelyaitu: 1
+khoirina: 1
+karim: 1
+mspi: 1
+inodonesia: 1
+vivin: 1
+octavia: 1
+tiap: 1
+diminimalisir: 1
+signal: 1
+menaglami: 1
+perlahan: 1
+lingkunga: 1
+berpengauh: 1
+sebesesar: 1
+pengauh: 1
+perusahaa: 1
+prespektif: 1
+abuabu: 1
+food: 1
+sekar: 1
+delfan: 1
+nonperforming: 1
+porselens: 1
+dilema: 1
+kultural: 1
+tegur: 1
+sapa: 1
+curiga: 1
+kepul: 1
+yudhistira: 1
+umkmtahu: 1
+kandangrejo: 1
+kedungpring: 1
+ifas: 1
+efas: 1
+stabilitas: 1
+differentation: 1
+sotfware: 1
+disfungsioanl: 1
+rekapitulisasi: 1
+sesngkan: 1
+lusiana: 1
+oktavia: 1
+farmasiyang: 1
+kuncicurrent: 1
+dioalah: 1
+inayat: 1
+negelkerke: 1
+pramadiani: 1
+deskripti: 1
+sisma: 1
+nabi: 1
+irmm: 1
+jeli: 1
+hikmah: 1
+dukunkyai: 1
+filsuf: 1
+mula: 1
+akal: 1
+imroatul: 1
+isnainia: 1
+bangsa: 1
+kreditor: 1
+syahrozi: 1
+anisyah: 1
+aria: 1
+lingkunganberpengaruh: 1
+samplingdan: 1
+tunggla: 1
+gowa: 1
+makassar: 1
+vivatex: 1
+metropolitan: 1
+kentjana: 1
+fitriah: 1
+kholifah: 1
+perusahaansampel: 1
+kuncimarket: 1
+arnis: 1
+wijayanti: 1
+definisi: 1
+nailussaadah: 1
+aviva: 1
+kiai: 1
+kharismatikx: 1
+otokratisx: 1
+sebsesar: 1
+bidayatul: 1
+nugrahospimm: 1
+noviandari: 1
+menganalisisperputaran: 1
+roeuji: 1
+akuisisisubjek: 1
+mutoharo: 1
+sherly: 1
+marlyna: 1
+ketidakterikatan: 1
+rifa: 1
+fitrotunisa: 1
+ttabell: 1
+terhdaap: 1
+rifaldi: 1
+indrawan: 1
+ramdhan: 1
+fitrianah: 1
+hiitung: 1
+sitem: 1
+nivia: 1
+pujowati: 1
+perindusrian: 1
+drhrmmoch: 1
+lingkup: 1
+feri: 1
+infrastrukur: 1
+pengunjungwisatawan: 1
+zuhruf: 1
+hjsanugrahini: 1
+variablel: 1
+iswati: 1
+wsemsi: 1
+stratifiedrandom: 1
+kofisien: 1
+iis: 1
+sulistyorini: 1
+drahjs: 1
+selaras: 1
+enrichmentterhadap: 1
+semaduratujuan: 1
+enlargementsecara: 1
+semaduravariabel: 1
+enrichmentmemiliki: 1
+fachruddin: 1
+farqi: 1
+subroto: 1
+ngampel: 1
+mojoroto: 1
+dulianti: 1
+adiningrum: 1
+lthitung: 1
+nilaifhitung: 1
+kyai: 1
+kholil: 1
+demang: 1
+hartinah: 1
+ganier: 1
+sujayanti: 1
+umk: 1
+dusun: 1
+gersikputih: 1
+koflik: 1
+kepuasasn: 1
+torism: 1
+tourservqual: 1
+majapait: 1
+majapahit: 1
+tagibles: 1
+jamal: 1
+sumberdaya: 1
+tugastugas: 1
+kecildari: 1
+kerjahal: 1
+sus: 1
+anny: 1
+pangistu: 1
+ptpelindo: 1
+karyawanteknik: 1
+pension: 1
+reation: 1
+arno: 1
+mengekplorasi: 1
+asshiddiq: 1
+ikamapaba: 1
+istrumen: 1
+nia: 1
+rohmatin: 1
+nikmah: 1
+sophie: 1
+paris: 1
+kepecayaan: 1
+menuruntujuan: 1
+mental: 1
+spritual: 1
+tersebutoleh: 1
+mencapat: 1
+indifidu: 1
+organisasikemitraan: 1
+oisau: 1
+deskriptifwawancara: 1
+analisisyaitu: 1
+kategorisasi: 1
+sitesisasi: 1
+forma: 1
+pik: 1
+galaxi: 1
+lansia: 1
+nu: 1
+kb: 1
+formal: 1
+paming: 1
+ranah: 1
+remaja: 1
+mudahterlebih: 1
+kimitraan: 1
+tanggulang: 1
+kemitraanmanajemen: 1
+kinerjapuskesmas: 1
+aliyuddin: 1
+angketkuesioner: 1
+ftest: 1
+tau: 1
+ybaik: 1
+malihat: 1
+yberpengaruh: 1
+variabelyang: 1
+kuncirotasi: 1
+jabatankepuasan: 1
+pegawaikinerja: 1
+kependidikananalisis: 1
+mufid: 1
+hidayatulloh: 1
+belajardan: 1
+gunawan: 1
+aditiya: 1
+karena: 1
+sair: 1
+heny: 1
+pangeranpersero: 1
+surabayahasil: 1
+berubahubah: 1
+sendiri: 1
+periksa: 1
+irhamni: 1
+risti: 1
+rsu: 1
+aries: 1
+ton: 1
+firmanda: 1
+bebek: 1
+sinjay: 1
+anang: 1
+bumiterhadap: 1
+organisiasi: 1
+upah: 1
+musyawarah: 1
+ketidakmampuan: 1
+pakat: 1
+aminah: 1
+nurfi: 1
+aisyah: 1
+fahrini: 1
+gita: 1
+amanda: 1
+rahmatika: 1
+em: 1
+signiifikan: 1
+mancanegara: 1
+aga: 1
+nominal: 1
+rupiah: 1
+barangbarang: 1
+tip: 1
+jatuh: 1
+ratiose: 1
+equitydan: 1
+sukubunga: 1
+empirik: 1
+menara: 1
+internusa: 1
+elda: 1
+elsaviana: 1
+mallmall: 1
+tolok: 1
+subbag: 1
+kerumahtanggaan: 1
+bag: 1
+kerumahtangaan: 1
+hrs: 1
+perspektfyaitu: 1
+perspektifpelanggan: 1
+bukubuku: 1
+analytical: 1
+hierarky: 1
+high: 1
+work: 1
+witri: 1
+handayani: 1
+sectiomal: 1
+ketermpilan: 1
+peengalaman: 1
+millisani: 1
+genral: 1
+cholis: 1
+profotabilitas: 1
+baiquni: 1
+kontruksi: 1
+sugio: 1
+dampit: 1
+sumberejo: 1
+aena: 1
+tethadap: 1
+ridhohalim: 1
+pengaruhgood: 1
+governenceterhadapkinerjakeuangan: 1
+sektormakanandanminuman: 1
+chaitulanam: 1
+kesdan: 1
+gatotherupranjoto: 1
+tujuandalampenelitianiniadalahuntuk: 1
+governence: 1
+yangterdiriataskomisaris: 1
+dankepemilikan: 1
+perusahaanjenis: 1
+minumanteknikpengambilsampelmenggunakanjudgment: 1
+daoatkansampelsebanyak: 1
+minumanteknikanalisis: 1
+menggunakananalisisregresi: 1
+berdasarkanhasilpenelitianmenyimpulkanbahwa: 1
+kepemilikaninstitusional: 1
+keuanganperusahaan: 1
+makanandanminuman: 1
+sedangkepemilikanmanajerial: 1
+berpengaruhterhadap: 1
+keuanganperusahaanmakanandanminuman: 1
+kepemilikaninstitusionaldankepemilikanmanajerialberpengaruhsecara: 1
+kinerjakeuanganmakanandanminuman: 1
+kinerjakeuangan: 1
+per inv: 1
+agis: 1
+amara: 1
+prakoso: 1
+fhiutng: 1
+exteriordan: 1
+cantum: 1
+tumbu: 1
+ruthtyanur: 1
+amaniyahsemsi: 1
+pupulasi: 1
+titik: 1
+setya: 1
+sudiyono: 1
+ori: 1
+fyaitu: 1
+puguh: 1
+amaniah: 1
+check: 1
+contoh: 1
+orbit: 1
+djafrizait: 1
+mirtan: 1
+arniko: 1
+pengujia: 1
+autokolerasi: 1
+pertumbumbuhan: 1
+ove: 1
+rsupply: 1
+rifqi: 1
+keruh: 1
+curang: 1
+persyratan: 1
+pengankatan: 1
+nilasari: 1
+udbersama: 1
+keluh: 1
+produktiivtas: 1
+icmiah: 1
+ujin: 1
+regeresi: 1
+trisnawati: 1
+erlin: 1
+ariyanti: 1
+heteroskedastiisitas: 1
+kala: 1
+hangtuah: 1
+diperhatikanya: 1
+bekal: 1
+divkaprang: 1
+indonesiapersero: 1
+mafsusah: 1
+spesifikas: 1
+xnilai: 1
+jaksa: 1
+suprapto: 1
+lebak: 1
+acara: 1
+ridho: 1
+nilao: 1
+semster: 1
+ade: 1
+kurnia: 1
+savitri: 1
+ririn: 1
+cahyani: 1
+purwanti: 1
+kareb: 1
+kriiteria: 1
+employe: 1
+vaca: 1
+vahu: 1
+stva: 1
+aprilya: 1
+varaibel: 1
+dumaksud: 1
+apa: 1
+chika: 1
+besi: 1
+arana: 1
+excellentia: 1
+lawang: 1
+hanifzainuri: 1
+pengaruhinformasilaba: 1
+pertumbuhanlabaterhadapkoefisienresponlabapada: 1
+dibawahbimbinganechsangani: 1
+semsidanhadipurnomo: 1
+penelitianinibertujuanuntukmengetahuipengaruhvariabelinformasilaba: 1
+danpertumbuhanlababaiksecaraparsialmaupunsimultanterhadapkoefisienresponlabapada: 1
+penelitianinidilakukansecaradeskriptifkuantitatifdenganmenggunakan: 1
+diperolehdari: 1
+beimetodepengambilansampel: 1
+digunakanadalah: 1
+dandiperolehsampelsebanyak: 1
+perusahaandari: 1
+perusahaanuntukpengujian: 1
+menggunakanujiasumsiklasik: 1
+sedangkanteknikanalisis: 1
+digunakanuntukmengetahuihipotesisadalahmenggunakanregresi: 1
+bergandadenganmemakaiuji: 1
+danuji: 1
+danpertumbuhanlabasecarasimultanberpengaruhtidaksignifikanterhadapkoefisienresponlabapada: 1
+yangterdaftar: 1
+berartihipotesis: 1
+tolakdanuji: 1
+danpertumbuhanlabasecaraparsialberpengaruhtidaksignifikanterhadapkoefisienresponlaba: 1
+inimenunjukkanbahwa: 1
+variabelbebasterdapatfaktorfaktor: 1
+mempengaruhikoefisienresponlabasepertikebijakanperusahaanbaiksecarainternalmaupuneksternaldankondisipasar: 1
+informasilaba: 1
+pertumbuhanlabadankoefisienresponlaba: 1
+mike: 1
+ardita: 1
+kabupeten: 1
+robiatul: 1
+adawiyah: 1
+rientasi: 1
+tehnikstratifiedclustersamplingberdasarkan: 1
+bsebesar: 1
+betakepemimpinan: 1
+sholichul: 1
+proposive: 1
+pemaegang: 1
+devinta: 1
+dianasari: 1
+sisahasil: 1
+rpublik: 1
+danibu: 1
+rab: 1
+maftuhah: 1
+logistic: 1
+farida: 1
+esate: 1
+hanafi: 1
+bega: 1
+promosijabatan: 1
+komensasi: 1
+merupakansalahsatuanakperusahaandari: 1
+bergerakdibidanglayanandistrubusidanperdaganganprodukkesehatan: 1
+saatini: 1
+melayaniperdaganganbaikditingkatapotik: 1
+rumahsakithinggakepasartradisional: 1
+untukmenunjangpelayanannya: 1
+dibutuhkantenagakerja: 1
+terampilbaikdalamkemampuanhard: 1
+skillmaupunsoft: 1
+skillnya: 1
+dalampenelitianinipendekatan: 1
+digunakanadalahkuantitatifdenganmetodestudikasus: 1
+dimanajumlahresponden: 1
+digunakanadalahseluruhkaryawan: 1
+adapuntujuandaripenelitianiniadalahuntukmengetahuipengaruhhard: 1
+skillterhadapproduktivitaskaryawan: 1
+berdasarkanhasilanalisa: 1
+dilakukandenganmenggunakan: 1
+didapatkanbahwakoefisienregresi: 1
+untukvariabelhard: 1
+skillkaryawan: 1
+bernilaipositif: 1
+dengannilaisigninfikansisebesar: 1
+sertahasilthitungttabel: 1
+inimenunjukkanbahwahard: 1
+skillberpengaruhpositifdansignifikanterhadapproduktivitaskaryawan: 1
+sedangkanuntukvariabelsoft: 1
+didapatkanhasilkoefisienregresi: 1
+dengannilaisignifikansi: 1
+lebihkecildaritingkatsignifikan: 1
+untuknilaithitungttabel: 1
+inijugamenunjukkanbahwavariabel: 1
+berpengaruhpositifdansignifikanterhadapproduktifitaskaryawan: 1
+secarasimultanvariabelhard: 1
+skilljugaberpengaruhpositifterhadapproduktivitaskaryawandengannilaifhitungf: 1
+tabeldantarafsignifikansisebesar: 1
+variabelhard: 1
+dansoft: 1
+skillmempunyaipengaruh: 1
+samabesarterhadapproduktivitaskaryawan: 1
+namunvariabelsoft: 1
+skillmempunyaiperan: 1
+lebihdominan: 1
+ditunjukkanolehkoefisien: 1
+sedangkanvariabelhard: 1
+nilaikoefisien: 1
+betahanya: 1
+produktivitaskaryawan: 1
+ammana: 1
+miftahuddin: 1
+wisawatawan: 1
+ech: 1
+aksi: 1
+korporasi: 1
+likuid: 1
+kritiria: 1
+peiode: 1
+muqtadir: 1
+seminar: 1
+saroh: 1
+hoiroti: 1
+menegetahui: 1
+tergadap: 1
+manual: 1
+insert: 1
+delta: 1
+silicon: 1
+industrial: 1
+blok: 1
+fb: 1
+cikarang: 1
+selatan: 1
+bekas: 1
+nonparametris: 1
+engagedtujuan: 1
+multikolineritas: 1
+sitti: 1
+choirin: 1
+zmijewskiterhadap: 1
+tingakt: 1
+hevin: 1
+sulistyaningsih: 1
+kurskall: 1
+lihayati: 1
+juag: 1
+interveningstudi: 1
+pemuda: 1
+kaffa: 1
+tunjung: 1
+adalahh: 1
+posiif: 1
+naufal: 1
+rasidi: 1
+dalah: 1
+efeke: 1
+asumsis: 1
+bawha: 1
+gazal: 1
+virna: 1
+dias: 1
+tdan: 1
+hosen: 1
+lbu: 1
+signiflkansi: 1
+signmkan: 1
+hani: 1
+gresikkomunikasi: 1
+interpesrsonal: 1
+xix: 1
+tehdap: 1
+sejati: 1
+sandar: 1
+alquran: 1
+hadist: 1
+garis: 1
+tabligh: 1
+fatonah: 1
+panutan: 1
+pnyelaras: 1
+debby: 1
+febriyana: 1
+keingnan: 1
+pangestu: 1
+sebnayak: 1
+alalisis: 1
+keluarpihak: 1
+peruahaan: 1
+alu: 1
+rb: 1
+musa: 1
+zakariyah: 1
+sepele: 1
+miftakhul: 1
+maidah: 1
+firdia: 1
+chasanah: 1
+ahp: 1
+analitical: 1
+hierarchy: 1
+kpi: 1
+tanggungjawab: 1
+komprehenship: 1
+sarjana: 1
+serap: 1
+wawas: 1
+representatif: 1
+sambut: 1
+kampus: 1
+adam: 1
+saedah: 1
+drhmalkirom: 1
+lelah: 1
+cidera: 1
+bekerjapenelitian: 1
+karyawany: 1
+karyawaan: 1
+mulyono: 1
+kampung: 1
+lawas: 1
+maspati: 1
+kententuan: 1
+selidik: 1
+penanggungjawab: 1
+monitoring: 1
+wasatawan: 1
+akses: 1
+wisatwan: 1
+aprilla: 1
+cutt: 1
+off: 1
+lunas: 1
+kewajibankewajiban: 1
+capitaltotal: 1
+earningstotal: 1
+before: 1
+taxestotal: 1
+equitybook: 1
+salestotal: 1
+cffota: 1
+cffos: 1
+ippeppe: 1
+chwctu: 1
+rppets: 1
+dits: 1
+netdebtts: 1
+basis: 1
+alir: 1
+auliatus: 1
+suatu: 1
+deksripsi: 1
+nikmat: 1
+kepentingankinerja: 1
+suhu: 1
+udarakebersihan: 1
+aroma: 1
+barangtersedianya: 1
+papan: 1
+poster: 1
+simbol: 1
+diskon: 1
+konsumenkepentingan: 1
+fasira: 1
+angrahini: 1
+liar: 1
+integratif: 1
+programprogram: 1
+komoditas: 1
+usul: 1
+support: 1
+potensipotensi: 1
+artikel: 1
+artifact: 1
+koreksi: 1
+kampil: 1
+fell: 1
+syaicullah: 1
+rosida: 1
+ningam: 1
+perusahaanya: 1
+distribution: 1
+katun: 1
+logo: 1
+baru: 1
+tema: 1
+kini: 1
+moral: 1
+samplingyaitu: 1
+fani: 1
+rachma: 1
+noerlila: 1
+fanomena: 1
+sayang: 1
+sandang: 1
+konsumtif: 1
+marketplace: 1
+pasca: 1
+semi: 1
+transfer: 1
+menunjukkanbahwasannya: 1
+kelamahan: 1
+itemitem: 1
+holistik: 1
+emosi: 1
+bangkit: 1
+santai: 1
+waswas: 1
+tenang: 1
+pikul: 1
+perusahaanorganisasi: 1
+bhakti: 1
+bumd: 1
+ulum: 1
+slovinanalisis: 1
+bresponden: 1
+berdasaekan: 1
+gondang: 1
+outbound: 1
+wego: 1
+destinasisecara: 1
+joan: 1
+oki: 1
+aprilyanto: 1
+penelitihan: 1
+terhapa: 1
+zuhri: 1
+moro: 1
+tresnopadangan: 1
+padang: 1
+probablity: 1
+raa: 1
+soewondo: 1
+pati: 1
+ananlisis: 1
+convenience: 1
+struktural: 1
+liear: 1
+penjulan: 1
+bernadeta: 1
+wanti: 1
+manurung: 1
+prajonto: 1
+yusi: 1
+pramifta: 1
+memusaskan: 1
+instrymen: 1
+nuri: 1
+sejawa: 1
+perspekstif: 1
+rosita: 1
+asma: 1
+discreationary: 1
+acruals: 1
+widiyawati: 1
+ecm: 1
+sifa: 1
+najib: 1
+semt: 1
+faisal: 1
+naga: 1
+profitabilita: 1
+topik: 1
+bertanggungjawab: 1
+tengahtengan: 1
+sibuk: 1
+zyn: 1
+rambah: 1
+virtual: 1
+konektivitas: 1
+mesin: 1
+manamana: 1
+istilah: 1
+sebut: 1
+things: 1
+infinit: 1
+azis: 1
+hasbullah: 1
+penegambilan: 1
+swbanyak: 1
+produkcitra: 1
+narasumber: 1
+catatn: 1
+dibeirkan: 1
+beva: 1
+pnelitian: 1
+migascepu: 1
+ourlan: 1
+ourland: 1
+sundari: 1
+maghfirotus: 1
+salamah: 1
+builiding: 1
+ulfatul: 1
+mukarromah: 1
+firman: 1
+aditiyas: 1
+saputra: 1
+sriharta: 1
+karyawanbudaya: 1
+pangan: 1
+berantas: 1
+hama: 1
+gabah: 1
+beras: 1
+rastra: 1
+ronny: 1
+mnoor: 1
+nonkonstan: 1
+audien: 1
+senjang: 1
+analysisn: 1
+nonprobablitiy: 1
+isntrumen: 1
+uju: 1
+cukp: 1
+negtatif: 1
+mens: 1
+sevqual: 1
+responsuveness: 1
+organisasinal: 1
+presatsi: 1
+karyawanmetode: 1
+larissa: 1
+tu: 1
+bustomi: 1
+makmun: 1
+konstituen: 1
+hoirul: 1
+umam: 1
+hjanugrahini: 1
+bagia: 1
+berpenagruh: 1
+populer: 1
+motif: 1
+peka: 1
+manufatur: 1
+valuepbv: 1
+rofendi: 1
+kenjerandi: 1
+drasanugrahini: 1
+kepemimpinanmotivasi: 1
+disiplinkerja: 1
+karyawandan: 1
+karyawanuntuk: 1
+ulpkenjeransampel: 1
+menujjukkan: 1
+fariabel: 1
+demokratikmotivasiteamworkdisiplin: 1
+keduannya: 1
+judgment: 1
+dingunakan: 1
+dilanjudkan: 1
+mcclleand: 1
+eksplanatory: 1
+ketemu: 1
+proportinate: 1
+samplingdata: 1
+meciptakan: 1
+far: 1
+ukuan: 1
+festival: 1
+sinergi: 1
+diharapakan: 1
+najmuddin: 1
+najmi: 1
+zahid: 1
+verifikasi: 1
+transferability: 1
+kh: 1
+prabowo: 1
+subianto: 1
+sandiaga: 1
+uno: 1
+montoya: 1
+preferensial: 1
+referensial: 1
+alida: 1
+like: 1
+independe: 1
+adalan: 1
+antarvariabel: 1
+sebanyal: 1
+equation: 1
+modelling: 1
+sem: 1
+lisrel: 1
+intenton: 1
+benda: 1
+kulit: 1
+potehi: 1
+golek: 1
+topeng: 1
+tosan: 1
+boneka: 1
+unyil: 1
+papar: 1
+tatap: 1
+karawitan: 1
+macapat: 1
+mumilatul: 1
+mufidah: 1
+perkapala: 1
+partial: 1
+simultanpenelitian: 1
+sigifikansi: 1
+seta: 1
+customernya: 1
+essenzoindonesia: 1
+analysi: 1
+profitabilitasroa: 1
+rsquare: 1
+profitbilitas: 1
+addalah: 1
+inim: 1
+enggunakan: 1
+purpsive: 1
+menunujukan: 1
+profitabilitan: 1
+erfani: 1
+dipeoleh: 1
+perushaaan: 1
+manajerialmown: 1
+sidayu: 1
+apasif: 1
+mewadai: 1
+sulastri: 1
+perusahaanpbv: 1
+juwairiyah: 1
+parametrik: 1
+holifatul: 1
+isma: 1
+aviyanti: 1
+intellectul: 1
+kurun: 1
+sscore: 1
+laura: 1
+jtrust: 1
+hipotesi: 1
+sciens: 1
+riska: 1
+tahn: 1
+kepemiikan: 1
+dipengrauhi: 1
+kholidah: 1
+dibuktukan: 1
+ra: 1
+fajria: 1
+membandingkaan: 1
+moderating: 1
+asosiatif: 1
+proportione: 1
+qamariyah: 1
+dbr: 1
+umami: 1
+aprilina: 1
+susandini: 1
+wilmar: 1
+prasidha: 1
+lqpendekatan: 1
+normalberdasarkan: 1
+elika: 1
+juniyanti: 1
+sofariyah: 1
+dream: 1
+mosaic: 1
+bom: 1
+kerumit: 1
+indinesia: 1
+keselatamatan: 1
+erfima: 1
+wahyu: 1
+widia: 1
+astutik: 1
+moderen: 1
+tulang: 1
+punggung: 1
+hias: 1
+sayur: 1
+curret: 1
+yaniar: 1
+inds: 1
+serah: 1
+kedisplinan: 1
+ishaki: 1
+busariyanto: 1
+keripik: 1
+manding: 1
+posiitif: 1
+ditamas: 1
+express: 1
+cargo: 1
+roudotul: 1
+multikolorieritas: 1
+peerputaran: 1
+multikoloniaritas: 1
+nurmayanti: 1
+sukma: 1
+varibelveriabel: 1
+tersebutberdasarkan: 1
+irsyadul: 1
+sentral: 1
+analisisdata: 1
+roahasil: 1
+nplldr: 1
+kemapuan: 1
+mdel: 1
+ramdom: 1
+kjinerja: 1
+terhadapo: 1
+berpoengaruh: 1
+rudi: 1
+hartono: 1
+agent: 1
+titans: 1
+mursyid: 1
+reng: 1
+pemprov: 1
+nonformal: 1
+kawirian: 1
+ibudra: 1
+udrumah: 1
+ditunjukkandengan: 1
+individuperilaku: 1
+endah: 1
+nurfadhillah: 1
+tahaptahap: 1
+reaktif: 1
+sopek: 1
+syarifmsi: 1
+caracara: 1
+popilasi: 1
+profisionalisme: 1
+rozyqin: 1
+desatanjung: 1
+interveningteknik: 1
+komentar: 1
+domino: 1
+gratis: 1
+isroil: 1
+mkeningkatkan: 1
+intraktif: 1
+kerjapertama: 1
+dirimereka: 1
+milu: 1
+hasilrekrutmen: 1
+mungut: 1
+ualang: 1
+psu: 1
+rekapitulasi: 1
+setor: 1
+kpu: 1
+mergerakuisisi: 1
+sebanyakperusahaan: 1
+deskriptifhasil: 1
+kopetensi: 1
+pengusahapencapaian: 1
+eja: 1
+dio: 1
+alfianur: 1
+pelatihandisiplin: 1
+litopenaeus: 1
+asli: 1
+panen: 1
+tbai: 1
+akuakultur: 1
+budidaya: 1
+rusti: 1
+diyayanti: 1
+piring: 1
+hasanudin: 1
+ukmf: 1
+intrument: 1
+eksplantif: 1
+disperindag: 1
+dwiagisa: 1
+nuh: 1
+bimbingann: 1
+jadwal: 1
+owner: 1
+material: 1
+abidah: 1
+kerjastres: 1
+gegor: 1
+shofi: 1
+nawawi: 1
+drec: 1
+ypenelitian: 1
+controlx: 1
+ypengendalian: 1
+fauzetul: 1
+tuji: 1
+fuji: 1
+karyawanberdasarkan: 1
+kuncireward: 1
+ardiansyah: 1
+wisuda: 1
+wardana: 1
+yani: 1
+ketintanggayungansurabaya: 1
+pasrsial: 1
+zakiyatus: 1
+dicky: 1
+alex: 1
+sandi: 1
+dalampemberdayaan: 1
+mr: 1
+ketekunankeajegan: 1
+membercheck: 1
+danu: 1
+prayogo: 1
+laksamana: 1
+anis: 1
+mahfudah: 1
+darmo: 1
+surabayaindonesiapenelitian: 1
+karyawantingkat: 1
+knowledege: 1
+dankinerja: 1
+hazizah: 1
+fitriani: 1
+dominasi: 1
+khusunya: 1
+original: 1
+sara: 1
+bahasa: 1
+spesifik: 1
+targeting: 1
+kritik: 1
+komentarkomentar: 1
+cicik: 1
+limgkungan: 1
+keefktifitasan: 1
+banyuajuh: 1
+ketidaksiapan: 1
+sultoni: 1
+drsdr: 1
+pegawaisebesar: 1
+menggukan: 1
+tapiokaadanya: 1
+bangkalansedangkan: 1
+samplenya: 1
+dampakdampak: 1
+pekerjaansusah: 1
+sector: 1
+pegambilan: 1
+perusahaanteknik: 1
+mennunjukkan: 1
+bopoldr: 1
+panglima: 1
+samplig: 1
+simpuk: 1
+cilmate: 1
+orgaization: 1
+mixed: 1
+methods: 1
+eksplanatoris: 1
+sekuensial: 1
+mediator: 1
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Buat DataFrame baru dengan abstrak asli dan abstrak stemmed</span>
+<span class="n">processed_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;abstrak_id&#39;</span><span class="p">,</span> <span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Ganti nama kolom</span>
+<span class="n">processed_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stemmed_abstrak_id&#39;</span><span class="p">:</span> <span class="s1">&#39;hasil_preprocessing&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Konversi frekuensi kata ke DataFrame</span>
+<span class="n">frequency_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">word_frequencies</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">])</span>
+<span class="n">frequency_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;word&#39;</span>
+<span class="n">frequency_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Simpan ke dua file CSV terpisah</span>
+<span class="n">processed_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;hasil_preprocessing_abstrak.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">frequency_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;frekuensi_kata_abstrak.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil preprocessing disimpan di &#39;hasil_preprocessing_abstrak.csv&#39;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frekuensi kata disimpan di &#39;frekuensi_kata_abstrak.csv&#39;&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Hasil preprocessing disimpan di &#39;hasil_preprocessing_abstrak.csv&#39;
+Frekuensi kata disimpan di &#39;frekuensi_kata_abstrak.csv&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_preprocessing</span> <span class="o">=</span> <span class="s2">&quot;hasil_preprocessing_abstrak.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">hasil_preprocessing</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abstrak_id</th>
+      <th>hasil_preprocessing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABSTRAK\r\nSatiyah, Pengaruh Faktor-faktor Pel...</td>
+      <td>['abstrak', 'satiyah', 'pengaruh', 'faktorfakt...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+      <td>['aplikasi', 'nyata', 'manfaat', 'teknologi', ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>['tuju', 'teliti', 'persepsi', 'brand', 'assoc...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abstrak\r\nPenelitian ini menggunakan metode k...</td>
+      <td>['abstrak', 'teliti', 'metode', 'kuantitatif',...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ABSTRAK\r\n\r\nTujuan penelitian ini adalah un...</td>
+      <td>['abstrak', 'tuju', 'teliti', 'identifikasi', ...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1021</th>
+      <td>ABSTRAK\nPenelitian ini bertujuan untuk menget...</td>
+      <td>['abstrak', 'teliti', 'tuju', 'hitung', 'tingk...</td>
+    </tr>
+    <tr>
+      <th>1022</th>
+      <td>ABSTRAK\nUswatun Hasanah, 160211100291, Pengar...</td>
+      <td>['abstrak', 'uswatun', 'hasanah', 'pengaruh', ...</td>
+    </tr>
+    <tr>
+      <th>1023</th>
+      <td>ABSTRAK\nTujuan dari penelitian ini adalah unt...</td>
+      <td>['abstrak', 'tuju', 'teliti', 'peran', 'servic...</td>
+    </tr>
+    <tr>
+      <th>1024</th>
+      <td>ABSTRAK\nPenelitian ini bertujuan: (1) Untuk m...</td>
+      <td>['abstrak', 'teliti', 'tuju', 'baur', 'promosi...</td>
+    </tr>
+    <tr>
+      <th>1025</th>
+      <td>Penelitian ini bertujuan untuk dapat mengetahu...</td>
+      <td>['teliti', 'tuju', 'pengaruh', 'motivasi', 'ke...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1026 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frekuensi_kata</span> <span class="o">=</span> <span class="s2">&quot;frekuensi_kata_abstrak.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">frekuensi_kata</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>word</th>
+      <th>frequency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pengaruh</td>
+      <td>5550</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kerja</td>
+      <td>5386</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>teliti</td>
+      <td>4381</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>variabel</td>
+      <td>3539</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>usaha</td>
+      <td>2535</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6493</th>
+      <td>nesscafe</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6494</th>
+      <td>rosa</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6495</th>
+      <td>fadjriya</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6496</th>
+      <td>siswati</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6497</th>
+      <td>satiyah</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>6498 rows × 2 columns</p>
+</div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ptatrunojoyomanajemen.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Crawling PTA Trunojoyo Prodi Manajemen</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ekstraksi_fitur_tfidf_abstrak.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TF-IDF Abstrak Indonesia</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Abstrak Bahasa Indonesia</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#PREPROCESSING">PREPROCESSING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Hapus-Missing-Value-dan-Data-Duplicat">Hapus Missing Value dan Data Duplicat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Test-Cleaning">Test Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Tokenisasi">Tokenisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Stopword-Removal">Stopword Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Stemming">Stemming</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abror Ulil
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

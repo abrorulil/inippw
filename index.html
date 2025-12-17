@@ -43,6 +43,8 @@
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,6 +160,34 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Halaman Utama</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Selamat Datang 👋</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pendahuluan &amp; Crawling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantar.html">Pengantar Pencarian dan Penambangan Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linkgraphscraping.html">Link Graph Scraping Teknik Industri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html">Crawling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingberita.html">Data Berita CNN Indonesia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingptatrunojoyo.html">Crawling PTA Trunojoyo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ptatrunojoyomanajemen.html">Crawling PTA Trunojoyo Prodi Manajemen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing &amp; Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_abstrak_indonesia.html">Preprocessing Abstrak Bahasa Indonesia</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html">Ekstraksi Fitur TF-IDF Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_abstrak.html">CBOW Embedding Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_berita.html">Preprocessing Berita</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_berita.html">Ekstraksi Fitur TF-IDF Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_berita.html">CBOW Embedding Berita</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analisis &amp; Clustering</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_berita.html">Klasifikasi LDA Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_abstrak.html">Klasifikasi LDA Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Word_Graph.html">Word Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pagerank2.html">Algoritma PageRank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphlnk.html">Graph Link Analysis</a></li>
 </ul>
 
     </div>
@@ -352,10 +382,116 @@ document.write(`
 </ul>
 </div>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pendahuluan &amp; Crawling</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pengantar.html">Pengantar Pencarian dan Penambangan Web</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pengantar.html#Penerapan-Web-Mining">Penerapan Web Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pengantar.html#Kesimpulan">Kesimpulan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pengantar.html#Referensi">Referensi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linkgraphscraping.html">Link Graph Scraping Teknik Industri</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linkgraphscraping.html#Tampilkah-DataFrame">Tampilkah DataFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html">Crawling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingberita.html">Data Berita CNN Indonesia</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crawlingberita.html#Ambil-data-berita-pada-index-website-CnnIndonesia">Ambil data berita pada index website CnnIndonesia</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingptatrunojoyo.html">Crawling PTA Trunojoyo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crawlingptatrunojoyo.html#Fungsi-untuk-menentukan-maksimal-halaman-pada-daftar-page-pada-website">Fungsi untuk menentukan maksimal halaman pada daftar page pada website</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crawlingptatrunojoyo.html#Fungsi-untuk-menampilkan-progres-bar-pada-terminal-atau-console">Fungsi untuk menampilkan progres bar pada terminal atau console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crawlingptatrunojoyo.html#Fungsi-untuk-mengambil-detail-isi-skripsi-dan-fungsi-untuk-crawling-seluruh-data-skripsi">Fungsi untuk mengambil detail isi skripsi dan fungsi untuk crawling seluruh data skripsi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crawlingptatrunojoyo.html#Load-data-csv">Load data csv</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ptatrunojoyomanajemen.html">Crawling PTA Trunojoyo Prodi Manajemen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ptatrunojoyomanajemen.html#Fungsi-untuk-menentukan-maksimal-halaman-pada-daftar-page-pada-website">Fungsi untuk menentukan maksimal halaman pada daftar page pada website</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ptatrunojoyomanajemen.html#Fungsi-Crawling-Khusus-Program-Studi-Manajemen">Fungsi Crawling Khusus Program Studi Manajemen</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preprocessing &amp; Embedding</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_abstrak_indonesia.html">Preprocessing Abstrak Bahasa Indonesia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#PREPROCESSING">PREPROCESSING</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#Hapus-Missing-Value-dan-Data-Duplicat">Hapus Missing Value dan Data Duplicat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#Test-Cleaning">Test Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#Tokenisasi">Tokenisasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#Stopword-Removal">Stopword Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_abstrak_indonesia.html#Stemming">Stemming</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html">Ekstraksi Fitur TF-IDF Abstrak</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html#Penjelasan-Berita-CNN">Penjelasan Berita CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ekstraksi_fitur_tfidf_abstrak.html#id1">Penjelasan Berita CNN</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_abstrak.html">CBOW Embedding Abstrak</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#Tujuan:">Tujuan:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#1.-Instalasi-Library">1. Instalasi Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#2.-Import-Library-dan-Load-Data">2. Import Library dan Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#3.-Definisi-Kelas-Custom">3. Definisi Kelas Custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#4.-Preprocessing-Teks-Abstrak">4. Preprocessing Teks Abstrak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#5.-Pembuatan-Corpus-dan-Training-Word2Vec">5. Pembuatan Corpus dan Training Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#6.-Eksplorasi-Model-Word2Vec-untuk-Abstrak">6. Eksplorasi Model Word2Vec untuk Abstrak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#7.-Ekstraksi-Embedding-untuk-Abstrak-Penelitian">7. Ekstraksi Embedding untuk Abstrak Penelitian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#8.-Validasi-Embedding">8. Validasi Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#9.-Konversi-Embedding-ke-DataFrame">9. Konversi Embedding ke DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#12.-Visualisasi-Embedding-Abstrak-Penelitian">12. Visualisasi Embedding Abstrak Penelitian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#10.-Penambahan-Label-(Opsional)">10. Penambahan Label (Opsional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_abstrak.html#11.-Hasil-Akhir">11. Hasil Akhir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_berita.html">Preprocessing Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_berita.html#PREPROCESSING">PREPROCESSING</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_berita.html#Hapus-Missing-Value-dan-Data-Duplicat">Hapus Missing Value dan Data Duplicat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_berita.html#Test-Cleaning">Test Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_berita.html#Tokenisasi">Tokenisasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_berita.html#Stopword-Removal">Stopword Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_berita.html#Stemming">Stemming</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ekstraksi_fitur_tfidf_berita.html">Ekstraksi Fitur TF-IDF Berita</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ekstraksi_fitur_tfidf_berita.html#Penjelasan-Berita-CNN">Penjelasan Berita CNN</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cbow_embeding_berita.html">CBOW Embedding Berita</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#Tujuan:">Tujuan:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#1.-Instalasi-Library">1. Instalasi Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#2.-Import-Library-dan-Load-Data">2. Import Library dan Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#3.-Definisi-Kelas-Custom">3. Definisi Kelas Custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#4.-Preprocessing-Teks">4. Preprocessing Teks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#5.-Pembuatan-Corpus-dan-Training-Word2Vec">5. Pembuatan Corpus dan Training Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#6.-Eksplorasi-Model-Word2Vec">6. Eksplorasi Model Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#7.-Ekstraksi-Embedding-untuk-Dokumen">7. Ekstraksi Embedding untuk Dokumen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#8.-Validasi-Embedding">8. Validasi Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#9.-Konversi-ke-DataFrame">9. Konversi ke DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#12.-Visualisasi-Embedding">12. Visualisasi Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#10.-Penambahan-Label-(Opsional)">10. Penambahan Label (Opsional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbow_embeding_berita.html#11.-Hasil-Akhir">11. Hasil Akhir</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analisis &amp; Clustering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_berita.html">Klasifikasi LDA Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi_lda_abstrak.html">Klasifikasi LDA Abstrak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Word_Graph.html">Word Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pagerank2.html">Algoritma PageRank</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Pagerank2.html#Latihan-Page-Rank">Latihan Page Rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pagerank2.html#Page-Rank-menggunakan-data-dari-yang-diberikan-di-kelas">Page Rank menggunakan data dari yang diberikan di kelas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pagerank2.html#Page-Rank-menggunakan-data-keluaran-link-teknik-informatika">Page Rank menggunakan data keluaran link teknik informatika</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pagerank2.html#Page-Rank-Menggunakan-Data-Link-Berita">Page Rank Menggunakan Data Link Berita</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphlnk.html">Graph Link Analysis</a></li>
+</ul>
 </div>
 </section>
 
