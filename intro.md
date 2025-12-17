@@ -1,11 +1,10 @@
-# PROFILE
+# Selamat Datang 👋
 
-| Informasi       | Nilai                                                                 |
-|-----------------|-----------------------------------------------------------------------|
-| Nama            | MOH ULIL ABROR ABDALLAH                                                 |
-| NIM             | 210411100166                                                          |
-| Program Studi   | Teknik Informatika Universitas Trunojoyo Madura                       |
-| Email           | abrorulil47@gmail.com                                             |
+| Profil Mahasiswa | Keterangan |
+| :--- | :--- |
+| **Nama** | Moh. Ulil Abror Abdallah |
+| **NIM** | 210411100166 |
+| **Kelas** | Penambangan Proyek Web - A |
 
-```{tableofcontents}
-```
+## Tentang Proyek ini
+Website ini berisi dokumentasi lengkap tugas Penambangan Proyek Web, mulai dari Crawling data hingga Analisis Graph. Silakan pilih menu di samping kiri untuk melihat detail setiap tahap.
