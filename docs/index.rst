@@ -1,18 +1,11 @@
 .. docs/index.rst
-Selamat Datang di Website Saya
-Dokumentasi Proyek Analisis Data
-=========================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Home
-   :hidden:
-
-   intro
+.. include:: intro.md
 
 .. toctree::
    :maxdepth: 2
    :caption: Pendahuluan & Crawling
+   :hidden:
 
    pengantar
    linkgraphscraping
@@ -24,6 +17,7 @@ Dokumentasi Proyek Analisis Data
 .. toctree::
    :maxdepth: 2
    :caption: Preprocessing & Embedding
+   :hidden:
 
    Preprocessing Abstrak Indonesia <preprocessing_abstrak_indonesia>
    Ekstraksi Fitur TF-IDF Abstrak <ekstraksi_fitur_tfidf_abstrak>
@@ -35,6 +29,7 @@ Dokumentasi Proyek Analisis Data
 .. toctree::
    :maxdepth: 2
    :caption: Klasifikasi & Clustering
+   :hidden:
 
    Klasifikasi LDA Berita <klasifikasi_lda_berita>
    Klasifikasi LDA Abstrak <klasifikasi_lda_abstrak>
@@ -44,6 +39,7 @@ Dokumentasi Proyek Analisis Data
 .. toctree::
    :maxdepth: 2
    :caption: Analisis Graf & Web Usage
+   :hidden:
 
    Analisis Word Graph <Word_Graph>
    Web Usage Mining <webusage>
