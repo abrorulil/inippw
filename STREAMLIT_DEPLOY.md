@@ -19,9 +19,10 @@ Steps to run locally:
 To deploy on Streamlit Cloud:
 
 1. Push the code to GitHub (e.g., https://github.com/abrorulil/inippw)
-2. Log in to https://share.streamlit.io and click "New app" → select the repo and branch, and set the main file to `app.py`.
+2. Log in to https://share.streamlit.io and click "New app" → select the repo and branch, and set the main file to `inippw/app.py`.
 3. Click deploy.
 
 Notes:
-- If your PDF is large, consider cropping or provide text directly.
-- The app uses `pyvis` to render interactive graphs.
+- Jika ingin antarmuka Bahasa Indonesia, pilih opsi Bahasa Indonesia pada sidebar aplikasi.
+- Jika PDF besar, pertimbangkan memotong atau tempel teks langsung.
+- Aplikasi menggunakan `pyvis` untuk menampilkan graf interaktif.

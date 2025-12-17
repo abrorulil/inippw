@@ -8,6 +8,8 @@ from nltk.corpus import stopwords
 import networkx as nx
 from collections import Counter
 from pyvis.network import Network
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import tempfile
 import pandas as pd
 
@@ -44,12 +46,21 @@ def clean_text(text: str):
     return text.strip()
 
 
-def tokenize_words(text: str, language="english"):
+def tokenize_words(text: str, language="english", do_stem=False):
     toks = word_tokenize(text.lower())
     words = [re.sub(r"[^a-zA-Z]", "", w) for w in toks]
     words = [w for w in words if w]
-    sw = set(stopwords.words(language)) if language in ["english"] else set()
+    if language == "english":
+        sw = set(stopwords.words("english"))
+    elif language == "indonesia":
+        factory = StopWordRemoverFactory()
+        sw = set(factory.get_stop_words())
+    else:
+        sw = set()
     words = [w for w in words if w not in sw]
+    if do_stem and language == "indonesia":
+        stemmer = StemmerFactory().create_stemmer()
+        words = [stemmer.stem(w) for w in words]
     return words
 
 
@@ -97,19 +108,21 @@ def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%"):
 
 
 def main():
-    st.title("Paper Word Graph & PageRank Explorer")
+    st.title("Eksplorator Word Graph & PageRank dari Paper")
     ensure_nltk()
 
-    st.sidebar.header("Upload / Input")
-    uploaded = st.sidebar.file_uploader("Upload PDF file", type=["pdf"])
-    text_input = st.sidebar.text_area("Or paste text (optional)", height=150)
+    st.sidebar.header("Unggah / Input")
+    uploaded = st.sidebar.file_uploader("Unggah file PDF", type=["pdf"])
+    text_input = st.sidebar.text_area("Atau tempel teks (opsional)", height=150)
 
-    language = st.sidebar.selectbox("Language for stopwords", ["english"], index=0)
-    window_size = st.sidebar.slider("Co-occurrence window", min_value=1, max_value=5, value=2)
-    top_n = st.sidebar.slider("Top N words", min_value=5, max_value=100, value=20)
+    lang_display = st.sidebar.selectbox("Bahasa untuk stopword", ["Bahasa Indonesia", "Bahasa Inggris"], index=0)
+    language = "indonesia" if lang_display == "Bahasa Indonesia" else "english"
+    do_stem = st.sidebar.checkbox("Lakukan stemming (Bahasa Indonesia)", value=False)
+    window_size = st.sidebar.slider("Jarak co-occurrence (window)", min_value=1, max_value=5, value=2)
+    top_n = st.sidebar.slider("Jumlah kata teratas", min_value=5, max_value=100, value=20)
 
     if uploaded is None and not text_input.strip():
-        st.info("Upload a PDF or paste text to begin.")
+        st.info("Unggah PDF atau tempel teks untuk memulai.")
         return
 
     full_text = ""
@@ -118,35 +131,35 @@ def main():
         try:
             full_text = read_pdf_bytes(file_bytes)
         except Exception as e:
-            st.error(f"Error reading PDF: {e}")
+            st.error(f"Terjadi kesalahan saat membaca PDF: {e}")
 
     if text_input.strip():
         full_text += "\n" + text_input
 
     cleaned = clean_text(full_text)
-    st.subheader("Extracted Text (preview)")
+    st.subheader("Teks yang diekstrak (pratinjau)")
     st.write(cleaned[:5000] + ("..." if len(cleaned) > 5000 else ""))
 
-    words = tokenize_words(cleaned, language=language)
-    st.write(f"Total words (after cleaning): {len(words)}")
+    words = tokenize_words(cleaned, language=language, do_stem=do_stem)
+    st.write(f"Jumlah kata (setelah pembersihan): {len(words)}")
 
     if len(words) < 5:
-        st.warning("Not enough words to build a graph. Try a longer document.")
+        st.warning("Tidak cukup kata untuk membangun graf. Coba dokumen yang lebih panjang.")
         return
 
     G = build_cooccurrence_graph(words, window_size=window_size)
 
-    st.subheader("Graph summary")
-    st.write(f"Nodes: {G.number_of_nodes()}, Edges: {G.number_of_edges()}")
+    st.subheader("Ringkasan graf")
+    st.write(f"Simpul: {G.number_of_nodes()}, Sisi: {G.number_of_edges()}")
 
     pr_top = top_n_pagerank(G, top_n)
-    pr_df = pd.DataFrame(pr_top, columns=["word", "pagerank"])
+    pr_df = pd.DataFrame(pr_top, columns=["kata", "pagerank"])
 
-    st.subheader("Top PageRank words")
+    st.subheader("Kata teratas menurut PageRank")
     st.dataframe(pr_df)
-    st.bar_chart(pr_df.set_index("word")["pagerank"])
+    st.bar_chart(pr_df.set_index("kata")["pagerank"])
 
-    st.subheader("Interactive Graph (top words)")
+    st.subheader("Graf interaktif (kata teratas)")
     net = pyvis_from_subgraph(G, pr_top)
     # save to temp html and display
     tmp = tempfile.NamedTemporaryFile(suffix=".html", delete=False)
