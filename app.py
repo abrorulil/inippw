@@ -97,31 +97,31 @@ def top_n_pagerank(G, n=20):
     return pr_sorted[:n]
 
 
-def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%", font_base=14, scale=1.0):
+def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%", font_base=14):
     net = Network(height=height, width=width, notebook=False)
     net.toggle_physics(True)
 
-    # add nodes with size ~ pagerank and font size scaled by 'scale'
+    # add nodes with size ~ pagerank and font size controlled by font_base
     max_score = max((s for _, s in pr_scores), default=0.0001)
     nodeset = set(n for n, _ in pr_scores)
     for node, score in pr_scores:
-        size = scale * (8 + (score / max_score) * 35)
-        font_size = max(8, int(scale * (font_base + (score / max_score) * 8)))
+        size = 15 + (score / max_score) * 60
+        font_size = max(10, int(font_base + (score / max_score) * 8))
         net.add_node(node, label=node, size=size, title=f"{node}: {score:.6f}", font={"size": font_size, "face": "Arial", "color": "#000000"})
 
-    # add edges between these top nodes if present in G, scale width by weight and scale
+    # add edges between these top nodes if present in G, scale width by weight
     for u, v, data in G.edges(data=True):
         if u in nodeset and v in nodeset:
             w = data.get("weight", 1)
-            width = max(0.5, (1 + math.log(w + 1)) * scale)
+            width = max(0.5, 1 + math.log(w + 1))
             net.add_edge(u, v, value=w, width=width)
 
-    # JS options to improve label rendering and physics; scale physics parameters
+    # JS options to improve label rendering and physics
     options = f"""
     var options = {{
       "nodes": {{"font": {{"face": "Arial"}}}},
       "edges": {{"smooth": {{"type": "continuous"}}}},
-      "physics": {{"barnesHut": {{"gravitationalConstant": -{int(1200*scale)}, "springLength": {int(120*scale)}, "springConstant": 0.001}}}},
+      "physics": {{"barnesHut": {{"gravitationalConstant": -1200, "springLength": 120, "springConstant": 0.001}}}},
       "interaction": {{"hover": true, "tooltipDelay": 100}}
     }}
     """
@@ -184,13 +184,10 @@ def main():
     st.subheader("Graf interaktif (kata teratas)")
     # Graph display options
     font_base = st.sidebar.slider("Ukuran font label (dasar)", min_value=10, max_value=24, value=14)
-    size_mode = st.sidebar.selectbox("Skala graf", ["Kecil", "Sedang", "Besar"], index=1)
-    scale_map = {"Kecil": 0.6, "Sedang": 1.0, "Besar": 1.6}
-    scale = scale_map[size_mode]
     show_static = st.sidebar.checkbox("Tampilkan graf statik (matplotlib) sebagai alternatif", value=False)
 
-    # build pyvis network (apply scale)
-    net = pyvis_from_subgraph(G, pr_top, font_base=font_base, scale=scale)
+    # build pyvis network (font size controlled only)
+    net = pyvis_from_subgraph(G, pr_top, font_base=font_base)
     tmp = tempfile.NamedTemporaryFile(suffix=".html", delete=False)
     net.save_graph(tmp.name)
     with open(tmp.name, "r", encoding="utf-8") as f:
@@ -199,29 +196,29 @@ def main():
     st.components.v1.html(html, height=600, scrolling=True)
 
     if show_static:
-        draw_static_graph(G, pr_top, font_size=font_base, scale=scale)
+        draw_static_graph(G, pr_top, font_size=font_base)
 
 
-def draw_static_graph(G, pr_scores, figsize=(9, 7), font_size=12, scale=1.0):
+def draw_static_graph(G, pr_scores, figsize=(10, 8), font_size=12):
     import matplotlib.pyplot as plt
 
     sub_nodes = [n for n, _ in pr_scores]
     subG = G.subgraph(sub_nodes).copy()
 
     # layout attempting to reduce label overlap
-    pos = nx.spring_layout(subG, k=0.6, iterations=300, seed=42)
+    pos = nx.spring_layout(subG, k=0.8, iterations=300, seed=42)
 
-    # node sizes proportional to pagerank (smaller base when scale < 1)
+    # node sizes proportional to pagerank
     max_score = max((s for _, s in pr_scores), default=0.0001)
-    sizes = [max(30, (50 * scale) + (score / max_score) * (800 * scale)) for _, score in pr_scores]
+    sizes = [300 + (score / max_score) * 3000 for _, score in pr_scores]
 
-    # edge widths scaled by weight and scale
-    widths = [max(0.5, (1 + math.log(subG[u][v].get('weight', 1) + 1)) * scale) for u, v in subG.edges()]
+    # edge widths scaled by weight
+    widths = [1 + math.log(subG[u][v].get('weight', 1) + 1) for u, v in subG.edges()]
 
     plt.figure(figsize=figsize)
     nx.draw_networkx_nodes(subG, pos, node_size=sizes, node_color='skyblue')
     nx.draw_networkx_edges(subG, pos, width=widths, alpha=0.7, edge_color='#888888')
-    nx.draw_networkx_labels(subG, pos, font_size=max(8, int(font_size * scale)), font_family='sans-serif')
+    nx.draw_networkx_labels(subG, pos, font_size=font_size, font_family='sans-serif')
     plt.axis('off')
 
     st.pyplot(plt.gcf())
