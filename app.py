@@ -126,7 +126,6 @@ def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%", font_base=14
     }
     """
     net.set_options(options)
-    net.barnes_hut()
     return net
 
 
