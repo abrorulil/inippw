@@ -1,6 +1,6 @@
 .. docs/index.rst
-
-Dokumentasi Proyek Analisis Data (inippw)
+Selamat Datang di Website Saya
+Dokumentasi Proyek Analisis Data
 =========================================
 
 .. toctree::
