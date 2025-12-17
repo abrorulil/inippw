@@ -1,0 +1,21 @@
+# Library dari referensi
+streamlit
+pymupdf
+nltk
+pandas
+networkx
+pyvis
+matplotlib
+scipy
+
+sphinx
+sphinx-book-theme
+nbsphinx
+myst-parser
+ipykernel
+scikit-learn
+sastrawi
+beautifulsoup4
+requests
+tqdm
+PyPDF2
