@@ -8,6 +8,7 @@ from nltk.corpus import stopwords
 import networkx as nx
 from collections import Counter
 from pyvis.network import Network
+import math
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import tempfile
@@ -96,21 +97,35 @@ def top_n_pagerank(G, n=20):
     return pr_sorted[:n]
 
 
-def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%"):
+def pyvis_from_subgraph(G, pr_scores, height="600px", width="100%", font_base=14):
     net = Network(height=height, width=width, notebook=False)
-    # add nodes with size ~ pagerank
-    max_score = max((s for _, s in pr_scores), default=0.0001)
-    for node, score in pr_scores:
-        size = 10 + (score / max_score) * 40
-        net.add_node(node, label=node, size=size, title=f"{node}: {score:.6f}")
+    net.toggle_physics(True)
 
-    # add edges between these top nodes if present in G
+    # add nodes with size ~ pagerank and font size scaled
+    max_score = max((s for _, s in pr_scores), default=0.0001)
     nodeset = set(n for n, _ in pr_scores)
+    for node, score in pr_scores:
+        size = 15 + (score / max_score) * 60
+        font_size = int(font_base + (score / max_score) * 12)
+        net.add_node(node, label=node, size=size, title=f"{node}: {score:.6f}", font={"size": font_size, "face": "Arial", "color": "#000000"})
+
+    # add edges between these top nodes if present in G, scale width by weight
     for u, v, data in G.edges(data=True):
         if u in nodeset and v in nodeset:
             w = data.get("weight", 1)
-            net.add_edge(u, v, value=w)
+            width = 1 + math.log(w + 1)
+            net.add_edge(u, v, value=w, width=width)
 
+    # JS options to improve label rendering and physics
+    options = """
+    var options = {
+      "nodes": {"font": {"face": "Arial"}},
+      "edges": {"smooth": {"type": "continuous"}},
+      "physics": {"barnesHut": {"gravitationalConstant": -2000, "springLength": 200, "springConstant": 0.001}},
+      "interaction": {"hover": true, "tooltipDelay": 100}
+    }
+    """
+    net.set_options(options)
     net.barnes_hut()
     return net
 
@@ -168,14 +183,47 @@ def main():
     st.bar_chart(pr_df.set_index("kata")["pagerank"])
 
     st.subheader("Graf interaktif (kata teratas)")
-    net = pyvis_from_subgraph(G, pr_top)
-    # save to temp html and display
+    # Graph display options
+    font_base = st.sidebar.slider("Ukuran font label (dasar)", min_value=10, max_value=24, value=14)
+    show_static = st.sidebar.checkbox("Tampilkan graf statik (matplotlib) sebagai alternatif", value=False)
+
+    # build pyvis network
+    net = pyvis_from_subgraph(G, pr_top, font_base=font_base)
     tmp = tempfile.NamedTemporaryFile(suffix=".html", delete=False)
     net.save_graph(tmp.name)
     with open(tmp.name, "r", encoding="utf-8") as f:
         html = f.read()
 
     st.components.v1.html(html, height=600, scrolling=True)
+
+    if show_static:
+        draw_static_graph(G, pr_top, font_size=font_base)
+
+
+def draw_static_graph(G, pr_scores, figsize=(10, 8), font_size=12):
+    import matplotlib.pyplot as plt
+
+    sub_nodes = [n for n, _ in pr_scores]
+    subG = G.subgraph(sub_nodes).copy()
+
+    # layout attempting to reduce label overlap
+    pos = nx.spring_layout(subG, k=0.8, iterations=300, seed=42)
+
+    # node sizes proportional to pagerank
+    max_score = max((s for _, s in pr_scores), default=0.0001)
+    sizes = [300 + (score / max_score) * 3000 for _, score in pr_scores]
+
+    # edge widths scaled by weight
+    widths = [1 + math.log(subG[u][v].get('weight', 1) + 1) for u, v in subG.edges()]
+
+    plt.figure(figsize=figsize)
+    nx.draw_networkx_nodes(subG, pos, node_size=sizes, node_color='skyblue')
+    nx.draw_networkx_edges(subG, pos, width=widths, alpha=0.7, edge_color='#888888')
+    nx.draw_networkx_labels(subG, pos, font_size=font_size, font_family='sans-serif')
+    plt.axis('off')
+
+    st.pyplot(plt.gcf())
+    plt.clf()
 
 
 if __name__ == "__main__":
