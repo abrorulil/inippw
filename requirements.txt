@@ -8,11 +8,15 @@ pyvis
 matplotlib
 scipy
 
+# Library untuk Sphinx & Tampilan
 sphinx
 sphinx-book-theme
 nbsphinx
 myst-parser
+sphinx-design
 ipykernel
+
+# Library untuk Notebook Anda
 scikit-learn
 sastrawi
 beautifulsoup4
