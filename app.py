@@ -46,19 +46,47 @@ def clean_text(text: str):
     return text.strip()
 
 def tokenize_words(text: str, language="english", custom_stopwords=""):
-    toks = word_tokenize(text.lower())
+    """Tokenize text into words safely with fallbacks.
+
+    Uses NLTK's word_tokenize when available; if NLTK data (punkt) is missing
+    it falls back to a simple regex-based tokenizer. Stopword loading is
+    also guarded and will attempt to download missing data once.
+    """
+    text_lower = text.lower()
+
+    # Try NLTK tokenizer, but fall back to a regex-based tokenizer if NLTK data is missing
+    try:
+        toks = word_tokenize(text_lower)
+    except LookupError:
+        # punkt not available; fallback and warn user
+        st.warning("NLTK tokenizer data not found — falling back to a simple tokenizer. Install 'punkt' for better results.")
+        toks = re.findall(r"[a-zA-Z]+", text_lower)
+    except Exception:
+        toks = re.findall(r"[a-zA-Z]+", text_lower)
+
     # Hanya ambil huruf
     words = [re.sub(r"[^a-zA-Z]", "", w) for w in toks]
-    words = [w for w in words if len(w) > 1] # Hapus kata 1 huruf
-    
-    # Setup stopwords
-    sw = set(stopwords.words(language)) if language in ["english", "indonesian"] else set()
-    
+    words = [w for w in words if len(w) > 1]  # Hapus kata 1 huruf
+
+    # Setup stopwords (guard against missing corpus)
+    sw = set()
+    if language in ["english", "indonesian"]:
+        try:
+            sw = set(stopwords.words(language))
+        except LookupError:
+            # Attempt to download stopwords once then reload
+            try:
+                nltk.download("stopwords")
+                sw = set(stopwords.words(language))
+            except Exception:
+                st.warning("NLTK stopwords not available — proceeding without stopword filtering.")
+                sw = set()
+
     # Tambahkan custom stopwords dari input user
     if custom_stopwords:
-        extras = [w.strip().lower() for w in custom_stopwords.split(",")]
+        extras = [w.strip().lower() for w in custom_stopwords.split(",") if w.strip()]
         sw.update(extras)
-        
+
     words = [w for w in words if w not in sw]
     return words
 
